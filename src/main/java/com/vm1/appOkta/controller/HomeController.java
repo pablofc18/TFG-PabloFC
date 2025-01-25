@@ -21,9 +21,9 @@ public class HomeController {
     public String login(HttpServletRequest request) {
         OAuth2AuthorizationRequest authorizationRequest = (OAuth2AuthorizationRequest) request.getSession()
             .getAttribute(HttpSessionOAuth2AuthorizationRequestRepository.class.getName() + ".AUTHORIZATION_REQUEST");
-
+        String authorizationUri ="hola";
         if (authorizationRequest != null) {
-            String authorizationUri = UriComponentsBuilder.fromUriString(authorizationRequest.getAuthorizationUri())
+            authorizationUri = UriComponentsBuilder.fromUriString(authorizationRequest.getAuthorizationUri())
                 .queryParam("client_id", authorizationRequest.getClientId())
                 .queryParam("redirect_uri", authorizationRequest.getRedirectUri())
                 .queryParam("response_type", authorizationRequest.getResponseType().getValue())
@@ -33,8 +33,8 @@ public class HomeController {
 
             System.out.println("Authorization URI: " + authorizationUri);
         }
-
-        return "Login page";
+        return "uri: "+authorizationUri;
+        //return "Login page";
     }
 
     @GetMapping("/home") 
