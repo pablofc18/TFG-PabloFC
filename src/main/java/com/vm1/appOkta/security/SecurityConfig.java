@@ -15,13 +15,13 @@ public class SecurityConfig {
         http
             // Configuración de autorización
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/public/**").permitAll() // Rutas públicas sin autenticación
+                .requestMatchers("/public/**", "/login").permitAll() // Rutas públicas sin autenticación
                 .anyRequest().authenticated() // Cualquier otra ruta requiere autenticación
-            );
+            )
             // Configuración de login con OAuth2 (Okta)
-/*             .oauth2Login(oauth2 -> oauth2
+            .oauth2Login(oauth2 -> oauth2
                 .defaultSuccessUrl("/home", true)
-            ); */
+            );
             // Configuración de logout
 /*             .logout(logout -> logout
                 .logoutSuccessUrl("/") // Redirige a la página principal tras logout
