@@ -18,18 +18,9 @@ public class SecurityConfig {
                 .requestMatchers("/public/**").permitAll() // Rutas públicas sin autenticación
                 .anyRequest().authenticated() // Cualquier otra ruta requiere autenticación
             )
-            // Configuración de login con OAuth2 (Okta)
             .oauth2Login(oauth2 -> oauth2
-                .redirectionEndpoint(redir -> redir
-                    .baseUri("/login/oauth2/code")
-                )
+                .defaultSuccessUrl("/home", true) // Redirige a /home tras login exitoso
             );
-/*             // Configuración de logout
-            .logout(logout -> logout
-                .logoutSuccessUrl("/") // Redirige a la página principal tras logout
-                .invalidateHttpSession(true) // Invalida la sesión HTTP
-                .clearAuthentication(true) // Limpia la autenticación
-            ); */
 
         return http.build();
     }
