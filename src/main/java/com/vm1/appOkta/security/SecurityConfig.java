@@ -20,14 +20,14 @@ public class SecurityConfig {
             )
             // Configuración de login con OAuth2 (Okta)
             .oauth2Login(oauth2 -> oauth2
-                .loginPage("/oauth2/authorization/okta") // Página de login, manejada automáticamente
-            )
+                .defaultSuccessUrl("/home", true)
+            );
             // Configuración de logout
-            .logout(logout -> logout
+/*             .logout(logout -> logout
                 .logoutSuccessUrl("/") // Redirige a la página principal tras logout
                 .invalidateHttpSession(true) // Invalida la sesión HTTP
                 .clearAuthentication(true) // Limpia la autenticación
-            );
+            ); */
 
         return http.build();
     }
