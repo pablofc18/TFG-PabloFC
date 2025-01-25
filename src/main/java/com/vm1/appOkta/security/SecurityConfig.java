@@ -21,6 +21,9 @@ public class SecurityConfig {
             // Configuración de login con OAuth2 (Okta)
             .oauth2Login(oauth2 -> oauth2
                 .defaultSuccessUrl("/home", true)
+                .redirectionEndpoint(redir -> redir
+                    .baseUri("/login/oauth2/code/okta") // Establece la URI base correctamente
+                )
             );
             // Configuración de logout
 /*             .logout(logout -> logout
