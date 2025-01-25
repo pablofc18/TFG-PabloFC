@@ -21,15 +21,15 @@ public class SecurityConfig {
             // Configuración de login con OAuth2 (Okta)
             .oauth2Login(oauth2 -> oauth2
                 .redirectionEndpoint(redir -> redir
-                    .baseUri("/login/oauth2/code/okta") // Correct the redirection base URI
+                    .baseUri("/login/oauth2/code")
                 )
-            )
-            // Configuración de logout
+            );
+/*             // Configuración de logout
             .logout(logout -> logout
                 .logoutSuccessUrl("/") // Redirige a la página principal tras logout
                 .invalidateHttpSession(true) // Invalida la sesión HTTP
                 .clearAuthentication(true) // Limpia la autenticación
-            );
+            ); */
 
         return http.build();
     }
