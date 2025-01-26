@@ -17,7 +17,7 @@ app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
 app.config['SESSION_PERMANENT'] = False
 
 # Configuración de Authlib
-oauth = OAuth(app)
+oauth = OAuth(app, debug=True)
 okta = oauth.register(
     name='okta',
     client_id=CLIENT_ID,
@@ -41,7 +41,7 @@ def home():
 @app.route('/login')
 def login():
     redirect_uri = url_for('auth', _external=True)
-    nonce = os.urandom(16).hex
+    nonce = os.urandom(16).hex()
     session['nonce'] = nonce
     return okta.authorize_redirect(redirect_uri, nonce=nonce)
 
