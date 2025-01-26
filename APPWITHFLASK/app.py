@@ -17,7 +17,7 @@ app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
 app.config['SESSION_PERMANENT'] = False
 
 # Configuración de Authlib
-oauth = OAuth(app, debug=True)
+oauth = OAuth(app)
 okta = oauth.register(
     name='okta',
     client_id=CLIENT_ID,
