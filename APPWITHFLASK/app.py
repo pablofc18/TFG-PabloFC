@@ -53,6 +53,7 @@ def auth():
         return "Error: Nonce perdido o no válido", 400
     # Valida el ID Token con el nonce
     user_info = okta.parse_id_token(token, nonce=nonce)
+    session['id_token'] = token.get('id_token')
     session['user'] = {
         'name': user_info['name'],
         'email': user_info['email'],
