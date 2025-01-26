@@ -11,10 +11,6 @@ CLIENT_ID = '0oamy75qf3BRY7URR5d7'
 CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
 REDIRECT_URI = 'http://192.168.1.10:5000/authorization-code/callback'
 
-okta_client = OktaClient({
-    'orgUrl': OKTA_DOMAIN,
-    'token': '{your-api-token}'
-})
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
 app.config['SESSION_PERMANENT'] = False
