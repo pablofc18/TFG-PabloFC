@@ -13,10 +13,11 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 public class HomeController {
     
-/*     @GetMapping("/")
+    @GetMapping("/")
     public String index() {
         return "App is running. Try accessing /home for Okta login.";
-    } */
+    } 
+
    @GetMapping("/login")
     public String login(HttpServletRequest request) {
         OAuth2AuthorizationRequest authorizationRequest = (OAuth2AuthorizationRequest) request.getSession()
