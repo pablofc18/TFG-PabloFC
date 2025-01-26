@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
 from flask.json import jsonify
+import os
 
 app = Flask(__name__)
 app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
@@ -40,13 +41,19 @@ def home():
 @app.route('/login')
 def login():
     redirect_uri = url_for('auth', _external=True)
-    return okta.authorize_redirect(redirect_uri)
+    nonce = os.urandom(16).hex
+    session['nonce'] = nonce
+    return okta.authorize_redirect(redirect_uri, nonce=nonce)
 
 # Ruta de redirección después del inicio de sesión
 @app.route('/auth/callback')
 def auth():
     token = okta.authorize_access_token()
-    user_info = okta.parse_id_token(token)
+    nonce = session.pop('nonce', None)  # Recupera y elimina el nonce de la sesión
+    if not nonce:
+        return "Error: Nonce perdido o no válido", 400
+    # Valida el ID Token con el nonce
+    user_info = okta.parse_id_token(token, nonce=nonce)
     session['user'] = {
         'name': user_info['name'],
         'email': user_info['email'],
