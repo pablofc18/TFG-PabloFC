@@ -20,6 +20,9 @@ public class SecurityConfig {
             )
             .oauth2Login(oauth2 -> oauth2
                 .defaultSuccessUrl("/home", true) // Redirige a /home tras login exitoso
+                .redirectionEndpoint(endpoint -> endpoint
+                    .baseUri("/login/oauth2/code/okta")
+                )   
             );
 
         return http.build();
