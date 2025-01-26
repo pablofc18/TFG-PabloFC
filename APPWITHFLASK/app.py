@@ -10,7 +10,6 @@ app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
 OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
 CLIENT_ID = '0oamy75qf3BRY7URR5d7'
 CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
-REDIRECT_URI = 'http://192.168.1.10:5000/authorization-code/callback'
 
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
@@ -63,8 +62,18 @@ def auth():
 # Ruta para cerrar sesión
 @app.route('/logout')
 def logout():
-    session.pop('user', None)
-    logout_url = f"{OKTA_DOMAIN}/v1/logout?id_token_hint={session.get('id_token')}&post_logout_redirect_uri={url_for('home', _external=True)}"
+    # Obtén el id_token de la sesión
+    id_token = session.pop('id_token', None)
+
+    # Construye la URL de cierre de sesión de Okta
+    logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for('home', _external=True)}"
+    if id_token:
+        logout_url += f"&id_token_hint={id_token}"
+
+    # Limpia la sesión del usuario
+    session.clear()
+
+    # Redirige al usuario al URL de cierre de sesión
     return redirect(logout_url)
 
 
