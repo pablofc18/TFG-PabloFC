@@ -6,9 +6,9 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # Configuración de Okta
-OKTA_DOMAIN = 'https://{your-okta-domain}'
-CLIENT_ID = '{your-client-id}'
-CLIENT_SECRET = '{your-client-secret}'
+OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
+CLIENT_ID = '0oamy75qf3BRY7URR5d7'
+CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
 REDIRECT_URI = 'http://192.168.1.10:5000/authorization-code/callback'
 
 okta_client = OktaClient({
