@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -25,7 +26,10 @@ public class SecurityConfig {
                     .baseUri("/login/oauth2/code/okta")
                 )   
             )
-            .oauth2Client(Customizer.withDefaults());
+            .oauth2Client(Customizer.withDefaults())
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Configura una sesión si es necesaria
+            );
 
 
         return http.build();
