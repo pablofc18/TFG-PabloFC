@@ -1,10 +1,33 @@
 from flask import Flask, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
+from flask_sqlalchemy import SQLAlchemy
 from flask.json import jsonify
 import os
 
 app = Flask(__name__)
 app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
+
+# DB INFO
+POSTGRES = {
+    'user': 'pablofc18',
+    'pw': 'pablofc18', 
+    'db': 'mydb',      
+    'host': 'localhost',
+    'port': '5432',     
+}
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{POSTGRES['user']}:{POSTGRES['pw']}@{POSTGRES['host']}:{POSTGRES['port']}/{POSTGRES['db']}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# initialize
+db = SQLAlchemy(app)
+
+# class for table users
+class User(db.Model):
+    __tablename__ = 'users'
+    email = db.Column(db.String(100), primary_key=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+
 
 # Configuración de Okta
 OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
@@ -58,6 +81,18 @@ def auth():
         'name': user_info['name'],
         'email': user_info['email'],
     }
+
+    # Guardar user si no existe
+    existing_user = User.query.filter_by(email=user_info['email']).first()
+    if not existing_user:
+        new_user = User(
+            email=user_info['email'],
+            name=user_info['name'],
+            password=user_info['password']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+
     return redirect('/')
 
 # Ruta para cerrar sesión
