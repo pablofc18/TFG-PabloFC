@@ -77,6 +77,10 @@ def logout():
     # Redirige al usuario al URL de cierre de sesión
     return redirect(logout_url)
 
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Página no encontrada", 404
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
