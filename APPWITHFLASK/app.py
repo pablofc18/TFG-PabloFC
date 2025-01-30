@@ -10,9 +10,12 @@ app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
 
 # conf logging
 logging.basicConfig(
-    filename='log/flaskAppOkta.log',          
     level=logging.DEBUG,            
-    format='%(asctime)s %(levelname)s %(name)s : %(message)s'
+    format='%(asctime)s %(levelname)s %(name)s : %(message)s',
+    handlers=[
+        logging.FileHandler("log/flaskAppOkta.log"),
+        logging.StreamHandler()
+    ]
 )
 
 # DB INFO
