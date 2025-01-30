@@ -25,7 +25,7 @@ db = SQLAlchemy(app)
 class User(db.Model):
     __tablename__ = 'users'
     email = db.Column(db.String(100), primary_key=True, nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False)
 
 
 # Configuración de Okta
@@ -86,7 +86,7 @@ def auth():
     if not existing_user:
         new_user = User(
             email=user_info['email'],
-            name=user_info['name'],
+            username=user_info['name'],
         )
         db.session.add(new_user)
         db.session.commit()
