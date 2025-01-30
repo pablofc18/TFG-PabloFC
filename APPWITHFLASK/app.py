@@ -17,6 +17,7 @@ POSTGRES = {
 }
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{POSTGRES['user']}:{POSTGRES['pw']}@{POSTGRES['host']}:{POSTGRES['port']}/{POSTGRES['db']}"
+# quitar notificaciones sqlalchemy
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # initialize
 db = SQLAlchemy(app)
@@ -28,7 +29,7 @@ class User(db.Model):
     full_name = db.Column(db.String(100), nullable=False)
 
 
-# Configuración de Okta
+# conf okta
 OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
 CLIENT_ID = '0oamy75qf3BRY7URR5d7'
 CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
@@ -37,7 +38,7 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
 app.config['SESSION_PERMANENT'] = False
 
-# Configuración de Authlib
+# conf oauth
 oauth = OAuth(app)
 okta = oauth.register(
     name='okta',
@@ -49,7 +50,7 @@ okta = oauth.register(
     }
 )
 
-# Ruta principal
+# / endpoint
 @app.route('/')
 def home():
     user = session.get('user')
@@ -58,7 +59,7 @@ def home():
     else:
         return '<a href="/login">Iniciar sesión con Okta</a>'
 
-# Ruta para iniciar sesión
+# /login endpoint
 @app.route('/login')
 def login():
     redirect_uri = url_for('auth', _external=True)
@@ -66,22 +67,22 @@ def login():
     session['nonce'] = nonce
     return okta.authorize_redirect(redirect_uri, nonce=nonce)
 
-# Ruta de redirección después del inicio de sesión
+# /auth/callback redirect after login
 @app.route('/auth/callback')
 def auth():
+    # 73-83 TODO: check
     token = okta.authorize_access_token()
-    nonce = session.pop('nonce', None)  # Recupera y elimina el nonce de la sesión
+    nonce = session.pop('nonce', None)  
     if not nonce:
         return "Error: Nonce perdido o no válido", 400
-    # Valida el ID Token con el nonce
-    user_info = okta.parse_id_token(token, nonce=nonce)
+    user_info = okta.parse_id_token(token, nonce)
     session['id_token'] = token.get('id_token')
     session['user'] = {
         'name': user_info['name'],
         'email': user_info['email'],
     }
 
-    # Guardar user si no existe
+    # guardar user si no existe en db
     existing_user = User.query.filter_by(email=user_info['email']).first()
     if not existing_user:
         new_user = User(
@@ -93,23 +94,23 @@ def auth():
 
     return redirect('/')
 
-# Ruta para cerrar sesión
+# /logout endpoint
 @app.route('/logout')
 def logout():
-    # Obtén el id_token de la sesión
+    # cogemos id_token de la sesion
     id_token = session.pop('id_token', None)
 
-    # Construye la URL de cierre de sesión de Okta
+    # despues de logout vamos a / (home())
     logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for('home', _external=True)}"
     if id_token:
         logout_url += f"&id_token_hint={id_token}"
 
-    # Limpia la sesión del usuario
+    # clear la sesion
     session.clear()
 
-    # Redirige al usuario al URL de cierre de sesión
     return redirect(logout_url)
 
+# enpoint si pagina no encontrada mostrar msj
 @app.errorhandler(404)
 def page_not_found(error):
     return "Página no encontrada", 404
