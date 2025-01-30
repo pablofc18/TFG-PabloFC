@@ -26,7 +26,6 @@ class User(db.Model):
     __tablename__ = 'users'
     email = db.Column(db.String(100), primary_key=True, nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    password = db.Column(db.String(100), nullable=False)
 
 
 # Configuración de Okta
@@ -88,7 +87,6 @@ def auth():
         new_user = User(
             email=user_info['email'],
             name=user_info['name'],
-            password=user_info['password']
         )
         db.session.add(new_user)
         db.session.commit()
