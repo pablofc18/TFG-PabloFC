@@ -2,10 +2,18 @@ from flask import Flask, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from flask.json import jsonify
+import logging
 import os
 
 app = Flask(__name__)
 app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
+
+# conf logging
+logging.basicConfig(
+    filename='log/flaskAppOkta.log',          
+    level=logging.DEBUG,            
+    format='%(asctime)s %(levelname)s %(name)s : %(message)s'
+)
 
 # DB INFO
 POSTGRES = {
@@ -55,8 +63,10 @@ okta = oauth.register(
 def home():
     user = session.get('user')
     if user:
+        app.logger.info("Usuario autenticado.")
         return f'¡Hola, {user["name"]}!'
     else:
+        app.logger.info("Usuario no autenticado.")
         return '<a href="/login">Iniciar sesión con Okta</a>'
 
 # /login endpoint
@@ -64,7 +74,9 @@ def home():
 def login():
     redirect_uri = url_for('auth', _external=True)
     nonce = os.urandom(16).hex()
+    app.logger.debug(f"Asignamos nonce a la sesion actual: {nonce}")
     session['nonce'] = nonce
+    app.logger.info(f"Redireccionamos a uri: {redirect_uri}")
     return okta.authorize_redirect(redirect_uri, nonce=nonce)
 
 # /auth/callback redirect after login
@@ -72,8 +84,10 @@ def login():
 def auth():
     # 73-83 TODO: check
     token = okta.authorize_access_token()
+    app.logger.info(f"Token obtenido: {token}")
     nonce = session.pop('nonce', None)  
     if not nonce:
+        app.logger.error("Nonce no encontrado en la sesion!")
         return "Error: Nonce perdido o no válido", 400
     user_info = okta.parse_id_token(token, nonce)
     session['id_token'] = token.get('id_token')
@@ -81,16 +95,19 @@ def auth():
         'name': user_info['name'],
         'email': user_info['email'],
     }
+    app.logger.info(f"Sesion info user: {user_info['name']}, email: {user_info['email']}")
 
     # guardar user si no existe en db
     existing_user = User.query.filter_by(email=user_info['email']).first()
     if not existing_user:
+        app.logger.info(f"User {user_info['name']} no guardado en db")
         new_user = User(
             email=user_info['email'],
             full_name=user_info['name'],
         )
         db.session.add(new_user)
         db.session.commit()
+        app.logger.info(f"User {user_info['name']} guardado en db")
 
     return redirect('/')
 
@@ -99,6 +116,7 @@ def auth():
 def logout():
     # cogemos id_token de la sesion
     id_token = session.pop('id_token', None)
+    app.logger.info(f"Token de la sesion: {id_token}")
 
     # despues de logout vamos a / (home())
     logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for('home', _external=True)}"
@@ -108,11 +126,13 @@ def logout():
     # clear la sesion
     session.clear()
 
+    app.logger.info(f"Logout url: {logout_url}")
     return redirect(logout_url)
 
 # enpoint si pagina no encontrada mostrar msj
 @app.errorhandler(404)
 def page_not_found(error):
+    app.logger.error("ERROR: page not found!")
     return "Página no encontrada", 404
 
 
