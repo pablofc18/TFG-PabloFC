@@ -11,7 +11,7 @@ app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
 # conf logging
 logging.basicConfig(
     level=logging.DEBUG,            
-    format='[%(asctime)s] [%(levelname)s] %(name)s : %(message)s',
+    format='[%(asctime)s] [%(levelname)s] [%(name)s] : %(message)s',
     handlers=[
         logging.FileHandler("log/flaskAppOkta.log"),
         logging.StreamHandler()
@@ -67,7 +67,7 @@ def home():
     user = session.get('user')
     if user:
         app.logger.info("Usuario autenticado.")
-        return f'¡Hola, {user["name"]}!'
+        return f'¡Hola, {user["name"]}! <br> <a href="/logout">Logout</a>'
     else:
         app.logger.info("Usuario no autenticado.")
         return '<a href="/login">Iniciar sesión con Okta</a>'
