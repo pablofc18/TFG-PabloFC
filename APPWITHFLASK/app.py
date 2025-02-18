@@ -111,6 +111,8 @@ def auth():
         db.session.add(new_user)
         db.session.commit()
         app.logger.info(f"User {user_info['name']} guardado en db")
+    else:
+        app.logger.info(f"User found in db: {existing_user.email}")
 
     return redirect('/')
 
