@@ -6,7 +6,7 @@ import logging
 import os
 
 app = Flask(__name__)
-app.secret_key = 'probandoaversifucnionadeunavez$$$!!!'
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
 # conf logging
 logging.basicConfig(
