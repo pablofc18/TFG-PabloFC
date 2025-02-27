@@ -138,7 +138,6 @@ def logout():
 # enpoint si pagina no encontrada mostrar msj
 @app.errorhandler(404)
 def page_not_found(error):
-    app.logger.error("ERROR: page not found!")
     app.logger.error(error)
     return "Página no encontrada :(", 404
 
