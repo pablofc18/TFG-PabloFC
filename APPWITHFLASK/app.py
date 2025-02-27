@@ -45,7 +45,6 @@ OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
 CLIENT_ID = '0oamy75qf3BRY7URR5d7'
 CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
 
-app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
 # user session will end if user close browser
 app.config['SESSION_PERMANENT'] = False
