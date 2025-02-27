@@ -47,6 +47,7 @@ CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Z
 
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SESSION_COOKIE_NAME'] = 'okta-login-session'
+# user session will end if user close browser
 app.config['SESSION_PERMANENT'] = False
 
 # conf oauth
@@ -138,7 +139,8 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(error):
     app.logger.error("ERROR: page not found!")
-    return "Página no encontrada", 404
+    app.logger.error(error)
+    return "Página no encontrada :(", 404
 
 
 if __name__ == '__main__':
