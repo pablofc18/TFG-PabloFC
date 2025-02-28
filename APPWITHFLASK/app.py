@@ -72,7 +72,8 @@ def home():
         #return f'¡Hola, {user["name"]}! <br> <a href="/logout">Logout</a>'
     else:
         app.logger.info("Usuario no autenticado.")
-        return '<a href="/login">Iniciar sesión con Okta</a>'
+        #return '<a href="/login">Iniciar sesión con Okta</a>'
+        return render_template("login.html")
 
 # /login endpoint
 @app.route('/login')
