@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Mi Aplicación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4285f4;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .button:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if user %}
+            <h1>Bienvenido, {{ user.name }}!</h1>
+            <p>Has iniciado sesión correctamente.</p>
+            <div>
+                <a href="/profile" class="button">Modificar perfil</a>
+                <a href="/logout" class="button">Cerrar sesión</a>
+            </div>
+        {% else %}
+            <h1>Bienvenido a Mi Aplicación</h1>
+            <p>Por favor, inicia sesión para acceder a todas las funcionalidades.</p>
+            <a href="/login" class="button">Iniciar sesión</a>
+        {% endif %}
+    </div>
+</body>
+</html>

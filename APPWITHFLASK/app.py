@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, session
+from flask import Flask, redirect, url_for, session, render_template, request, flash
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from flask.json import jsonify
@@ -41,7 +41,8 @@ class User(db.Model):
 
 
 # conf okta
-OKTA_DOMAIN = 'https://dev-67811299.okta.com/oauth2/default'
+OKTA_ORG_URL = 'https://dev-67811299.okta.com' 
+OKTA_DOMAIN = f'{OKTA_ORG_URL}/oauth2/default'
 CLIENT_ID = '0oamy75qf3BRY7URR5d7'
 CLIENT_SECRET = '3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr'
 
@@ -67,7 +68,8 @@ def home():
     user = session.get('user')
     if user:
         app.logger.info("Usuario autenticado.")
-        return f'¡Hola, {user["name"]}! <br> <a href="/logout">Logout</a>'
+        return render_template("home.html", user=user)
+        #return f'¡Hola, {user["name"]}! <br> <a href="/logout">Logout</a>'
     else:
         app.logger.info("Usuario no autenticado.")
         return '<a href="/login">Iniciar sesión con Okta</a>'
