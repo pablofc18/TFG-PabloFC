@@ -73,7 +73,7 @@ def home():
     else:
         app.logger.info("Usuario no autenticado.")
         #return '<a href="/login">Iniciar sesión con Okta</a>'
-        return render_template("login.html")
+        return render_template("home.html", user=user)
 
 # /login endpoint
 @app.route('/login')
