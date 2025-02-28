@@ -119,6 +119,17 @@ def auth():
 
     return redirect('/')
 
+# /profile endpoint per veure i editar el perfil
+@app.route('/profile')
+def profile():
+    user = session.get('user')
+    if not user:
+        return redirect('/login')
+    
+    db_user = User.query.filter_by(email=user['email']).first()
+    return render_template('profile.html', user=db_user)
+
+
 # /logout endpoint
 @app.route('/logout')
 def logout():
