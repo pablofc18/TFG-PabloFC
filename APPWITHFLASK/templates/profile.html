@@ -70,13 +70,14 @@
 </head>
 <body>
     <!-- Show flash() msgs -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <ul class="flash-messages">
             {% for category, message in messages %}
-                <li class="{{ category }}">{{ message }}</li>
+                <div class="alert alert-{{ category }}">
+                {{ message }}
+                </div>
             {% endfor %}
-            </ul>
         {% endif %}
     {% endwith %}
 

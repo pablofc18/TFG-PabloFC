@@ -190,19 +190,19 @@ def update_profile():
     # Obtenir l'usuari actual de la base de dades
     current_user = User.query.filter_by(email=user['email']).first()
     if not current_user:
-        flash('Usuari no trobat', 'error')
+        flash('Usuari no trobat', 'danger')
         return redirect('/profile')
     
     try:
         # Actualitzar l'usuari a Okta
-        okta_user_id = get_okta_user_id(session.get('email'))
+        okta_user_id = get_okta_user_id(user.email)
         app.logger.info(f"okta_user_id: {okta_user_id}")
         if okta_user_id:
             profile_data = {
                 "firstName": full_name.split()[0],
                 "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
-                "email": session.get('email'),
-                "login": session.get('email'),
+                "email": user.email,
+                "login": user.email,
                 "displayName": full_name
             }
             if update_okta_user_profile(okta_user_id, profile_data):
@@ -219,13 +219,13 @@ def update_profile():
                 
                 flash('Perfil actualitzat correctament', 'success')
             else:
-                flash('Error en actualitzar el perfil a Okta', 'error')
+                flash('Error en actualitzar el perfil a Okta', 'danger')
         else:
-            flash('No s\'ha pogut trobar l\'usuari a Okta', 'error')
+            flash('No s\'ha pogut trobar l\'usuari a Okta', 'danger')
     except Exception as e:
         db.session.rollback()
         app.logger.error(f"Error en actualitzar el perfil: {str(e)}")
-        flash(f'Error en actualitzar el perfil: {str(e)}', 'error')
+        flash(f'Error en actualitzar el perfil: {str(e)}', 'danger')
     
     return redirect('/profile')
 
