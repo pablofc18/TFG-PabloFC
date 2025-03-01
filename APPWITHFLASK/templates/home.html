@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - Mi Aplicación</title>
+    <title>Inici - Flask App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,16 +36,16 @@
 <body>
     <div class="container">
         {% if user %}
-            <h1>Bienvenido, {{ user.name }}!</h1>
-            <p>Has iniciado sesión correctamente.</p>
+            <h1>Benvingut, {{ user.name }}!</h1>
+            <p>Has iniciat sessió correctament.</p>
             <div>
                 <a href="/profile" class="button">Modificar perfil</a>
-                <a href="/logout" class="button">Cerrar sesión</a>
+                <a href="/logout" class="button">Tancar sessió</a>
             </div>
         {% else %}
-            <h1>Bienvenido a Mi Aplicación Flask</h1>
-            <p>Por favor, inicia sesión para acceder a todas las funcionalidades.</p>
-            <a href="/login" class="button">Iniciar sesión</a>
+            <h1>Benvingut a Flask App</h1>
+            <p>Inicia sessió per accedir a totes les funcionalitats.</p>
+            <a href="/login" class="button">Iniciar sessió</a>
         {% endif %}
     </div>
 </body>

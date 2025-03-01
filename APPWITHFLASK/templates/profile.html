@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Perfil - Mi Aplicación</title>
+    <title>El meu perfil - Flask App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,28 +88,28 @@
     <!---->
 
     <div class="container">
-        <h1>Mi Perfil</h1>
+        <h1>El meu perfil</h1>
         
         <div class="profile-info">
-            <h2>Información actual</h2>
-            <p><strong>Nombre:</strong> {{ user.full_name }}</p>
+            <h2>Informació actual</h2>
+            <p><strong>Nom:</strong> {{ user.full_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
         </div>
         
-        <h2>Actualizar perfil</h2>
+        <h2>Actualitzar perfil</h2>
         <form action="/update_profile" method="post">
             <div class="form-group">
-                <label for="full_name">Nombre completo:</label>
+                <label for="full_name">Nom complet:</label>
                 <input type="text" id="full_name" name="full_name" value="{{ user.name }}" required>
-                <small>El email no se puede cambiar ya que es tu identificador en Okta.</small>
+                <small>El email no es pot canviar ja que es el teu identificador a Okta.</small>
             </div>
             
-            <button type="submit" class="submit-button">Actualizar perfil</button>
+            <button type="submit" class="submit-button">Actualitzar perfil</button>
         </form>
         
         <div style="margin-top: 20px;">
-            <a href="/" class="button">Volver a inicio</a>
-            <a href="/logout" class="button">Cerrar sesión</a>
+            <a href="/" class="button">Tornar a inici</a>
+            <a href="/logout" class="button">Tancar sessió</a>
         </div>
     </div>
 </body>
