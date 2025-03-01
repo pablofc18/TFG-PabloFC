@@ -181,10 +181,10 @@ def update_profile():
     # Obtenir les dades del formulari
     full_name = request.form.get('full_name')
     email = request.form.get('email')
+    app.logger.info(f"full_name: {full_name}")
+    app.logger.info(f"full_name: {email}")
     
-    # Validar les dades
     if not full_name or not email:
-        flash('Tots els camps són obligatoris', 'error')
         return redirect('/profile')
     
     # Obtenir l'usuari actual de la base de dades
@@ -196,6 +196,7 @@ def update_profile():
     try:
         # Actualitzar l'usuari a Okta
         okta_user_id = get_okta_user_id(user['email'])
+        app.logger.info(f"okta_user_id: {okta_user_id}")
         if okta_user_id:
             profile_data = {
                 "firstName": full_name.split()[0],
