@@ -35,6 +35,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 # class for table users
+# (no es pot guardar contrsenya d'Okta a db)
 class User(db.Model):
     __tablename__ = "users"
     email = db.Column(db.String(100), primary_key=True, nullable=False)
@@ -67,12 +68,16 @@ okta = oauth.register(
 ###
 ### Api calls methods
 ###
+
+# auth http headers for okta api 
+headers = {
+    "Authorization": f"SSWS {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+
 # find id with email
+# @param email -> user's email
 def get_okta_user_id(email):
-    headers = {
-        "Authorization": f"SSWS {API_TOKEN}",
-        "Content-Type": "application/json"
-    }
     response = requests.get(f"{OKTA_ORG_URL}/api/v1/users/{email}", headers=headers)
     if response.status_code == 200:
         id_user = response.json()["id"]
@@ -83,13 +88,9 @@ def get_okta_user_id(email):
         return None
 
 # modif profile in Okta
-# @param user_id -> id
+# @param user_id -> id in Okta
 # @param profile_data -> new profile to modif in Okta
 def update_okta_user_profile(user_id, profile_data):
-    headers = {
-        'Authorization': f'SSWS {API_TOKEN}',
-        'Content-Type': 'application/json'
-    }
     data = {
         "profile": profile_data
     }
@@ -99,6 +100,24 @@ def update_okta_user_profile(user_id, profile_data):
         return True
     else:
         app.logger.error(f"Error actualitzant perfil d'usuari a Okta: {response.text}")
+        return False
+
+# change password in Okta
+# @param user_id -> id in Okta
+# @param curr_psswd -> contra actual
+# @param new_psswd -> contra nova
+def change_okta_user_password(user_id, curr_psswd, new_psswd):
+    data = {
+        "oldPassword": {"value": curr_psswd},
+        "newPassword": {"value": new_psswd}
+    }
+    url = f"{OKTA_ORG_URL}/api/v1/users/{user_id}/credentials/change_password"
+    response = requests.post(url, headers=headers, json=data)
+    if response.status_code == 200:
+        app.logger.info("Contrasenya actualitzada a Okta")
+        return True
+    else:
+        app.logger.error(f"Error actualitzant contrasenya a Okta: {response.text}")
         return False
 
 ### 
@@ -172,62 +191,100 @@ def profile():
     return render_template("profile.html", user=db_user)
 
 # /update_profile per modificar el perfil
-@app.route('/update_profile', methods=['POST'])
+@app.route("/update_profile", methods=["POST"])
 def update_profile():
-    user = session.get('user')
-    app.logger.info(f"user:{user}")
+    user = session.get("user")
+    app.logger.info(f"upduser user:{user}")
     if not user:
-        return redirect('/login')
+        return redirect("/login")
     
     # dades del formulari
-    full_name = request.form.get('full_name')
+    full_name = request.form.get("full_name")
     app.logger.info(f"NEW full_name: {full_name}")
-    app.logger.info(f"email: {user['email']}")
+    app.logger.info(f"email: {user["email"]}")
     
     # si no modifica full_name torna a profile
     if not full_name:
-        return redirect('/profile')
+        return redirect("/profile")
     
     # Obtenir l'usuari actual de la base de dades
-    current_user = User.query.filter_by(email=user['email']).first()
+    current_user = User.query.filter_by(email=user["email"]).first()
     if not current_user:
-        flash('Usuari no trobat', 'danger')
+        flash("Usuari no trobat", "danger")
         return redirect('/profile')
     
     try:
         # Actualitzar l'usuari a Okta
-        okta_user_id = get_okta_user_id(user['email'])
+        okta_user_id = get_okta_user_id(user["email"])
         if okta_user_id:
             profile_data = {
                 "firstName": full_name.split()[0],
                 "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
-                "email": user['email'],
-                "login": user['email'],
+                "email": user["email"],
+                "login": user["email"],
                 "displayName": full_name
             }
             if update_okta_user_profile(okta_user_id, profile_data):
                 # Si actualitzacio a Okta exit, actualitzar la BD 
                 current_user.full_name = full_name
-                
                 db.session.commit()
                 
                 # Actualitzar la sessió
-                session['user'] = {
-                    'name': full_name,
-                    'email': user['email'],
+                session["user"] = {
+                    "name": full_name,
+                    "email": user["email"],
                 }
                 
-                flash('Perfil actualitzat correctament', 'success')
+                flash("Perfil actualitzat correctament", "success")
             else:
-                flash('Error en actualitzar el perfil a Okta', 'danger')
+                flash("Error en actualitzar el perfil a Okta", "danger")
         else:
-            flash('No s\'ha pogut trobar l\'usuari a Okta', 'danger')
+            flash("No s'ha pogut trobar l'usuari a Okta", "danger")
     except Exception as e:
         db.session.rollback()
         app.logger.error(f"Error en actualitzar el perfil: {str(e)}")
-        flash(f'Error en actualitzar el perfil: {str(e)}', 'danger')
+        flash(f"Error en actualitzar el perfil: {str(e)}", "danger")
     
-    return redirect('/profile')
+    return redirect("/profile")
+
+# /password endpoint to show change password view
+@app.route("/password")
+def password():
+    return render_template("change_password.html")
+
+# /change_password call Okta api to change psswd
+@app.route("/change_password", methods=["POST"])
+def change_password():
+    user = session.get("user")
+    app.logger.info(f"chpwd user:{user}")
+    if not user:
+        return redirect("/login")
+    
+    curr_psswd = request.form.get("current_password")
+    new_psswd = request.form.get("new_password")
+    confirm_new_psswd = request.form.get("confirm_new_password")
+
+    if not curr_psswd or not new_psswd or not confirm_new_psswd:
+        flash("Tots els camps son obligatoris!", "danger")
+        return redirect("/password")
+
+    if new_psswd != confirm_new_psswd:
+        flash("Les contrasenyes no coincideixen!", "danger")
+        return redirect("/passowrd")
+
+    okta_user_id = get_okta_user_id(user["email"])
+    if not okta_user_id:
+        flash("No s'ha pogut trobar el id de l'usuari a Okta", "danger")
+        return redirect("/password")
+    
+    if change_okta_user_password(okta_user_id, curr_psswd, new_psswd):
+        flash("Contrasenya actualitzada correctament", "success")
+    else:
+        flash("Error a l'actualitzar contrasenya!", "danger")
+    
+    # tornem al profile view
+    return redirect("/profile")
+
 
 # /logout endpoint
 @app.route("/logout")
