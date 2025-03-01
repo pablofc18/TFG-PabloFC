@@ -175,16 +175,16 @@ def profile():
 @app.route('/update_profile', methods=['POST'])
 def update_profile():
     user = session.get('user')
+    app.logger.info(f"user:{user}")
     if not user:
         return redirect('/login')
     
-    # Obtenir les dades del formulari
+    # dades del formulari
     full_name = request.form.get('full_name')
-    email = request.form.get('email')
     app.logger.info(f"full_name: {full_name}")
-    app.logger.info(f"full_name: {email}")
     
-    if not full_name or not email:
+    # si no modifica full_name torna a profile
+    if not full_name:
         return redirect('/profile')
     
     # Obtenir l'usuari actual de la base de dades
@@ -195,26 +195,19 @@ def update_profile():
     
     try:
         # Actualitzar l'usuari a Okta
-        okta_user_id = get_okta_user_id(user['email'])
+        okta_user_id = get_okta_user_id(session.get('email'))
         app.logger.info(f"okta_user_id: {okta_user_id}")
         if okta_user_id:
             profile_data = {
                 "firstName": full_name.split()[0],
                 "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
-                "email": email,
-                "login": email,
+                "email": session.get('email'),
+                "login": session.get('email'),
                 "displayName": full_name
             }
             if update_okta_user_profile(okta_user_id, profile_data):
-                # Si l'actualització a Okta té èxit, actualitzar la BD local
-                if email != current_user.email:
-                    # Si canvia l'email, hem de crear un nou registre i eliminar l'antic
-                    new_user = User(email=email, full_name=full_name)
-                    db.session.add(new_user)
-                    db.session.delete(current_user)
-                else:
-                    # Si només canvia el nom, actualitzar el registre existent
-                    current_user.full_name = full_name
+                # Si actualitzacio a Okta exit, actualitzar la BD 
+                current_user.full_name = full_name
                 
                 db.session.commit()
                 

@@ -69,12 +69,23 @@
     </style>
 </head>
 <body>
+    <!-- Show flash() msgs -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <div class="container">
         <h1>Mi Perfil</h1>
         
         <div class="profile-info">
             <h2>Información actual</h2>
-            <p><strong>Nombre:</strong> {{ user.name }}</p>
+            <p><strong>Nombre:</strong> {{ user.full_name }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
         </div>
         
