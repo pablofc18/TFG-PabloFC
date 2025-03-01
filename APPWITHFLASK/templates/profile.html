@@ -76,6 +76,9 @@
             {% for category, message in messages %}
                 <div class="alert alert-{{ category }} alert-dismissible fade show">
                 {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             {% endfor %}
         {% endif %}
