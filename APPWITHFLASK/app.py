@@ -107,6 +107,8 @@ def update_okta_user_profile(user_id, profile_data):
 # @param curr_psswd -> contra actual
 # @param new_psswd -> contra nova
 def change_okta_user_password(user_id, curr_psswd, new_psswd):
+    app.logger.info(f"pwd:{curr_psswd}")
+    app.logger.info(f"newpwd:{new_psswd}")
     data = {
         "oldPassword": {"value": curr_psswd},
         "newPassword": {"value": new_psswd}
@@ -260,9 +262,9 @@ def change_password():
     if not user:
         return redirect("/login")
     
-    curr_psswd = request.form.get("current_password")
-    new_psswd = request.form.get("new_password")
-    confirm_new_psswd = request.form.get("confirm_new_password")
+    curr_psswd = request.form.get("curr_psswd")
+    new_psswd = request.form.get("new_psswd")
+    confirm_new_psswd = request.form.get("confirm_new_psswd")
 
     if not curr_psswd or not new_psswd or not confirm_new_psswd:
         flash("Tots els camps son obligatoris!", "danger")
