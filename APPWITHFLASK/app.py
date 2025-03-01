@@ -182,6 +182,7 @@ def update_profile():
     # dades del formulari
     full_name = request.form.get('full_name')
     app.logger.info(f"full_name: {full_name}")
+    app.logger.info(f"email: {user.email}")
     
     # si no modifica full_name torna a profile
     if not full_name:
