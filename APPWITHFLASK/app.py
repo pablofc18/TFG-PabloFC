@@ -15,11 +15,11 @@ logging.basicConfig(
     format="[%(asctime)s] [%(levelname)s] [%(name)s] : %(message)s",
     handlers=[
         logging.FileHandler("log/flaskAppOkta.log"),
-        logging.StreamHandler()
+        logging.StreamHandler() # tambe mostrara log en terminal
     ]
 )
 
-# DB INFO
+# db info
 POSTGRES = {
     "user": "pablofc18",
     "pw": "pablofc18", 
@@ -29,8 +29,7 @@ POSTGRES = {
 }
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{POSTGRES["user"]}:{POSTGRES["pw"]}@{POSTGRES["host"]}:{POSTGRES["port"]}/{POSTGRES["db"]}"
-# quitar notificaciones sqlalchemy
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False # quitar notificaciones sqlalchemy
 # initialize
 db = SQLAlchemy(app)
 
@@ -50,8 +49,7 @@ CLIENT_SECRET = "3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Z
 API_TOKEN = "00nH4N4nc-V9u7Io4kofmaXlUPIHrljtW4NiiMCklp" 
 
 app.config["SESSION_COOKIE_NAME"] = "okta-login-session"
-# user session will end if user close browser
-app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_PERMANENT"] = False # user session terminara si es tanca navegador 
 
 # conf oauth
 oauth = OAuth(app)
@@ -107,6 +105,7 @@ def update_okta_user_profile(user_id, profile_data):
 # @param curr_psswd -> contra actual
 # @param new_psswd -> contra nova
 def change_okta_user_password(user_id, curr_psswd, new_psswd):
+    # NO son segurs mai mostrar pwd en text pla
     app.logger.info(f"pwd:{curr_psswd}")
     app.logger.info(f"newpwd:{new_psswd}")
     data = {
@@ -164,7 +163,7 @@ def auth():
     }
     app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}")
 
-    # guardar user si no existe en db
+    # guardar user si no exist en db
     existing_user = User.query.filter_by(email=user_info["email"]).first()
     if not existing_user:
         app.logger.info(f"User {user_info["name"]} no guardat en db")
@@ -209,14 +208,14 @@ def update_profile():
     if not full_name:
         return redirect("/profile")
     
-    # Obtenir l'usuari actual de la base de dades
+    # obtenir usuari actual de la db
     current_user = User.query.filter_by(email=user["email"]).first()
     if not current_user:
         flash("Usuari no trobat", "danger")
         return redirect('/profile')
     
     try:
-        # Actualitzar l'usuari a Okta
+        # actualitzar usuari a Okta
         okta_user_id = get_okta_user_id(user["email"])
         if okta_user_id:
             profile_data = {
@@ -227,11 +226,11 @@ def update_profile():
                 "displayName": full_name
             }
             if update_okta_user_profile(okta_user_id, profile_data):
-                # Si actualitzacio a Okta exit, actualitzar la BD 
+                # si actualitzacio a Okta exit, actualitzar la BD 
                 current_user.full_name = full_name
                 db.session.commit()
                 
-                # Actualitzar la sessió
+                # actualitzar la sessio
                 session["user"] = {
                     "name": full_name,
                     "email": user["email"],
@@ -282,7 +281,7 @@ def change_password():
     if change_okta_user_password(okta_user_id, curr_psswd, new_psswd):
         flash("Contrasenya actualitzada correctament", "success")
     else:
-        flash("Error a l'actualitzar contrasenya!", "danger")
+        flash("Error a l'actualitzar contrasenya! Proba una mes segura!", "danger")
     
     # tornem al profile view
     return redirect("/profile")
