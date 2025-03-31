@@ -29,7 +29,7 @@ POSTGRES = {
     "pw": os.getenv("POSTGRES_PW"), 
     "db": os.getenv("POSTGRES_DB"),
     "host": os.getenv("POSTGRES_HOST"),
-    "port": os.getenv("POSTGRES_PORT"),
+    "port": os.getenv("POSTGRES_PORT", "5432"),
 }
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{POSTGRES["user"]}:{POSTGRES["pw"]}@{POSTGRES["host"]}:{POSTGRES["port"]}/{POSTGRES["db"]}"
