@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, session, render_template, request, flash
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
 from flask.json import jsonify
 import requests
 import logging
@@ -8,6 +9,9 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
+
+# load env vars
+load_dotenv()
 
 # conf logging
 logging.basicConfig(
@@ -21,11 +25,11 @@ logging.basicConfig(
 
 # db info
 POSTGRES = {
-    "user": "pablofc18",
-    "pw": "pablofc18", 
-    "db": "mydb",      
-    "host": "localhost",
-    "port": "5432",     
+    "user": os.getenv("POSTGRES_USER"),
+    "pw": os.getenv("POSTGRES_PW"), 
+    "db": os.getenv("POSTGRES_DB"),
+    "host": os.getenv("POSTGRES_HOST"),
+    "port": os.getenv("POSTGRES_PORT"),
 }
 
 app.config["SQLALCHEMY_DATABASE_URI"] = f"postgresql://{POSTGRES["user"]}:{POSTGRES["pw"]}@{POSTGRES["host"]}:{POSTGRES["port"]}/{POSTGRES["db"]}"
@@ -42,11 +46,11 @@ class User(db.Model):
 
 
 # conf okta
-OKTA_ORG_URL = "https://dev-67811299.okta.com" 
+OKTA_ORG_URL = os.getenv("OKTA_ORG_URL")
 OKTA_DOMAIN = f"{OKTA_ORG_URL}/oauth2/default"
-CLIENT_ID = "0oamy75qf3BRY7URR5d7"
-CLIENT_SECRET = "3s9rXnYcabFJ5SGSJ5rIUOQ8cm4tyCBsziRj6xerJCovxm1ih4zo8eMIt7bZr8Zr"
-API_TOKEN = "00nH4N4nc-V9u7Io4kofmaXlUPIHrljtW4NiiMCklp" 
+CLIENT_ID = os.getenv("OKTA_CLIENT_ID")
+CLIENT_SECRET = os.getenv("OKTA_CLIENT_SECRET")
+API_TOKEN = os.getenv("OKTA_API_TOKEN")
 
 app.config["SESSION_COOKIE_NAME"] = "okta-login-session"
 app.config["SESSION_PERMANENT"] = False # user session terminara si es tanca navegador 
