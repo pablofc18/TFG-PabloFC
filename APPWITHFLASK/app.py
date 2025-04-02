@@ -2,7 +2,7 @@ from flask import Flask, redirect, url_for, session, render_template, request, f
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-from flask.json import jsonify
+#from flask.json import jsonify
 import requests
 import logging
 import os
@@ -10,7 +10,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY")
 
-# load env vars
+# load env vars (per protegir credencials)
 load_dotenv("env_vars.env")
 
 # conf logging
