@@ -2687,3 +2687,32 @@ sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) could not translate
 [2025-03-31 17:54:36,644] [INFO] [werkzeug] : 192.168.1.36 - - [31/Mar/2025 17:54:36] "GET /profile HTTP/1.1" 200 -
 [2025-03-31 17:54:38,511] [INFO] [app] : Usuari autenticat.
 [2025-03-31 17:54:38,511] [INFO] [werkzeug] : 192.168.1.36 - - [31/Mar/2025 17:54:38] "GET / HTTP/1.1" 200 -
+[2025-04-02 15:42:54,601] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-02 15:42:54,602] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-02 17:43:11,730] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-02 17:43:11,730] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-02 18:03:22,708] [INFO] [app] : Usuari no autenticat.
+[2025-04-02 18:03:22,712] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:03:22] "GET / HTTP/1.1" 200 -
+[2025-04-02 18:03:22,792] [ERROR] [app] : 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-04-02 18:03:22,793] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:03:22] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-04-02 18:03:23,997] [DEBUG] [app] : Asignem nonce a la sessio actual: c18bbe75545511a43e2fb9a189692414
+[2025-04-02 18:03:23,997] [INFO] [app] : Redireccionem a uri: http://192.168.1.10:5000/auth/callback
+[2025-04-02 18:03:23,999] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-04-02 18:03:24,845] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/.well-known/openid-configuration HTTP/1.1" 200 None
+[2025-04-02 18:03:24,847] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:03:24] "[32mGET /login HTTP/1.1[0m" 302 -
+[2025-04-02 18:03:25,508] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-04-02 18:03:26,521] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /oauth2/default/v1/token HTTP/1.1" 200 None
+[2025-04-02 18:03:26,524] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-04-02 18:03:27,471] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/v1/keys HTTP/1.1" 200 None
+[2025-04-02 18:03:27,488] [INFO] [app] : Token obtingut: {'token_type': 'Bearer', 'expires_in': 3600, 'access_token': 'eyJraWQiOiJmeGVVN095M3NZaWRlaDVZc002ZndIUzhYTVNUdWJyamtZbjhSUTNsVDVBIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULlJwYjJBemdELWc0SUdyOTVia29JVktBWUJsMlFwbm1Mek16cUw5a3FHc0kiLCJpc3MiOiJodHRwczovL2Rldi02NzgxMTI5OS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3NDM2MTcwMDYsImV4cCI6MTc0MzYyMDYwNiwiY2lkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJ1aWQiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsInNjcCI6WyJwcm9maWxlIiwiZW1haWwiLCJvcGVuaWQiXSwiYXV0aF90aW1lIjoxNzQzNjE2ODA3LCJzdWIiOiJwYWJsby5mcmFuY28uY0Blc3R1ZGlhbnRhdC51cGMuZWR1IiwiZWlkIjoiMDAwMEEifQ.Yjku3Ie65PuWnluu4YrBSHSY_Z5MNJ47yPvwIX0DmsmkC1ahKUd3sCPQHX0qnqCVFswR4q3d_x-ycZAbXuJdZyINpuePBOlgdX_aKE9YUe5aXTEWFUaWQ2Yj--QauEbhLD1jPkeeYDHvXgnrSjF4-Eh3PtLc6XChnn37X7cHTbaY07lUX3MYLpZ2RopLPPJVKIynFgyyz-jOJedn2htz00KU9AtjhSYMoVNBMXETOKPFkLKhRvnWMlAzBZZwDIUPGUjJWPWvOZtBzTOIYKEpdQg5sedglwfnMlbinFdrufAUn3ZhFwIoZk8YqES0pibDN9czcKPIJ506RzbKk-xceg', 'scope': 'profile email openid', 'id_token': 'eyJraWQiOiJmeGVVN095M3NZaWRlaDVZc002ZndIUzhYTVNUdWJyamtZbjhSUTNsVDVBIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDM2MTcwMDYsImV4cCI6MTc0MzYyMDYwNiwianRpIjoiSUQuV3FURVRnWTJLSklUSUVWZW9vbDJuaDItQjRaTVhDa1VUSGpJNm9wX3BydyIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6ImMxOGJiZTc1NTQ1NTExYTQzZTJmYjlhMTg5NjkyNDE0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0MzYxNjgwNywiYXRfaGFzaCI6IkFhWmtOTFV0QzBTamdlYmN3V2p6bWcifQ.mN0bM65Lc6eI5ojDGs2bus54rWj7SjTF3vnLaSFS5NSvF-gZEo8TC733M3lBFv6Z6xD5NWn-L4aV2zyMo2RkYBB-ISKEOJK0Y5sVe9OEby6TezaMgOn-OdtJh2l63cmfNklhmSYoNn5Kxl9ejRQZ1KXqKhY6rbSJ3bioGwsKzV6AZM5Z-mSsgRrLofgV6k1j3O0idOfl8_wluBiJGyZWRoZbmLb1ejWP1QTWM-rk43WtxVebGGs1y-WnU2Lb7fAlO_rCvsk2MPVlxNgJOdKtXsosqc9Pq7Mm7uyxb-3UEhSAfHEOilT-ya7-oc8Pn1ALGR7K7z0s5LCr3CpuidVfFA', 'expires_at': 1743620606, 'userinfo': {'sub': '00umxga28fj2SXH2P5d7', 'name': 'Pablo Franco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1743617006, 'exp': 1743620606, 'jti': 'ID.WqTETgY2KJITIEVeool2nh2-B4ZMXCkUTHjI6op_prw', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': 'c18bbe75545511a43e2fb9a189692414', 'preferred_username': 'pablo.franco.c@estudiantat.upc.edu', 'auth_time': 1743616807, 'at_hash': 'AaZkNLUtC0SjgebcwWjzmg'}}
+[2025-04-02 18:03:27,489] [INFO] [app] : Sessio info usuari: Pablo Franco, email: pablo.franco.c@estudiantat.upc.edu
+[2025-04-02 18:03:27,509] [INFO] [app] : User trobat in db: pablo.franco.c@estudiantat.upc.edu
+[2025-04-02 18:03:27,510] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:03:27] "[32mGET /auth/callback?code=ZLdfR4wDh0fQ11R3dHeQbkvadM7m-ezi0twyiSo-Ndo&state=Cnz2JkO7Eb2L0F90B3ZUvReeAsllT4 HTTP/1.1[0m" 302 -
+[2025-04-02 18:03:27,518] [INFO] [app] : Usuari autenticat.
+[2025-04-02 18:03:27,518] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:03:27] "GET / HTTP/1.1" 200 -
