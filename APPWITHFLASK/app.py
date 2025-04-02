@@ -161,6 +161,7 @@ def auth():
         app.logger.error("Nonce no trobat en la sessio!")
         return "Error: Nonce perdut o no valid", 400
     user_info = okta.parse_id_token(token, nonce)
+    app.logger.info(f"User parsed token {user_info}")
     session["id_token"] = token.get("id_token")
     session["user"] = {
         "name": user_info["name"],
