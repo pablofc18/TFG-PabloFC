@@ -43,6 +43,7 @@ class User(db.Model):
     __tablename__ = "users"
     email = db.Column(db.String(100), primary_key=True, nullable=False)
     full_name = db.Column(db.String(100), nullable=False)
+    eid = db.Column(db.String(5), nullable=False, unique=True)
 
 
 # conf okta
@@ -164,6 +165,7 @@ def auth():
     session["user"] = {
         "name": user_info["name"],
         "email": user_info["email"],
+        "eid": user_info["eid"]
     }
     app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}")
 
@@ -174,6 +176,7 @@ def auth():
         new_user = User(
             email=user_info["email"],
             full_name=user_info["name"],
+            eid=user_info["eid"]
         )
         db.session.add(new_user)
         db.session.commit()
