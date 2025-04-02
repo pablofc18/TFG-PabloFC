@@ -1,6 +1,8 @@
 import requests
 import os 
+from dotenv import load_dotenv
 
+load_dotenv("env_vars.env")
 # Configuració: defineix el teu domini d'Okta i el teu API token
 okta_domain = os.getenv("OKTA_ORG_URL")
 api_token = os.getenv("OKTA_API_TOKEN")
