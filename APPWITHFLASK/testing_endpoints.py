@@ -26,3 +26,18 @@ if response_users.status_code == 200:
         print("-" * 40)
 else:
     print("Error en obtenir els usuaris:", response_users.status_code, response_users.text)
+
+print("***********************************")
+print("***********************************")
+print("***********************************")
+print("***********************************")
+print("***********************************")
+### userinfo endpoint
+urlui = f'{okta_domain}/v1/userinfo'
+resp = requests.get(urlui, headers=headers)
+if resp.status_code == 200:
+    userinfo = resp.json()
+    print(userinfo)
+    
+else:
+    print("error")
