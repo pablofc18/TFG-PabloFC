@@ -243,6 +243,7 @@ def update_profile():
                 session["user"] = {
                     "name": full_name,
                     "email": user["email"],
+                    "eid": user["eid"]
                 }
                 
                 flash("Perfil actualitzat correctament", "success")
