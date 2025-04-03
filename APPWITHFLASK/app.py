@@ -2,7 +2,8 @@ from flask import Flask, redirect, url_for, session, render_template, request, f
 from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-#from flask.json import jsonify
+from functools import wraps
+import jwt
 import requests
 import logging
 import os
@@ -69,9 +70,38 @@ okta_oauth = oauth.register(
 )
 
 ###
+### Verify access token 
+###
+def require_valid_token(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        access_token = session.get("access_token")
+        if not access_token:
+            flash("Acces denegat: token no present.", "danger")
+            return redirect("/login")
+        try:
+            # decode token sin verificar firma para extraer los claims
+            decoded = jwt.decode(access_token, options={"verify_signature": False})
+        except Exception as e:
+            flash("Acces denegat: token invalid.", "danger")
+            return redirect("/login")        
+        
+        # verificar dades critiques
+        user_session = session.get("user", {})
+        token_email = decoded.get("sub")
+        token_eid = decoded.get("eid")
+        token_issuer = decoded.get("iss")
+
+        if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != OKTA_DOMAIN:
+            flash("Dades d'usuari inconsistents, si us plau inicia sesio de nou.", "danger")
+            return redirect("/login")        
+
+        return f(*args, **kwargs)
+    return decorated_function
+
+###
 ### Api calls methods
 ###
-
 # auth http headers for okta api 
 headers = {
     "Authorization": f"SSWS {API_TOKEN}",
@@ -164,6 +194,7 @@ def auth():
     user_info = okta_oauth.parse_id_token(token, nonce)
     app.logger.debug(f"User parsed token {user_info}")
     session["id_token"] = token.get("id_token")
+    session["access_token"] = token.get("access_token")
     session["user"] = {
         "name": user_info["name"],
         "email": user_info["email"],
@@ -190,6 +221,7 @@ def auth():
 
 # /profile endpoint per veure i editar el perfil
 @app.route("/profile")
+@require_valid_token
 def profile():
     user = session.get("user")
     if not user:
@@ -202,6 +234,7 @@ def profile():
 
 # /update_profile per modificar el perfil
 @app.route("/update_profile", methods=["POST"])
+@require_valid_token
 def update_profile():
     user = session.get("user")
     app.logger.info(f"upduser user:{user}")
@@ -266,6 +299,7 @@ def password():
 
 # /change_password call Okta api to change psswd
 @app.route("/change_password", methods=["POST"])
+@require_valid_token
 def change_password():
     user = session.get("user")
     app.logger.info(f"chpwd user:{user}")
