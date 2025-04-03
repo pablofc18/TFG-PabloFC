@@ -97,6 +97,7 @@ def update_okta_user_profile(user_id, profile_data):
     data = {
         "profile": profile_data
     }
+    app.logger.debug(f"update profile okta: {data}")
     response = requests.post(f"{OKTA_ORG_URL}/api/v1/users/{user_id}", headers=headers, json=data)
     if response.status_code == 200:
         app.logger.debug(f"Perfil d'Okta actualitzat correctament: {profile_data}")
@@ -168,7 +169,7 @@ def auth():
         "email": user_info["email"],
         "eid": user_info["eid"]
     }
-    app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}")
+    app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}, eid: {user_info["eid"]}")
 
     # guardar user si no exist en db
     existing_user = User.query.filter_by(email=user_info["email"]).first()
