@@ -33,6 +33,10 @@ print("***********************************")
 print("***********************************")
 print("***********************************")
 ### userinfo endpoint
+headers = {
+    'Authorization': f'Bearer {api_token}',
+    'Accept': 'application/json'
+}
 urlui = f'{okta_domain}/v1/userinfo'
 resp = requests.get(urlui, headers=headers)
 if resp.status_code == 200:
