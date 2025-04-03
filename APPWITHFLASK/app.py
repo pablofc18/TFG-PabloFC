@@ -58,7 +58,7 @@ app.config["SESSION_PERMANENT"] = False # user session terminara si es tanca nav
 
 # conf oauth
 oauth = OAuth(app)
-okta = oauth.register(
+okta_oauth = oauth.register(
     name="okta",
     client_id=CLIENT_ID,
     client_secret=CLIENT_SECRET,
@@ -148,19 +148,19 @@ def login():
     app.logger.debug(f"Asignem nonce a la sessio actual: {nonce}")
     session["nonce"] = nonce
     app.logger.info(f"Redireccionem a uri: {redirect_uri}")
-    return okta.authorize_redirect(redirect_uri, nonce=nonce)
+    return okta_oauth.authorize_redirect(redirect_uri, nonce=nonce)
 
 # /auth/callback redirect after login
 @app.route("/auth/callback")
 def auth():
     # 73-83 TODO: check
-    token = okta.authorize_access_token()
+    token = okta_oauth.authorize_access_token()
     app.logger.info(f"Token obtingut: {token}")
     nonce = session.pop("nonce", None)  
     if not nonce:
         app.logger.error("Nonce no trobat en la sessio!")
         return "Error: Nonce perdut o no valid", 400
-    user_info = okta.parse_id_token(token, nonce)
+    user_info = okta_oauth.parse_id_token(token, nonce)
     app.logger.info(f"User parsed token {user_info}")
     session["id_token"] = token.get("id_token")
     session["user"] = {
