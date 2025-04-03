@@ -81,7 +81,7 @@ def require_valid_token(f):
             return redirect("/login")
         try:
             # decode token sin verificar firma para extraer los claims
-            decoded = jwt.decode(access_token, options={"verify_signature": False})
+            decoded = jwt.decode(access_token, key=None, options={"verify_signature": False})
         except Exception as e:
             app.logger.error(f"Access denegat: token invalid")
             flash("Acces denegat: token invalid.", "danger")
