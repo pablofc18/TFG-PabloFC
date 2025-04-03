@@ -2841,3 +2841,34 @@ KeyError: 'eid'
 [2025-04-02 18:29:41,429] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:29:41] "[32mGET /auth/callback?code=L71uYI1ysRAHwlw58BOxqq-7kU18yjlJLCPn5fvQdIY&state=W8qlBb9uvEbLdTTl3pcNenspRUvQcW HTTP/1.1[0m" 302 -
 [2025-04-02 18:29:41,449] [INFO] [app] : Usuari autenticat.
 [2025-04-02 18:29:41,449] [INFO] [werkzeug] : 192.168.1.36 - - [02/Apr/2025 18:29:41] "GET / HTTP/1.1" 200 -
+[2025-04-03 14:52:13,546] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-03 14:52:13,547] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-03 14:52:48,407] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-03 14:52:48,407] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-03 14:52:59,803] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-03 14:52:59,803] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-03 14:53:16,034] [INFO] [app] : Usuari no autenticat.
+[2025-04-03 14:53:16,038] [INFO] [werkzeug] : 192.168.1.36 - - [03/Apr/2025 14:53:16] "GET / HTTP/1.1" 200 -
+[2025-04-03 14:53:16,110] [ERROR] [app] : 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+[2025-04-03 14:53:16,110] [INFO] [werkzeug] : 192.168.1.36 - - [03/Apr/2025 14:53:16] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-04-03 14:53:56,019] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.10:5000
+[2025-04-03 14:53:56,020] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-03 14:54:06,500] [INFO] [app] : Usuari no autenticat.
+[2025-04-03 14:54:06,504] [INFO] [werkzeug] : 192.168.1.36 - - [03/Apr/2025 14:54:06] "GET / HTTP/1.1" 200 -
+[2025-04-03 14:54:09,379] [DEBUG] [app] : Asignem nonce a la sessio actual: 8bf9f435b87cdb9d97a2094d9ed526d9
+[2025-04-03 14:54:09,379] [INFO] [app] : Redireccionem a uri: http://192.168.1.10:5000/auth/callback
+[2025-04-03 14:54:09,381] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-04-03 14:54:10,193] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/.well-known/openid-configuration HTTP/1.1" 200 None
+[2025-04-03 14:54:10,197] [INFO] [werkzeug] : 192.168.1.36 - - [03/Apr/2025 14:54:10] "[32mGET /login HTTP/1.1[0m" 302 -
