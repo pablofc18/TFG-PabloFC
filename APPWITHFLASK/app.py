@@ -83,16 +83,19 @@ def require_valid_token(f):
             # decode token sin verificar firma para extraer los claims
             decoded = jwt.decode(access_token, options={"verify_signature": False})
         except Exception as e:
+            app.logger.error(f"Access denegat: token invalid")
             flash("Acces denegat: token invalid.", "danger")
             return redirect("/login")        
         
         # verificar dades critiques
+        app.logger.warning(f"decoded jwt: {decoded}")
         user_session = session.get("user", {})
         token_email = decoded.get("sub")
         token_eid = decoded.get("eid")
         token_issuer = decoded.get("iss")
 
         if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != OKTA_DOMAIN:
+            app.logger.error(f"Dades d'usuari inconsistents!!!")
             flash("Dades d'usuari inconsistents, si us plau inicia sesio de nou.", "danger")
             return redirect("/login")        
 
