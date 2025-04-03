@@ -84,7 +84,7 @@ def get_okta_user_id(email):
     response = requests.get(f"{OKTA_ORG_URL}/api/v1/users/{email}", headers=headers)
     if response.status_code == 200:
         id_user = response.json()["id"]
-        app.logger.info(f"Id de l'usuari: {id_user}")
+        app.logger.debug(f"Id de l'usuari: {id_user}")
         return id_user
     else:
         app.logger.error(f"Error obtenint usuari d'Okta: {response.text}")
@@ -99,7 +99,7 @@ def update_okta_user_profile(user_id, profile_data):
     }
     response = requests.post(f"{OKTA_ORG_URL}/api/v1/users/{user_id}", headers=headers, json=data)
     if response.status_code == 200:
-        app.logger.info(f"Perfil d'Okta actualitzat correctament: {profile_data}")
+        app.logger.debug(f"Perfil d'Okta actualitzat correctament: {profile_data}")
         return True
     else:
         app.logger.error(f"Error actualitzant perfil d'usuari a Okta: {response.text}")
@@ -111,8 +111,8 @@ def update_okta_user_profile(user_id, profile_data):
 # @param new_psswd -> contra nova
 def change_okta_user_password(user_id, curr_psswd, new_psswd):
     # NO son segurs mai mostrar pwd en text pla
-    app.logger.info(f"pwd:{curr_psswd}")
-    app.logger.info(f"newpwd:{new_psswd}")
+    app.logger.debug(f"pwd:{curr_psswd}")
+    app.logger.debug(f"newpwd:{new_psswd}")
     data = {
         "oldPassword": {"value": curr_psswd},
         "newPassword": {"value": new_psswd}
@@ -155,13 +155,13 @@ def login():
 def auth():
     # 73-83 TODO: check
     token = okta_oauth.authorize_access_token()
-    app.logger.info(f"Token obtingut: {token}")
+    app.logger.debug(f"Token obtingut: {token}")
     nonce = session.pop("nonce", None)  
     if not nonce:
         app.logger.error("Nonce no trobat en la sessio!")
         return "Error: Nonce perdut o no valid", 400
     user_info = okta_oauth.parse_id_token(token, nonce)
-    app.logger.info(f"User parsed token {user_info}")
+    app.logger.debug(f"User parsed token {user_info}")
     session["id_token"] = token.get("id_token")
     session["user"] = {
         "name": user_info["name"],
@@ -207,7 +207,7 @@ def update_profile():
     if not user:
         return redirect("/login")
     
-    # dades del formulari
+    # dades del formulari (full_name)
     full_name = request.form.get("full_name")
     app.logger.info(f"NEW full_name: {full_name}")
     app.logger.info(f"email: {user["email"]}")
@@ -231,7 +231,8 @@ def update_profile():
                 "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
                 "email": user["email"],
                 "login": user["email"],
-                "displayName": full_name
+                "displayName": full_name,
+                "employeeNumber": user["eid"]
             }
             if update_okta_user_profile(okta_user_id, profile_data):
                 # si actualitzacio a Okta exit, actualitzar la BD 
@@ -300,7 +301,7 @@ def change_password():
 def logout():
     # cogemos id_token de la sesion
     id_token = session.pop("id_token", None)
-    app.logger.info(f"Token de la sessio: {id_token}")
+    app.logger.debug(f"Token de la sessio: {id_token}")
 
     # despues de logout vamos a / (home())
     logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
@@ -310,7 +311,7 @@ def logout():
     # clear la sesion
     session.clear()
 
-    app.logger.info(f"Logout url: {logout_url}")
+    app.logger.debug(f"Logout url: {logout_url}")
     return redirect(logout_url)
 
 # enpoint si pagina no encontrada mostrar msj
