@@ -3,7 +3,7 @@ from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from functools import wraps
-from jwt import PyJWT
+import jwt
 import requests
 import logging
 import os
@@ -81,8 +81,7 @@ def require_valid_token(f):
             return redirect("/login")
         try:
             # decode token sin verificar firma para extraer los claims
-            jwt_decoder = PyJWT()
-            decoded = jwt_decoder.decode(access_token, options={"verify_signature": False}, algorithms=["RS256"])
+            decoded = jwt.decode(access_token)
         except Exception as e:
             app.logger.error(f"Access denegat token invalid: {e}")
             flash("Acces denegat: token invalid.", "danger")
