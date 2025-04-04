@@ -3,7 +3,8 @@ from authlib.integrations.flask_client import OAuth
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from functools import wraps
-import jwt
+import base64 
+import json
 import requests
 import logging
 import os
@@ -72,6 +73,20 @@ okta_oauth = oauth.register(
 ###
 ### Verify access token 
 ###
+def jwt_decode_no_verification(token):
+    parts = token.split('.')
+    if len(parts) != 3:
+        raise Exception("Token no te 3 parts!")
+
+    payload = parts[1]
+    # si hay padding fes:
+    if len(payload) % 4 != 0:
+        payload += '=' * (-len(payload) % 4)
+
+    decoded_bytes = base64.urlsafe_b64decode(payload)
+    claims = json.loads(decoded_bytes)
+    return claims
+
 def require_valid_token(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -81,7 +96,8 @@ def require_valid_token(f):
             return redirect("/login")
         try:
             # decode token sin verificar firma para extraer los claims
-            decoded = jwt.decode(access_token)
+            #decoded = jwt.decode(access_token)
+            decoded = jwt_decode_no_verification(access_token)
         except Exception as e:
             app.logger.error(f"Access denegat token invalid: {e}")
             flash("Acces denegat: token invalid.", "danger")
