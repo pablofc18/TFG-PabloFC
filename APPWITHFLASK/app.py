@@ -104,7 +104,7 @@ def require_valid_token(f):
             return redirect("/login")        
         
         # verificar dades critiques
-        app.logger.warning(f"decoded jwt: {decoded}")
+        app.logger.debug(f"decoded jwt: {decoded}")
         user_session = session.get("user", {})
         token_email = decoded.get("sub")
         token_eid = decoded.get("eid")
@@ -146,10 +146,10 @@ def update_okta_user_profile(user_id, profile_data):
     data = {
         "profile": profile_data
     }
-    app.logger.debug(f"update profile okta: {data}")
+    app.logger.debug(f"Update profile okta: {data}")
     response = requests.post(f"{OKTA_ORG_URL}/api/v1/users/{user_id}", headers=headers, json=data)
     if response.status_code == 200:
-        app.logger.debug(f"Perfil d'Okta actualitzat correctament: {profile_data}")
+        app.logger.info(f"Perfil d'Okta actualitzat correctament: {profile_data}")
         return True
     else:
         app.logger.error(f"Error actualitzant perfil d'usuari a Okta: {response.text}")
@@ -184,7 +184,7 @@ def change_okta_user_password(user_id, curr_psswd, new_psswd):
 def home():
     user = session.get("user")
     if user:
-        app.logger.info("Usuari autenticat.")
+        app.logger.info(f"Usuari autenticat {user}")
         return render_template("home.html", user=user)
     else:
         app.logger.info("Usuari no autenticat.")
@@ -224,7 +224,7 @@ def auth():
     # guardar user si no exist en db
     existing_user = User.query.filter_by(email=user_info["email"]).first()
     if not existing_user:
-        app.logger.info(f"User {user_info["name"]} no guardat en db")
+        app.logger.debug(f"User {user_info["name"]} no guardat en db")
         new_user = User(
             email=user_info["email"],
             full_name=user_info["name"],
@@ -232,9 +232,9 @@ def auth():
         )
         db.session.add(new_user)
         db.session.commit()
-        app.logger.info(f"User {user_info["name"]} guardat en db")
+        app.logger.debug(f"User {user_info["name"]} guardat en db")
     else:
-        app.logger.info(f"User trobat in db: {existing_user.email}")
+        app.logger.debug(f"User trobat in db: {existing_user.email}")
 
     return redirect("/")
 
