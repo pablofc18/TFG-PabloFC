@@ -91,14 +91,15 @@ def require_valid_token(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         access_token = session.get("access_token")
-        if access_token:
+        if not access_token:
             flash("Acces denegat: token no present.", "danger")
+            app.logger.error("Acces denegat token no present")
             return redirect("/logout")
         try:
             # decode token sin verificar firma para extraer los claims
             decoded = jwt_decode_no_verification(access_token)
         except Exception as e:
-            app.logger.error(f"Access denegat token invalid: {e}")
+            app.logger.error(f"Acces denegat token invalid: {e}")
             flash("Acces denegat: token invalid.", "danger")
             return redirect("/logout")        
         
