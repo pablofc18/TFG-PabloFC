@@ -9,61 +9,10 @@ CREADA DOCKER DB POSTGRES:
     postgres:latest
 
 
-# TODO or NOT todo> in okta verify integrity token:
-
-import jwt
-from jwt import PyJWKClient
-
-def validate_access_token(token):
-    jwks_url = f"{OKTA_DOMAIN}/v1/keys"
-    jwks_client = PyJWKClient(jwks_url)
-    try:
-        signing_key = jwks_client.get_signing_key_from_jwt(token)
-    except Exception as e:
-        app.logger.error(f"No se pudo obtener la clave de firma: {str(e)}")
-        return None
-
-    try:
-        # Aquí se verifican la firma y la expiración
-        decoded = jwt.decode(
-            token,
-            signing_key.key,
-            algorithms=["RS256"],
-            audience=CLIENT_ID,              # El client_id se usa como audiencia
-            issuer=f"{OKTA_DOMAIN}"          # Ajusta el issuer según tu configuración en Okta
-        )
-        return decoded
-    except jwt.ExpiredSignatureError:
-        app.logger.error("El token ha expirado")
-        return None
-    except jwt.InvalidTokenError as e:
-        app.logger.error(f"Token inválido: {str(e)}")
-        return None
-
-from functools import wraps
-from flask import redirect, session, flash
-
-def require_valid_token(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        access_token = session.get("access_token")
-        if not access_token:
-            flash("Acceso denegado: token no presente.", "danger")
-            return redirect("/login")
-
-        decoded = validate_access_token(access_token)
-        if not decoded:
-            flash("Token inválido o expirado.", "danger")
-            return redirect("/login")
-        
-        # Comparar algunos campos críticos con la sesión (si lo deseas)
-        user_session = session.get("user", {})
-        token_email = decoded.get("email")
-        token_eid = decoded.get("eid")
-        
-        if token_email != user_session.get("email") or token_eid != user_session.get("eid"):
-            flash("Datos de usuario inconsistentes, por favor inicia sesión nuevamente.", "danger")
-            return redirect("/login")
-        
-        return f(*args, **kwargs)
-    return decorated_function
+### MOSTRAR codigo python en trabajo:
+Puedes optar por incorporar el código en un apéndice del documente final, formateat amb un estil que permeti una lectura fàcil 
+(per exemple, amb colors i numeració de línies). Així, al cos principal del treball pots incloure fragments representatius o resums
+del codi i, al mateix temps, proporcionar en el apèndix el codi complet (aproximadament 400 línies). També és convenient afegir una 
+referència a un repositori en línia (per exemple, GitHub) on es pugui accedir a la versió actualitzada, garantint així que el lector
+tingui accés a tota la informació necessària sense saturar el document principal.
+###

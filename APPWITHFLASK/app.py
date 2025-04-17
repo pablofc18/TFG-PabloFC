@@ -10,7 +10,7 @@ import logging
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY")
+app.secret_key = os.getenv("FLASK_SECRET_KEY") # variable not in file (os env system)
 
 # load env vars (per protegir credencials)
 load_dotenv("env_vars.env")
@@ -91,17 +91,16 @@ def require_valid_token(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         access_token = session.get("access_token")
-        if not access_token:
+        if access_token:
             flash("Acces denegat: token no present.", "danger")
-            return redirect("/login")
+            return redirect("/logout")
         try:
             # decode token sin verificar firma para extraer los claims
-            #decoded = jwt.decode(access_token)
             decoded = jwt_decode_no_verification(access_token)
         except Exception as e:
             app.logger.error(f"Access denegat token invalid: {e}")
             flash("Acces denegat: token invalid.", "danger")
-            return redirect("/login")        
+            return redirect("/logout")        
         
         # verificar dades critiques
         app.logger.debug(f"decoded jwt: {decoded}")
@@ -110,10 +109,12 @@ def require_valid_token(f):
         token_eid = decoded.get("eid")
         token_issuer = decoded.get("iss")
 
+        # TODO: eid regex
+
         if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != OKTA_DOMAIN:
             app.logger.error(f"Dades d'usuari inconsistents!!!")
             flash("Dades d'usuari inconsistents, si us plau inicia sesio de nou.", "danger")
-            return redirect("/login")        
+            return redirect("/logout")        
 
         return f(*args, **kwargs)
     return decorated_function
