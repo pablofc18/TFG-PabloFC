@@ -136,7 +136,6 @@ headers = {
 }
 
 # find id with email
-# @param email -> user's email
 def get_okta_user_id(email):
     response = requests.get(f"{OKTA_ORG_URL}/api/v1/users/{email}", headers=headers)
     if response.status_code == 200:
@@ -148,8 +147,6 @@ def get_okta_user_id(email):
         return None
 
 # modif profile in Okta
-# @param user_id -> id in Okta
-# @param profile_data -> new profile to modif in Okta
 def update_okta_user_profile(user_id, profile_data):
     data = {
         "profile": profile_data
@@ -164,9 +161,6 @@ def update_okta_user_profile(user_id, profile_data):
         return False
 
 # change password in Okta
-# @param user_id -> id in Okta
-# @param curr_psswd -> contra actual
-# @param new_psswd -> contra nova
 def change_okta_user_password(user_id, curr_psswd, new_psswd):
     # NO son segurs mai mostrar pwd en text pla
     app.logger.debug(f"pwd:{curr_psswd}")
