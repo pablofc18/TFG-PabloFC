@@ -8,6 +8,7 @@ import json
 import requests
 import logging
 import os
+import re
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY") # variable not in file (os env system)
@@ -110,7 +111,12 @@ def require_valid_token(f):
         token_eid = decoded.get("eid")
         token_issuer = decoded.get("iss")
 
-        # TODO: eid regex
+        # verificar patro eid (employeeNumber)
+        pattern = r'^\d{4}[A-Z]$'
+        if (not re.fullmatch(pattern, token_eid)):
+            app.logger.error(f"Eid: {token_eid} incorrecte!")
+            flash("Employee Number incorrecte!", "danger")
+            return redirect("/logout")
 
         if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != OKTA_DOMAIN:
             app.logger.error(f"Dades d'usuari inconsistents!!!")
