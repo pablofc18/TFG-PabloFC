@@ -14,7 +14,7 @@ class ExtractOktaData:
         }
 
     # Extract user info in Okta users endpoint
-    def extract_users(self):
+    def extract_users_info(self):
         url = f"{self.org_url}/api/v1/users"
         resp = requests.get(url, headers=self.headers)
         if resp.status_code != 200: # error
@@ -39,6 +39,16 @@ class ExtractOktaData:
             })
         return simplified_users
 
+    # Extract group info in Okta groups endpoint
+    def extract_groups_info(self):
+        url = f"{self.org_url}/api/v1/groups"
+        resp = requests.get(url, headers=self.headers)
+        if resp.status_code != 200: # error
+            raise requests.HTTPError(
+                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
+            )
+        raw_groups = resp.json()
+        print(raw_groups)
 
 if __name__ == '__main__':
     # load env vars (per protegir credencials)
@@ -51,8 +61,10 @@ if __name__ == '__main__':
         raise ValueError("Env vars okta api token i aes key HAN D'ESTAR DEFINIDES")
 
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
-    users = extractOktaData.extract_users()
-    print(users)
+    users = extractOktaData.extract_users_info()
+    #print(users)
+    groups = extractOktaData.extract_groups_info()
+    
 
 
 
