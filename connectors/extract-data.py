@@ -34,7 +34,7 @@ class ExtractOktaData:
 
 if __name__ == '__main__':
     # load env vars (per protegir credencials)
-    load_dotenv("env_vars.env")
+    load_dotenv("../env_vars.env")
     OKTA_ORG_URL = os.getenv("OKTA_ORG_URL")
     OKTA_API_TOKEN = os.getenv("OKTA_API_TOKEN")
     AES_KEY = os.getenv("AES_KEY")
