@@ -21,15 +21,23 @@ class ExtractOktaData:
             raise requests.HTTPError(
                 f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
             )
-        
         raw_users = resp.json()
+
         simplified_users = []
-        #for user in raw_users:
-        print (raw_users)
-        with open("testOUTPUT.json", "w") as f:
-            f.write(raw_users)
-
-
+        for user in raw_users:
+            profile = user.get("profile", {})
+            simplified_users.append({
+                "id": user.get("id"),
+                "profile": {
+                    "firstName": profile.get("firstName"),
+                    "lastName": profile.get("lastName"),
+                    "displayName": profile.get("displayName"),
+                    "login": profile.get("login"), # login and email are the same
+                    "email": profile.get("email"),
+                    "employeeNumber": profile.get("employeeNumber")
+                }
+            })
+        return simplified_users
 
 
 if __name__ == '__main__':
@@ -43,7 +51,8 @@ if __name__ == '__main__':
         raise ValueError("Env vars okta api token i aes key HAN D'ESTAR DEFINIDES")
 
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
-    extractOktaData.extract_users()
+    users = extractOktaData.extract_users()
+    print(users)
 
 
 
