@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY") # variable not in file (os env system)
 
 # load env vars (per protegir credencials)
-load_dotenv("env_vars.env")
+load_dotenv("../env_vars.env")
 
 # conf logging
 logging.basicConfig(
