@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
-class AESEncryptor:
+class AESHelper:
     # Helper to encrypt/decrypt files
     def __init__(self, aes_key: bytes):
         self.aes_key = aes_key
@@ -25,6 +25,7 @@ class AESEncryptor:
         with open(output_path, 'wb') as f:
             f.write(iv + ciphertext)
 
+    # Decrypt file & return json
     def decrypt_file(self, input_path: str):
         # read IV + ciphertext
         with open(input_path, 'rb') as f:

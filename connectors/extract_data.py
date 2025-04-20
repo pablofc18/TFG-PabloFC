@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
-from cipher_utils import AESEncryptor
+from cipher_utils import AESHelper
 
 
 class ExtractOktaData:
@@ -103,7 +103,7 @@ class ExtractOktaData:
     # Run all, extract data (2 files: groups and users) and save encrypted .json 
     def run(self, users_enc_path: str, groups_enc_path: str):
         # cipher utils
-        encryptor = AESEncryptor(self.aes_key)
+        encryptor = AESHelper(self.aes_key)
         # users
         users = self.extract_users_info()
         encryptor.encrypt_file(users, users_enc_path)
