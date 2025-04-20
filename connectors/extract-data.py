@@ -12,7 +12,7 @@ class ExtractOktaData:
     def __init__(self, org_url: str, api_token: str, aes_key: bytes):
         self.org_url = org_url
         self.api_token = api_token
-        self.aes_key = aes_key
+        self.aes_key = base64.b64decode(aes_key)
         self.headers = {
             "Authorization": f"SSWS {self.api_token}",
             "Content-Type": "application/json"
@@ -126,11 +126,11 @@ class ExtractOktaData:
         # users
         users = self.extract_users_info()
         self.save_json(users, users_json_path)
-        #self.encrypt_file(users_json_path, users_enc_path)
+        self.encrypt_file(users_json_path, users_enc_path)
         # groups
         groups = self.extract_groups_info()
         self.save_json(groups, groups_json_path)
-        #self.encrypt_file(groups_json_path, groups_enc_path)
+        self.encrypt_file(groups_json_path, groups_enc_path)
         # show msg in terminal
         print(f"Usuaris i grups exportats i xifrats en: {users_enc_path} && {groups_enc_path}")
 
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     #print(users)
     #groups = extractOktaData.extract_groups_info()
     #print(groups) 
-
+    extractOktaData.run("users.json","users.json.enc","groups.json","groups.json.enc")
 
 
 
