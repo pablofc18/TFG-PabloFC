@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
+from cipher_utils import AESEncryptor
 
 
 class ExtractOktaData:
@@ -99,35 +100,16 @@ class ExtractOktaData:
             })
         return simplified_groups
 
-    # Save data in .json
-    def save_json(self, data, path: str):
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-
-    # Encrypt AES-CBC file
-    def encrypt_file(self, dataobj, output_path: str):
-        # data: dataobj
-        plaintext = json.dumps(dataobj, ensure_ascii=False, indent=2).encode("utf-8")
-        # padding PKCS7
-        padder = padding.PKCS7(128).padder()
-        padded_data = padder.update(plaintext) + padder.finalize()
-
-        iv = os.urandom(16)
-        cipher = Cipher(algorithms.AES(self.aes_key), modes.CBC(iv), backend=default_backend())
-        encryptor = cipher.encryptor()
-        ciphertext = encryptor.update(padded_data) + encryptor.finalize()
-
-        with open(output_path, 'wb') as f:
-            f.write(iv + ciphertext)
-
     # Run all, extract data (2 files: groups and users) and save encrypted .json 
     def run(self, users_enc_path: str, groups_enc_path: str):
+        # cipher utils
+        encryptor = AESEncryptor(self.aes_key)
         # users
         users = self.extract_users_info()
-        self.encrypt_file(users, users_enc_path)
+        encryptor.encrypt_file(users, users_enc_path)
         # groups
         groups = self.extract_groups_info()
-        self.encrypt_file(groups, groups_enc_path)
+        encryptor.encrypt_file(groups, groups_enc_path)
         # show msg in terminal
         print(f"Usuaris i grups exportats i xifrats en: {users_enc_path} && {groups_enc_path}")
 
@@ -143,10 +125,6 @@ if __name__ == '__main__':
         raise ValueError("Env vars okta api token i aes key HAN D'ESTAR DEFINIDES")
 
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
-    #users = extractOktaData.extract_users_info()
-    #print(users)
-    #groups = extractOktaData.extract_groups_info()
-    #print(groups) 
     extractOktaData.run("users.json.enc", "groups.json.enc")
 
 
