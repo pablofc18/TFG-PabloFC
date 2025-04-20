@@ -40,6 +40,46 @@ class TransformOktaToEntraIdData:
             })
         return entraid_users_format
 
+    # Map Okta groups json to Entra ID groups json
+    ## we need users already created in Entra ID to assign to groups
+    def map_groups_to_entraid(self, groups: list) -> list:
+        entraid_groups = []
+        for group in groups:
+            group_name = group.get("name")
+            description = f"{group_name}, group for Microsoft Entra ID"
+
+            entraid_groups.append({
+                "displayName": group_name,
+                "description": description,
+                "groupTypes": [], # not necessary for security group in entra id
+                "mailEnabled": False,
+                "mailNickname": group_name,
+                "securityEnabled": True,
+                "owners@odata.bind": [],  # TODO
+                "members@odata.bind": []  # TODO
+            })
+        return entraid_groups
+
+"""
+!!!app registration in group apart!!!
+GROUP JSON CREATE ENTRAID
+{
+  "description": "Group with designated owner and members",
+  "displayName": "Operations group",
+  "groupTypes": [
+  ],
+  "mailEnabled": false,
+  "mailNickname": "operations2019",
+  "securityEnabled": true,
+  "owners@odata.bind": [
+    "https://graph.microsoft.com/v1.0/users/26be1845-4119-4801-a799-aea79d09f1a2"
+  ],
+  "members@odata.bind": [
+    "https://graph.microsoft.com/v1.0/users/ff7cb387-6688-423c-8188-3da9532a73cc",
+    "https://graph.microsoft.com/v1.0/users/69456242-0067-49d3-ba96-9de6f2728e14"
+  ]
+}
+"""
 
 if __name__ == '__main__':
     load_dotenv("../env_vars.env")
@@ -52,4 +92,7 @@ if __name__ == '__main__':
     print("\n*****\n")
     mapeigEntraid = transformOktaToEntraIdData.map_users_to_entraid(jsonobj)
     print(mapeigEntraid)
+    print("\n*****\n")
+    mapeigG = transformOktaToEntraIdData.map_groups_to_entraid(transformOktaToEntraIdData.decrypt_file_to_json("groups.json.enc"))
+    print(mapeigG)
 
