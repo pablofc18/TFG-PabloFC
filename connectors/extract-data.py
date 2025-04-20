@@ -147,7 +147,7 @@ if __name__ == '__main__':
     #print(users)
     #groups = extractOktaData.extract_groups_info()
     #print(groups) 
-    extractOktaData.run("users.json","users.json.enc","groups.json","groups.json.enc")
+    extractOktaData.run("users.json.enc", "groups.json.enc")
 
 
 
