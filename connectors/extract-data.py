@@ -39,7 +39,7 @@ class ExtractOktaData:
             })
         return simplified_users
 
-    # Extract group info in Okta groups endpoint
+    # Extract group info in Okta groups endpoint (id, name, users_list, apps_list)
     def extract_groups_info(self):
         url = f"{self.org_url}/api/v1/groups"
         resp = requests.get(url, headers=self.headers)
@@ -48,7 +48,46 @@ class ExtractOktaData:
                 f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
             )
         raw_groups = resp.json()
-        print(raw_groups)
+
+        simplified_groups = []
+        for group in raw_groups:
+            group_id = group.get("id")
+            group_profile = group.get("profile", {})
+            group_name = group_profile.get("name")
+
+            # get users email list
+            users_url = group.get("_links", {}).get("users", {}).get("href")
+            users_email = []
+            if users_url: 
+                raw_users = requests.get(users_url, headers=self.headers)
+                if raw_users.status_code != 200: # error
+                    raise requests.HTTPError(
+                        f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
+                    )
+                users_json = raw_users.json() 
+                users_email = [user.get("profile, {}").get("email") for user in users_json]
+            
+            # get asigned apps name list
+            apps_url = group.get("_links", {}).get("apps", {}).get("href")
+            apps_name = []
+            if apps_url:
+                raw_apps = requests.get(apps_url, headers=self.headers)
+                if resp.status_code != 200: # error
+                    raise requests.HTTPError(
+                        f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
+                    )
+                apps_json = raw_apps.json()
+                apps_name = [app.get("label") for app in apps_json]
+            
+            simplified_groups.append({
+                "id": group_id,
+                "name": group_name,
+                "users_list": users_email,
+                "apps_list": apps_name
+            })
+        return simplified_groups
+
+
 
 if __name__ == '__main__':
     # load env vars (per protegir credencials)
@@ -64,7 +103,7 @@ if __name__ == '__main__':
     users = extractOktaData.extract_users_info()
     #print(users)
     groups = extractOktaData.extract_groups_info()
-    
+    print(groups) 
 
 
 
