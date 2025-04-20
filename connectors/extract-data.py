@@ -105,10 +105,9 @@ class ExtractOktaData:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
     # Encrypt AES-CBC file
-    def encrypt_file(self, input_path: str, output_path: str):
-        with open(input_path, 'rb') as f:
-            plaintext = f.read()
-
+    def encrypt_file(self, dataobj, output_path: str):
+        # data: dataobj
+        plaintext = json.dumps(dataobj, ensure_ascii=False, indent=2).encode("utf-8")
         # padding PKCS7
         padder = padding.PKCS7(128).padder()
         padded_data = padder.update(plaintext) + padder.finalize()
@@ -122,15 +121,13 @@ class ExtractOktaData:
             f.write(iv + ciphertext)
 
     # Run all, extract data (2 files: groups and users) and save encrypted .json 
-    def run(self, users_json_path: str, users_enc_path: str, groups_json_path: str, groups_enc_path: str):
+    def run(self, users_enc_path: str, groups_enc_path: str):
         # users
         users = self.extract_users_info()
-        self.save_json(users, users_json_path)
-        self.encrypt_file(users_json_path, users_enc_path)
+        self.encrypt_file(users, users_enc_path)
         # groups
         groups = self.extract_groups_info()
-        self.save_json(groups, groups_json_path)
-        self.encrypt_file(groups_json_path, groups_enc_path)
+        self.encrypt_file(groups, groups_enc_path)
         # show msg in terminal
         print(f"Usuaris i grups exportats i xifrats en: {users_enc_path} && {groups_enc_path}")
 
