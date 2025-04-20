@@ -68,7 +68,11 @@ class ExtractOktaData:
                         f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
                     )
                 users_json = raw_users.json() 
-                users_email = [user.get("profile, {}").get("email") for user in users_json]
+                users_email = [
+                    user.get("profile", {}).get("email")
+                    for user in users_json
+                    if isinstance(user, dict)
+                ]
             
             # get asigned apps name list
             apps_url = group.get("_links", {}).get("apps", {}).get("href")
