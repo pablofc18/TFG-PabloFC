@@ -51,9 +51,12 @@ class ExtractOktaData:
 
         simplified_groups = []
         for group in raw_groups:
+            # filter by groups created by me
+            if group.get("type") != "OKTA_GROUP":
+                continue
+
             group_id = group.get("id")
-            group_profile = group.get("profile", {})
-            group_name = group_profile.get("name")
+            group_name = group.get("profile", {}).get("name")
 
             # get users email list
             users_url = group.get("_links", {}).get("users", {}).get("href")
