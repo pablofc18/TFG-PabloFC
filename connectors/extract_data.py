@@ -121,9 +121,6 @@ if __name__ == '__main__':
     OKTA_API_TOKEN = os.getenv("OKTA_API_TOKEN")
     AES_KEY = os.getenv("AES_KEY")
 
-    if not OKTA_API_TOKEN or not AES_KEY:
-        raise ValueError("Env vars okta api token i aes key HAN D'ESTAR DEFINIDES")
-
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
     extractOktaData.run("users.json.enc", "groups.json.enc")
 
