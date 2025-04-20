@@ -1,7 +1,12 @@
-from dotenv import load_dotenv
+import json
 import base64
 import os
 import requests
+from dotenv import load_dotenv
+from cryptography.hazmat.primitives import padding
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.backends import default_backend
+
 
 class ExtractOktaData:
     def __init__(self, org_url: str, api_token: str, aes_key: bytes):
@@ -94,6 +99,40 @@ class ExtractOktaData:
             })
         return simplified_groups
 
+    # Save data in .json
+    def save_json(self, data, path: str):
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+    # Encrypt AES-CBC file
+    def encrypt_file(self, input_path: str, output_path: str):
+        with open(input_path, 'rb') as f:
+            plaintext = f.read()
+
+        # padding PKCS7
+        padder = padding.PKCS7(128).padder()
+        padded_data = padder.update(plaintext) + padder.finalize()
+
+        iv = os.urandom(16)
+        cipher = Cipher(algorithms.AES(self.aes_key), modes.CBC(iv), backend=default_backend())
+        encryptor = cipher.encryptor()
+        ciphertext = encryptor.update(padded_data) + encryptor.finalize()
+
+        with open(output_path, 'wb') as f:
+            f.write(iv + ciphertext)
+
+    # Run all, extract data (2 files: groups and users) and save encrypted .json 
+    def run(self, users_json_path: str, users_enc_path: str, groups_json_path: str, groups_enc_path: str):
+        # users
+        users = self.extract_users_info()
+        self.save_json(users, users_json_path)
+        #self.encrypt_file(users_json_path, users_enc_path)
+        # groups
+        groups = self.extract_groups_info()
+        self.save_json(groups, groups_json_path)
+        #self.encrypt_file(groups_json_path, groups_enc_path)
+        # show msg in terminal
+        print(f"Usuaris i grups exportats i xifrats en: {users_enc_path} && {groups_enc_path}")
 
 
 if __name__ == '__main__':
@@ -107,10 +146,11 @@ if __name__ == '__main__':
         raise ValueError("Env vars okta api token i aes key HAN D'ESTAR DEFINIDES")
 
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
-    users = extractOktaData.extract_users_info()
+    #users = extractOktaData.extract_users_info()
     #print(users)
-    groups = extractOktaData.extract_groups_info()
-    print(groups) 
+    #groups = extractOktaData.extract_groups_info()
+    #print(groups) 
+
 
 
 
