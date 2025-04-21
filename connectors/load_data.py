@@ -12,7 +12,7 @@ class LoadEntraIdData:
         self.aes_key = base64.b64decode(aes_key)
         self.entraid_utils = EntraIDUtils()
         self.decryptor = AESHelper(self.aes_key)
-        self.transformData = TransformOktaToEntraIdData(self.entraid_domain, aes_key, self.graph_url)
+        self.transformData = TransformOktaToEntraIdData(entraid_domain, aes_key, self.graph_url)
 
     # Create users in Entra ID
     def create_users(self, users_enc_path: str, results_path: str):
