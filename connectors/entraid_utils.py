@@ -14,6 +14,18 @@ class EntraIDUtils:
         self.client_secret = os.getenv("ENTRAID_CLIENT_SECRET")
         self.token = None
 
+    # Get uid by email
+    def get_user_id(self, email: str) -> str:
+        url = f"{self.graph_url}/v1.0/users/{email}"
+        resp = requests.get(url, headers=self.get_headers())
+        if resp.status_code != 200: # error
+            raise requests.HTTPError(
+                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
+            )
+        result = resp.json().get("id", "")
+        if not result:
+            raise ValueError(f"No user found in Entra ID with email: {email}")
+        return result
 
     # Get token for graph api
     def get_token_graph(self) -> str:

@@ -2,13 +2,16 @@ import base64
 import os
 from dotenv import load_dotenv
 from cipher_utils import AESHelper
+from entraid_utils import EntraIDUtils
 
 
 class TransformOktaToEntraIdData:
-    def __init__(self, entraid_domain: str, aes_key: bytes):
+    def __init__(self, entraid_domain: str, aes_key: bytes, graph_url: str):
         self.entraid_domain = entraid_domain
         self.aes_key = base64.b64decode(aes_key)
         self.decryptor = AESHelper(self.aes_key)
+        self.entraid_utils = EntraIDUtils()
+        self.graph_url = graph_url
 
     # Map Okta users json to Entra ID users json
     def map_users_to_entraid(self, users: list) -> list:
@@ -52,6 +55,28 @@ class TransformOktaToEntraIdData:
             })
         return entraid_groups
 
+    # Add the members to each group (this method will be executed after the creation of users in Entra)
+    def add_members_to_entraid_groups(self, mapped_groups: list) -> list:
+        okta_groups = self.decryptor.decrypt_file("users.json.enc") # sempre sera aquest nom el posa el creador (jo)
+        updated = []
+        for grp_payload in mapped_groups:
+            name = grp_payload["displayName"]
+            # troba entrada original a okta amb el mateix nom (sempre trobara, mai None)
+            okta_grp = next((g for g in okta_groups if g.get("name") == name), None)
+            members = []
+            if okta_grp:
+                for email in okta_grp.get("users_list", []):
+                    try:
+                        # obtenir id segons l'email i posar del format per entra id 
+                        uid = self.entraid_utils.get_user_id(email)
+                        members.append(f"{self.graph_url}/v1.0/users/{uid}")
+                    except Exception:
+                        # si no troba continue
+                        continue
+            grp_payload["members@odata.bind"] = members
+            updated.append(grp_payload)
+        return updated
+
     # Run all, transform data from .json.enc users/groups and map to Entra Id and 
     ## save again in new json.enc 
     def run(self, users_in_enc: str, users_out_enc: str, groups_in_enc: str, groups_out_enc: str):
@@ -92,8 +117,9 @@ if __name__ == '__main__':
     load_dotenv("../env_vars.env")
     AES_KEY = os.getenv("AES_KEY")  
     ENTRAID_DOMAIN = os.getenv("ENTRAID_DOMAIN")
+    GRAPH_URL = os.getenv("GRAPH_URL")
 
-    transformOktaToEntraIdData = TransformOktaToEntraIdData(ENTRAID_DOMAIN, AES_KEY)
+    transformOktaToEntraIdData = TransformOktaToEntraIdData(ENTRAID_DOMAIN, AES_KEY, GRAPH_URL)
 
     transformOktaToEntraIdData.run("users.json.enc", "users.entraid.json.enc", "groups.json.enc", "groups.entraid.json.enc")
 
