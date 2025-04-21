@@ -71,6 +71,10 @@ class TransformOktaToEntraIdData:
             if okta_grp:
                 for email in okta_grp.get("users_list", []):
                     try:
+                        print("************")
+                        print(okta_grp.get("users_list"))
+                        print("************")
+                        print(email)
                         # obtenir id segons l'email i posar del format per entra id 
                         uid = self.entraid_utils.get_user_id(email)
                         print(uid)
