@@ -381,4 +381,5 @@ def page_not_found(error):
 ### MAIN
 ###
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, ssl_context=("/home/pablofc18/myApp/APPWITHFLASK/certs/cert.pem",
+                                                    "/home/pablofc18/myApp/APPWITHFLASK/certs/key.pem"))

@@ -1,10 +1,6 @@
-import json
 import base64
 import os
 from dotenv import load_dotenv
-from cryptography.hazmat.primitives import padding
-from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
-from cryptography.hazmat.backends import default_backend
 from cipher_utils import AESHelper
 
 
@@ -12,11 +8,11 @@ class TransformOktaToEntraIdData:
     def __init__(self, entraid_domain: str, aes_key: str):
         self.entraid_domain = entraid_domain
         self.aes_key = base64.b64decode(aes_key)
+        self.decryptor = AESHelper(self.aes_key)
 
     # Retorna json
     def decrypt_file_to_json(self, file_enc_path: str):
-        decryptor = AESHelper(self.aes_key)
-        return decryptor.decrypt_file(file_enc_path)
+        return self.decryptor.decrypt_file(file_enc_path)
 
     # Map Okta users json to Entra ID users json
     def map_users_to_entraid(self, users: list) -> list:
@@ -41,7 +37,7 @@ class TransformOktaToEntraIdData:
         return entraid_users_format
 
     # Map Okta groups json to Entra ID groups json
-    ## we need users already created in Entra ID to assign to groups
+    ## we need users already created in Entra ID to be assigned to groups
     def map_groups_to_entraid(self, groups: list) -> list:
         entraid_groups = []
         for group in groups:
