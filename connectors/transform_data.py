@@ -50,8 +50,8 @@ class TransformOktaToEntraIdData:
                 "mailEnabled": False,
                 "mailNickname": group_name,
                 "securityEnabled": True,
-                "owners@odata.bind": [],  # TODO
-                "members@odata.bind": []  # TODO
+                "owners@odata.bind": [ "https://graph.microsoft.com/v1.0/users/8bfad921-68e6-4d7a-8ffa-9adb6bab57df" ], # This is the Microsoft tenant admin (me)
+                "members@odata.bind": [] # will process in load_data.py
             })
         return entraid_groups
 
