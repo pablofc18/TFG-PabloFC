@@ -24,6 +24,13 @@ class LoadEntraIdData:
     # Create groups in Entra ID
     #def create_groups(self,):
 
+    # Run all, decrypt entra id json enc files and create users/groups
+    # TODO GROUPS !!!
+    def run(self, users_in_enc: str, ):
+        batch_resp = self.create_users(users_in_enc, "users_result_batch.json")
+        print(f"S'ha fet tot!")
+        
+
 if __name__ == '__main__':
     load_dotenv("../env_vars.env")
     AES_KEY = os.getenv("AES_KEY")
