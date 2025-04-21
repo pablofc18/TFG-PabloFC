@@ -7,7 +7,7 @@ from entraid_utils import EntraIDUtils
 
 
 class LoadEntraIdData:
-    def __init__(self, aes_key: bytes):
+    def __init__(self, aes_key: str):
         self.aes_key = base64.b64decode(aes_key)
         self.entraid_utils = EntraIDUtils()
 
