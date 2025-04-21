@@ -78,10 +78,11 @@ class TransformOktaToEntraIdData:
                         # obtenir id segons l'email i posar del format per entra id 
                         uid = self.entraid_utils.get_user_id(email)
                         print(uid)
+                        print("AAAAAAAAAAA************")
                         print()
                         members.append(f"{self.graph_url}/v1.0/users/{uid}")
                         print(members)
-                        print()
+                        print("ASDASDASDASDASDASDASDASDASDASDASDASD")
                     except Exception:
                         # si no troba continue
                         continue
