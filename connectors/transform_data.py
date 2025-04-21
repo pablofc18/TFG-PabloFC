@@ -57,7 +57,7 @@ class TransformOktaToEntraIdData:
 
     # Add the members to each group (this method will be executed after the creation of users in Entra)
     def add_members_to_entraid_groups(self, mapped_groups: list) -> list:
-        okta_groups = self.decryptor.decrypt_file("users.json.enc") # sempre sera aquest nom el posa el creador (jo)
+        okta_groups = self.decryptor.decrypt_file("groups.json.enc") # sempre sera aquest nom el posa el creador (jo)
         print(okta_groups)
         print()
         updated = []
