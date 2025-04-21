@@ -95,4 +95,5 @@ class EntraIDUtils:
             raise requests.HTTPError(
                 f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
             )
+        print(batch_body)
         return resp.json()
