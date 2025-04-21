@@ -47,6 +47,6 @@ if __name__ == '__main__':
     ENTRAID_DOMAIN = os.getenv("ENTRAID_DOMAIN")
     GRAPH_URL = os.getenv("GRAPH_URL")
     loadData = LoadEntraIdData(AES_KEY, ENTRAID_DOMAIN, GRAPH_URL)
-    loadData.run("users.entraid.json.enc", "BATCH_RESP.json")
+    loadData.run("users.entraid.json.enc", "BATCH_RESP_U.json", "groups.entraid.json.enc", "BATCH_RESP_G.json")
     #users_res = loadData.create_users("users.json.enc", "users_batch_res.json")
     #print(json.dumps(users_res, indent=2, ensure_ascii=False))
