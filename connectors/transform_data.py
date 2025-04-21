@@ -5,14 +5,10 @@ from cipher_utils import AESHelper
 
 
 class TransformOktaToEntraIdData:
-    def __init__(self, entraid_domain: str, aes_key: str):
+    def __init__(self, entraid_domain: str, aes_key: bytes):
         self.entraid_domain = entraid_domain
         self.aes_key = base64.b64decode(aes_key)
         self.decryptor = AESHelper(self.aes_key)
-
-    # Retorna json
-    def decrypt_file_to_json(self, file_enc_path: str):
-        return self.decryptor.decrypt_file(file_enc_path)
 
     # Map Okta users json to Entra ID users json
     def map_users_to_entraid(self, users: list) -> list:
@@ -56,6 +52,21 @@ class TransformOktaToEntraIdData:
             })
         return entraid_groups
 
+    # Run all, transform data from .json.enc users/groups and map to Entra Id and 
+    ## save again in new json.enc 
+    def run(self, users_in_enc: str, users_out_enc: str, groups_in_enc: str, groups_out_enc: str):
+        # users
+        raw_users = self.decryptor.decrypt_file(users_in_enc)
+        mapped_users = self.map_users_to_entraid(raw_users)
+        self.decryptor.encrypt_file(mapped_users, users_out_enc)
+        print(f"Usuaris Entra ID xifrats a {users_out_enc}")
+
+        # groups
+        raw_groups = self.decryptor.decrypt_file(groups_in_enc)
+        mapped_groups = self.map_groups_to_entraid(raw_groups)
+        self.decryptor.encrypt_file(mapped_groups, groups_out_enc)
+        print(f"Grups Entra ID xifrats a {groups_out_enc}")
+
 """
 !!!app registration in group apart!!!
 GROUP JSON CREATE ENTRAID
@@ -83,12 +94,15 @@ if __name__ == '__main__':
     ENTRAID_DOMAIN = os.getenv("ENTRAID_DOMAIN")
 
     transformOktaToEntraIdData = TransformOktaToEntraIdData(ENTRAID_DOMAIN, AES_KEY)
-    jsonobj = transformOktaToEntraIdData.decrypt_file_to_json("users.json.enc")
+
+    transformOktaToEntraIdData.run("users.json.enc", "users.entraid.json.enc", "groups.json.enc", "groups.entraid.json.enc")
+
+"""     jsonobj = transformOktaToEntraIdData.decrypt_file_to_json("users.json.enc")
     print(jsonobj)
     print("\n*****\n")
     mapeigEntraid = transformOktaToEntraIdData.map_users_to_entraid(jsonobj)
     print(mapeigEntraid)
     print("\n*****\n")
     mapeigG = transformOktaToEntraIdData.map_groups_to_entraid(transformOktaToEntraIdData.decrypt_file_to_json("groups.json.enc"))
-    print(mapeigG)
+    print(mapeigG) """
 

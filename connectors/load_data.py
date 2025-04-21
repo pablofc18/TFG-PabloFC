@@ -7,18 +7,14 @@ from entraid_utils import EntraIDUtils
 
 
 class LoadEntraIdData:
-    def __init__(self, aes_key: str):
+    def __init__(self, aes_key: bytes):
         self.aes_key = base64.b64decode(aes_key)
         self.entraid_utils = EntraIDUtils()
-
-    # Retorna json
-    def decrypt_file_to_json(self, file_enc_path: str):
-        decryptor = AESHelper(self.aes_key)
-        return decryptor.decrypt_file(file_enc_path)
+        self.decryptor = AESHelper(self.aes_key)
 
     # Create users in Entra ID
     def create_users(self, users_enc_path: str, results_path: str):
-        users_json = self.decrypt_file_to_json(users_enc_path)
+        users_json = self.decryptor.decrypt_file(users_enc_path)
         batch_response = self.entraid_utils.create_users_batch(users_json)
         if results_path:
             with open(results_path, "w", encoding="utf-8") as f:
@@ -29,6 +25,7 @@ class LoadEntraIdData:
     #def create_groups(self,):
 
 if __name__ == '__main__':
+    load_dotenv("../env_vars.env")
     AES_KEY = os.getenv("AES_KEY")
     loadData = LoadEntraIdData(AES_KEY)
     users_res = loadData.create_users("users.json.enc", "users_batch_res.json")

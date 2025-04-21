@@ -10,6 +10,7 @@ class ExtractOktaData:
         self.org_url = org_url
         self.api_token = api_token
         self.aes_key = base64.b64decode(aes_key)
+        self.encryptor = AESHelper(self.aes_key)
         self.headers = {
             "Authorization": f"SSWS {self.api_token}",
             "Content-Type": "application/json"
@@ -98,14 +99,12 @@ class ExtractOktaData:
 
     # Run all, extract data (2 files: groups and users) and save encrypted .json 
     def run(self, users_enc_path: str, groups_enc_path: str):
-        # cipher utils
-        encryptor = AESHelper(self.aes_key)
         # users
         users = self.extract_users_info()
-        encryptor.encrypt_file(users, users_enc_path)
+        self.encryptor.encrypt_file(users, users_enc_path)
         # groups
         groups = self.extract_groups_info()
-        encryptor.encrypt_file(groups, groups_enc_path)
+        self.encryptor.encrypt_file(groups, groups_enc_path)
         # show msg in terminal
         print(f"Usuaris i grups exportats i xifrats en: {users_enc_path} && {groups_enc_path}")
 
