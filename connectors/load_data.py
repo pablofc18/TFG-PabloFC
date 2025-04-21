@@ -38,7 +38,7 @@ class LoadEntraIdData:
     def run(self, users_in_enc: str, users_out_batch: str, groups_in_enc: str, groups_out_batch: str):
         batch_resp_u = self.create_users(users_in_enc, users_out_batch)
         batch_resp_g = self.create_groups(groups_in_enc, groups_out_batch)
-        print(f"Carrega de data correcta. Resposta json en {batch_resp_u} i {batch_resp_g}")
+        print(f"Carrega de data correcta. Resposta json en {users_out_batch} i {groups_out_batch}")
         
 
 if __name__ == '__main__':
