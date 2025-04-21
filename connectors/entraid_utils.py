@@ -23,9 +23,6 @@ class EntraIDUtils:
                 f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
             )
         result = resp.json().get("id", "")
-        print("AAAAAAAAAAAAAAA")
-        print(result)
-        print("AAAAAAAAAAAAAAA")
         if not result:
             raise ValueError(f"No user found in Entra ID with email: {email}")
         return result

@@ -24,10 +24,10 @@ class LoadEntraIdData:
         return batch_response
 
     # Create groups in Entra ID
-    def create_groups(self, groups_enc_path: str, results_path: str):
+    def create_groups(self, groups_enc_path: str, results_path: str, groups_okta_enc_path: str, users_entra_enc_path: str):
         raw_entraid_groups_no_members = self.decryptor.decrypt_file(groups_enc_path)
         # afegir una transformacio mes per afegir usuaris als grups
-        groups_json = self.transformData.add_members_to_entraid_groups(raw_entraid_groups_no_members)          
+        groups_json = self.transformData.add_members_to_entraid_groups(raw_entraid_groups_no_members, groups_okta_enc_path, users_entra_enc_path)          
         batch_response = self.entraid_utils.create_groups_batch(groups_json)
         if results_path:
             with open(results_path, "w", encoding="utf-8") as f:
@@ -35,9 +35,9 @@ class LoadEntraIdData:
         return batch_response
 
     # Run all, decrypt entra id json enc files and create users/groups
-    def run(self, users_in_enc: str, users_out_batch: str, groups_in_enc: str, groups_out_batch: str):
+    def run(self, users_in_enc: str, users_out_batch: str, groups_in_enc: str, groups_out_batch: str, groups_okta_enc_path: str):
         batch_resp_u = self.create_users(users_in_enc, users_out_batch)
-        batch_resp_g = self.create_groups(groups_in_enc, groups_out_batch)
+        batch_resp_g = self.create_groups(groups_in_enc, groups_out_batch, groups_okta_enc_path, users_in_enc)
         print(f"Carrega de data correcta. Resposta json en {users_out_batch} i {groups_out_batch}")
         
 
@@ -47,6 +47,6 @@ if __name__ == '__main__':
     ENTRAID_DOMAIN = os.getenv("ENTRAID_DOMAIN")
     GRAPH_URL = os.getenv("GRAPH_URL")
     loadData = LoadEntraIdData(AES_KEY, ENTRAID_DOMAIN, GRAPH_URL)
-    loadData.run("users.entraid.json.enc", "BATCH_RESP_U.json", "groups.entraid.json.enc", "BATCH_RESP_G.json")
+    loadData.run("users.entraid.json.enc", "BATCH_RESP_U.json", "groups.entraid.json.enc", "BATCH_RESP_G.json", "groups.json.enc")
     #users_res = loadData.create_users("users.json.enc", "users_batch_res.json")
     #print(json.dumps(users_res, indent=2, ensure_ascii=False))
