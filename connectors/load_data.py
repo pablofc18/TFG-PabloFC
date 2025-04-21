@@ -26,8 +26,8 @@ class LoadEntraIdData:
 
     # Run all, decrypt entra id json enc files and create users/groups
     # TODO GROUPS !!!
-    def run(self, users_in_enc: str, ):
-        batch_resp = self.create_users(users_in_enc, "users_result_batch.json")
+    def run(self, users_in_enc: str, users_out_batch: str):
+        batch_resp = self.create_users(users_in_enc, users_out_batch)
         print(f"S'ha fet tot!")
         
 
@@ -35,5 +35,6 @@ if __name__ == '__main__':
     load_dotenv("../env_vars.env")
     AES_KEY = os.getenv("AES_KEY")
     loadData = LoadEntraIdData(AES_KEY)
-    users_res = loadData.create_users("users.json.enc", "users_batch_res.json")
-    print(json.dumps(users_res, indent=2, ensure_ascii=False))
+    loadData.run("users.entraid.json.enc", "BATCH_RESP.json")
+    #users_res = loadData.create_users("users.json.enc", "users_batch_res.json")
+    #print(json.dumps(users_res, indent=2, ensure_ascii=False))
