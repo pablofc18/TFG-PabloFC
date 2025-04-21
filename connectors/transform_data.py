@@ -58,18 +58,26 @@ class TransformOktaToEntraIdData:
     # Add the members to each group (this method will be executed after the creation of users in Entra)
     def add_members_to_entraid_groups(self, mapped_groups: list) -> list:
         okta_groups = self.decryptor.decrypt_file("users.json.enc") # sempre sera aquest nom el posa el creador (jo)
+        print(okta_groups)
+        print()
         updated = []
         for grp_payload in mapped_groups:
             name = grp_payload["displayName"]
             # troba entrada original a okta amb el mateix nom (sempre trobara, mai None)
             okta_grp = next((g for g in okta_groups if g.get("name") == name), None)
             members = []
+            print(okta_grp)
+            print()
             if okta_grp:
                 for email in okta_grp.get("users_list", []):
                     try:
                         # obtenir id segons l'email i posar del format per entra id 
                         uid = self.entraid_utils.get_user_id(email)
+                        print(uid)
+                        print()
                         members.append(f"{self.graph_url}/v1.0/users/{uid}")
+                        print(members)
+                        print()
                     except Exception:
                         # si no troba continue
                         continue
