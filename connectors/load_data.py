@@ -1,4 +1,5 @@
 import os
+import base64
 import json
 from dotenv import load_dotenv
 from cipher_utils import AESHelper
@@ -7,7 +8,7 @@ from entraid_utils import EntraIDUtils
 
 class LoadEntraIdData:
     def __init__(self, aes_key: bytes):
-        self.aes_key = aes_key
+        self.aes_key = base64.b64decode(aes_key)
         self.entraid_utils = EntraIDUtils()
 
     # Retorna json
