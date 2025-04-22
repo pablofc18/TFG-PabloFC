@@ -33,7 +33,6 @@ class TransformOktaToEntraIdData:
                     "password": "Prueba123!"
                 }
             })
-        print(entraid_users_format)
         return entraid_users_format
 
     # Map Okta groups json to Entra ID groups json
@@ -57,11 +56,25 @@ class TransformOktaToEntraIdData:
         return entraid_groups
 
     # Add the members to each group (this method will be executed after the creation of users in Entra)
-    def add_members_to_entraid_groups(self, mapped_groups: list, groups_okta_enc_path: str, users_entra_enc_path: str) -> list:
+    def add_members_to_entraid_groups(self, groups_entra_json: list, groups_okta_enc_path: str, users_okta_enc_path: str, users_entra_enc_path: str) -> list:
         okta_groups = self.decryptor.decrypt_file(groups_okta_enc_path) # groups.json.enc
-        entra_users = self.decryptor.decrypt_file(users_entra_enc_path) # users.json.enc
+        entra_users = self.decryptor.decrypt_file(users_entra_enc_path) # users.entraid.json.enc
+        okta_users = self.decryptor.decrypt_file(users_okta_enc_path) # users.json.enc
+
+        # Map per cada part abans del @ del mail d'okta ens quedem amb el displayname
+        ## exemple [user6@test.com -> user6: user6 user6 (=== firstName: displayName)]
+        email_to_displayName = {
+            usr['profile']['email']: usr['profile']['displayName']
+            for usr in okta_users
+        }
+        # Map displayName (mateix Okta EntraID) amb userPrincipalName EntraID (email)
+        displayName_to_email = {
+            usr['displayName']: usr['userPrincipalName']
+            for usr in entra_users
+        }
+
         updated = []
-        for grp_payload in mapped_groups:
+        for grp_payload in groups_entra_json:
             name = grp_payload["displayName"]
             # troba entrada original a okta amb el mateix nom (sempre trobara, mai None)
             okta_grp = next((g for g in okta_groups if g.get("name") == name), None)
@@ -70,10 +83,13 @@ class TransformOktaToEntraIdData:
                 for email_okta in okta_grp.get("users_list", []):
                     try:
                         print(email_okta)
-                        # obtenir id segons l'email i posar del format per entra id 
-                        uid = self.entraid_utils.get_user_id(email_okta)
-                        print(uid)
-                        members.append(f"{self.graph_url}/v1.0/users/{uid}")
+                        displayName = email_to_displayName.get(email_okta)
+                        if displayName:
+                            email_entra = displayName_to_email.get(displayName)
+                            if email_entra:
+                                # obtenir id segons l'email i posar del format per entra id 
+                                uid = self.entraid_utils.get_user_id(email_entra)
+                                members.append(f"{self.graph_url}/v1.0/users/{uid}")
                     except Exception:
                         # si no troba continue
                         continue
