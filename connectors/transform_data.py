@@ -82,7 +82,6 @@ class TransformOktaToEntraIdData:
             if okta_grp:
                 for email_okta in okta_grp.get("users_list", []):
                     try:
-                        print(email_okta)
                         displayName = email_to_displayName.get(email_okta)
                         if displayName:
                             email_entra = displayName_to_email.get(displayName)
@@ -91,7 +90,7 @@ class TransformOktaToEntraIdData:
                                 uid = self.entraid_utils.get_user_id(email_entra)
                                 members.append(f"{self.graph_url}/v1.0/users/{uid}")
                     except Exception:
-                        # si no troba continue
+                        # si no troba continue (haria de trobar sempre)
                         continue
             grp_payload["members@odata.bind"] = members
             updated.append(grp_payload)
