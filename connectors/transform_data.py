@@ -111,26 +111,6 @@ class TransformOktaToEntraIdData:
         self.decryptor.encrypt_file(mapped_groups, groups_out_enc)
         print(f"Grups Entra ID xifrats a {groups_out_enc}")
 
-"""
-!!!app registration in group apart!!!
-GROUP JSON CREATE ENTRAID
-{
-  "description": "Group with designated owner and members",
-  "displayName": "Operations group",
-  "groupTypes": [
-  ],
-  "mailEnabled": false,
-  "mailNickname": "operations2019",
-  "securityEnabled": true,
-  "owners@odata.bind": [
-    "https://graph.microsoft.com/v1.0/users/26be1845-4119-4801-a799-aea79d09f1a2"
-  ],
-  "members@odata.bind": [
-    "https://graph.microsoft.com/v1.0/users/ff7cb387-6688-423c-8188-3da9532a73cc",
-    "https://graph.microsoft.com/v1.0/users/69456242-0067-49d3-ba96-9de6f2728e14"
-  ]
-}
-"""
 
 if __name__ == '__main__':
     load_dotenv("../env_vars.env")
@@ -141,13 +121,3 @@ if __name__ == '__main__':
     transformOktaToEntraIdData = TransformOktaToEntraIdData(ENTRAID_DOMAIN, AES_KEY, GRAPH_URL)
 
     transformOktaToEntraIdData.run("users.json.enc", "users.entraid.json.enc", "groups.json.enc", "groups.entraid.json.enc")
-
-"""     jsonobj = transformOktaToEntraIdData.decrypt_file_to_json("users.json.enc")
-    print(jsonobj)
-    print("\n*****\n")
-    mapeigEntraid = transformOktaToEntraIdData.map_users_to_entraid(jsonobj)
-    print(mapeigEntraid)
-    print("\n*****\n")
-    mapeigG = transformOktaToEntraIdData.map_groups_to_entraid(transformOktaToEntraIdData.decrypt_file_to_json("groups.json.enc"))
-    print(mapeigG) """
-

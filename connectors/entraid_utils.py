@@ -18,10 +18,7 @@ class EntraIDUtils:
     def get_user_id(self, email: str) -> str:
         url = f"{self.graph_url}/v1.0/users/{email}"
         resp = requests.get(url, headers=self.get_headers())
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
+        resp.raise_for_status()
         result = resp.json().get("id", "")
         if not result:
             raise ValueError(f"No user found in Entra ID with email: {email}")
@@ -37,10 +34,7 @@ class EntraIDUtils:
             "grant_type": "client_credentials"
         }
         resp = requests.post(url_graph, data=body)
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
+        resp.raise_for_status()
         resp_json = resp.json()
         token = resp_json.get("access_token")
         if not token:
@@ -71,10 +65,7 @@ class EntraIDUtils:
             })
         batch_body = {"requests": requests_list}
         resp = requests.post(batch_url, json=batch_body, headers=self.get_headers())
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
+        resp.raise_for_status()
         return resp.json()
 
     # Create groups (multple per 1 request)
@@ -91,8 +82,5 @@ class EntraIDUtils:
             })
         batch_body = {"requests": requests_list}
         resp = requests.post(batch_url, json=batch_body, headers=self.get_headers())
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
+        resp.raise_for_status()
         return resp.json()

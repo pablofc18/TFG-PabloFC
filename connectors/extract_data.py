@@ -20,10 +20,7 @@ class ExtractOktaData:
     def extract_users_info(self):
         url = f"{self.org_url}/api/v1/users"
         resp = requests.get(url, headers=self.headers)
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
+        resp.raise_for_status()
         raw_users = resp.json()
 
         simplified_users = []
@@ -45,15 +42,12 @@ class ExtractOktaData:
     # Extract group info in Okta groups endpoint (id, name, users_list, apps_list)
     def extract_groups_info(self):
         url = f"{self.org_url}/api/v1/groups"
-        resp = requests.get(url, headers=self.headers)
-        if resp.status_code != 200: # error
-            raise requests.HTTPError(
-                f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-            )
-        raw_groups = resp.json()
+        raw_groups = requests.get(url, headers=self.headers)
+        raw_groups.raise_for_status()
+        groups_json = raw_groups.json()
 
         simplified_groups = []
-        for group in raw_groups:
+        for group in groups_json:
             # filter by groups created by me
             if group.get("type") != "OKTA_GROUP":
                 continue
@@ -66,10 +60,7 @@ class ExtractOktaData:
             users_email = []
             if users_url: 
                 raw_users = requests.get(users_url, headers=self.headers)
-                if raw_users.status_code != 200: # error
-                    raise requests.HTTPError(
-                        f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-                    )
+                raw_users.raise_for_status()
                 users_json = raw_users.json() 
                 users_email = [
                     user.get("profile", {}).get("email")
@@ -82,10 +73,7 @@ class ExtractOktaData:
             apps_name = []
             if apps_url:
                 raw_apps = requests.get(apps_url, headers=self.headers)
-                if resp.status_code != 200: # error
-                    raise requests.HTTPError(
-                        f"Error {resp.status_code} al cridar a {resp.url}: {resp.reason}"
-                    )
+                raw_apps.raise_for_status()
                 apps_json = raw_apps.json()
                 apps_name = [app.get("label") for app in apps_json]
             
@@ -118,6 +106,3 @@ if __name__ == '__main__':
 
     extractOktaData = ExtractOktaData(OKTA_ORG_URL, OKTA_API_TOKEN, AES_KEY)
     extractOktaData.run("users.json.enc", "groups.json.enc")
-
-
-
