@@ -68,20 +68,10 @@ class ExtractOktaData:
                     if isinstance(user, dict)
                 ]
             
-            # get asigned apps name list
-            apps_url = group.get("_links", {}).get("apps", {}).get("href")
-            apps_name = []
-            if apps_url:
-                raw_apps = requests.get(apps_url, headers=self.headers)
-                raw_apps.raise_for_status()
-                apps_json = raw_apps.json()
-                apps_name = [app.get("label") for app in apps_json]
-            
             simplified_groups.append({
                 "id": group_id,
                 "name": group_name,
                 "users_list": users_email,
-                "apps_list": apps_name
             })
         return simplified_groups
 
