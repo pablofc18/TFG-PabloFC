@@ -288,12 +288,14 @@ def auth():
 @app.route("/getAToken")
 def auth_entraid():
     token = entraid_oauth.authorize_access_token()
+    app.logger.debug(f"Token obtingut: {token}")
     nonce = session.pop("nonce", None)  
     if not nonce:
         app.logger.error("Nonce no trobat en la sessio!")
         return "Error: Nonce perdut o no valid", 400
     user_info = entraid_oauth.parse_id_token(token, nonce)
-    # Alguns tenants usen claim "email", altres "upn"
+    app.logger.debug(f"User parsed token {user_info}")
+    #TODO EID
     #eid_claim = user_info.get("employeeNumber") or user_info.get("extension_EmployeeNumber") or ""
     session.update({
         "provider": "entra_id",
