@@ -203,7 +203,8 @@ def change_okta_user_password(user_id, curr_psswd, new_psswd):
 # / endpoint
 @app.route("/")
 def home():
-    if session["provider"] == "okta":
+    provider = session.get("provider")
+    if provider == "okta":
         user = session.get("user")
         if user:
             app.logger.info(f"Usuari autenticat {user}")
@@ -211,7 +212,7 @@ def home():
         else:
             app.logger.info("Usuari no autenticat.")
             return render_template("home.html", user=user)
-    elif session["provider"] == "entra_id":
+    elif provider == "entra_id":
         user = session.get("user_entraid")
         if user:
             app.logger.info(f"Usuari autenticat {user}")
@@ -220,7 +221,7 @@ def home():
             app.logger.info("Usuari no autenticat.")
             return render_template("home.html", user=user)
     else:
-        app.logger.info("Error inesperat!")
+        app.logger.info("Usuari no autenticat")
         return render_template("home.html", user=None)
 
 
