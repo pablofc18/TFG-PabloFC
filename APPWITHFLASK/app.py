@@ -56,10 +56,10 @@ CLIENT_ID = os.getenv("OKTA_CLIENT_ID")
 CLIENT_SECRET = os.getenv("OKTA_CLIENT_SECRET")
 API_TOKEN = os.getenv("OKTA_API_TOKEN")
 
-app.config["SESSION_COOKIE_NAME"] = "okta-login-session"
+app.config["SESSION_COOKIE_NAME"] = "login-session"
 app.config["SESSION_PERMANENT"] = False # user session terminara si es tanca navegador 
 
-# conf oauth
+# conf oauth Okta
 oauth = OAuth(app)
 okta_oauth = oauth.register(
     name="okta",
@@ -70,6 +70,25 @@ okta_oauth = oauth.register(
         "scope": "openid profile email",
     }
 )
+
+# conf entra id
+ENTRAID_TENANT_ID     = os.getenv("ENTRAID_TENANT_ID")
+ENTRAID_CLIENT_ID     = os.getenv("ENTRAID_CLIENT_ID")
+ENTRAID_CLIENT_SECRET = os.getenv("ENTRAID_CLIENT_SECRET")
+ENTRAID_AUTHORITY     = f"{os.getenv("LOGIN_MICROSOFT_URL")}/{ENTRAID_TENANT_ID}"
+ENTRAID_OPENID_CONFIG = f"{ENTRAID_AUTHORITY}/v2.0/.well-known/openid-configuration"
+
+# conf oauth Entra id
+entraid_oauth = oauth.register(
+    name="microsoft",
+    client_id=ENTRAID_CLIENT_ID,
+    client_secret=ENTRAID_CLIENT_SECRET,
+    server_metadata_url=ENTRAID_OPENID_CONFIG,
+    client_kwargs={
+        "scope": "openid profile email User.ReadWrite User.ReadWrite.All api://myAppFlask/myApp-scope" # TODO CHECK SCOPES!!!
+    },
+)
+
 
 ###
 ### Verify access token 
@@ -184,15 +203,28 @@ def change_okta_user_password(user_id, curr_psswd, new_psswd):
 # / endpoint
 @app.route("/")
 def home():
-    user = session.get("user")
-    if user:
-        app.logger.info(f"Usuari autenticat {user}")
-        return render_template("home.html", user=user)
+    if session["provider"] == "okta":
+        user = session.get("user")
+        if user:
+            app.logger.info(f"Usuari autenticat {user}")
+            return render_template("home.html", user=user)
+        else:
+            app.logger.info("Usuari no autenticat.")
+            return render_template("home.html", user=user)
+    elif session["provider"] == "entra_id":
+        user = session.get("user_entraid")
+        if user:
+            app.logger.info(f"Usuari autenticat {user}")
+            return render_template("home.html", user=user)
+        else:
+            app.logger.info("Usuari no autenticat.")
+            return render_template("home.html", user=user)
     else:
-        app.logger.info("Usuari no autenticat.")
-        return render_template("home.html", user=user)
+        app.logger.info("Error inesperat!")
+        return render_template("home.html", user=None)
 
-# /login endpoint
+
+# /login endpoint for Okta
 @app.route("/login")
 def login():
     redirect_uri = url_for("auth", _external=True)
@@ -202,7 +234,17 @@ def login():
     app.logger.info(f"Redireccionem a uri: {redirect_uri}")
     return okta_oauth.authorize_redirect(redirect_uri, nonce=nonce)
 
-# /auth/callback redirect after login
+# /login endpoint for Okta
+@app.route("/login_entraid")
+def login_entraid():
+    nonce = os.urandom(16).hex()
+    app.logger.debug(f"Asignem nonce a la sessio actual: {nonce}")
+    session["nonce"] = nonce
+    redirect_uri = url_for("auth_entraid", _external=True)
+    app.logger.info(f"Redireccionem a uri: {redirect_uri}")
+    return entraid_oauth.authorize_redirect(redirect_uri, nonce=nonce)
+
+# /auth/callback redirect after login OKTA
 @app.route("/auth/callback")
 def auth():
     # 73-83 TODO: check
@@ -214,6 +256,7 @@ def auth():
         return "Error: Nonce perdut o no valid", 400
     user_info = okta_oauth.parse_id_token(token, nonce)
     app.logger.debug(f"User parsed token {user_info}")
+    session["provider"] = "okta"
     session["id_token"] = token.get("id_token")
     session["access_token"] = token.get("access_token")
     session["user"] = {
@@ -238,6 +281,47 @@ def auth():
     else:
         app.logger.debug(f"User trobat in db: {existing_user.email}")
 
+    return redirect("/")
+
+# /getAToken redirect after login ENTRA ID
+@app.route("/getAToken")
+def auth_microsoft():
+    token = entraid_oauth.authorize_access_token()
+    nonce = session.pop("nonce", None)  
+    if not nonce:
+        app.logger.error("Nonce no trobat en la sessio!")
+        return "Error: Nonce perdut o no valid", 400
+    user_info = entraid_oauth.parse_id_token(token, nonce)
+    # Alguns tenants usen claim "email", altres "upn"
+    #eid_claim = user_info.get("employeeNumber") or user_info.get("extension_EmployeeNumber") or ""
+    session.update({
+        "provider": "entra_id",
+        "entraid_id_token": token.get("id_token"),
+        "entraid_access_token": token.get("access_token"),
+        "user_entraid": {
+            "name": user_info["name"],
+            "email": user_info.get("email") or user_info.get("preferred_username"),
+           # "eid":   eid_claim
+        }
+    })
+    existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
+    if not existing_user:
+        db.session.add(User(**session["user_entraid"]))
+        db.session.commit()
+
+        app.logger.debug(f"User {user_info["name"]} no guardat en db")
+        new_user = User(
+            #email=user_info["email"],
+            email=session["user_entraid"]["email"],
+            full_name=user_info["name"],
+            #eid=user_info["eid"]
+            eid="TEST"
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        app.logger.debug(f"User {user_info["name"]} guardat en db")
+    else:
+        app.logger.debug(f"User trobat in db: {existing_user.email}")
     return redirect("/")
 
 # /profile endpoint per veure i editar el perfil
