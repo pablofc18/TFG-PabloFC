@@ -4054,3 +4054,82 @@ KeyError: 'eid'
 [2025-04-21 14:52:00,778] [INFO] [werkzeug] : 192.168.1.37 - - [21/Apr/2025 14:52:00] "[32mGET /logout HTTP/1.1[0m" 302 -
 [2025-04-21 14:52:01,424] [INFO] [app] : Usuari no autenticat.
 [2025-04-21 14:52:01,425] [INFO] [werkzeug] : 192.168.1.37 - - [21/Apr/2025 14:52:01] "GET / HTTP/1.1" 200 -
+[2025-04-21 16:28:06,471] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-04-21 16:28:06,472] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-22 10:01:09,662] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-04-22 10:01:09,662] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-24 15:35:33,746] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-04-24 15:35:33,747] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-27 11:23:44,970] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-04-27 11:23:44,971] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-04-30 16:50:11,202] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-04-30 16:50:11,203] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-01 09:32:10,042] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-01 09:32:10,043] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 10:45:40,527] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 10:45:40,529] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 10:45:58,926] [INFO] [app] : Usuari no autenticat.
+[2025-05-03 10:45:58,931] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:45:58] "GET / HTTP/1.1" 200 -
+[2025-05-03 10:45:59,209] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:45:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-05-03 10:47:34,738] [DEBUG] [app] : Asignem nonce a la sessio actual: 394da62f1bc53c241956c4c3955b5f80
+[2025-05-03 10:47:34,738] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/auth/callback
+[2025-05-03 10:47:34,740] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 10:47:35,735] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/.well-known/openid-configuration HTTP/1.1" 200 None
+[2025-05-03 10:47:35,737] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:47:35] "[32mGET /login HTTP/1.1[0m" 302 -
+[2025-05-03 10:47:51,588] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 10:47:52,649] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /oauth2/default/v1/token HTTP/1.1" 200 None
+[2025-05-03 10:47:52,650] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 10:47:53,702] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/v1/keys HTTP/1.1" 200 None
+[2025-05-03 10:47:53,712] [DEBUG] [app] : Token obtingut: {'token_type': 'Bearer', 'expires_in': 3600, 'access_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULlpHOXpHUk9zRWlnQm1aVzlDd0w3LWtkYU5LYlNUQ0dxODRIYlVfOXIxSFEiLCJpc3MiOiJodHRwczovL2Rldi02NzgxMTI5OS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3NDYyNjkyNzIsImV4cCI6MTc0NjI3Mjg3MiwiY2lkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJ1aWQiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNzQ2MjY5MjcwLCJzdWIiOiJwYWJsby5mcmFuY28uY0Blc3R1ZGlhbnRhdC51cGMuZWR1IiwiZWlkIjoiMDAwMEEifQ.CKfsJybgJhEwFjZ0A9G6s3LysyhVTJuniqUgrsGVCGJU0aJYqATDWmu-Xtb7l8BjYi2eW0R9W3lZrMhOygNYGKsFiJZpaQRKPTZcLgFaCIAX0Xtl41o4dciC5rnXbNqbvt9eyHDHPLUhLXFIndFxJQkAho5Kipgf-hzE-dta0AiI_SFxSguPojdA95mV6KFQM_It-nANT4PtgOjTdLDh_ghUOWE0cru318_ZNXkShLrpIEMO-fODPMjppRx_z5nLTQDbNyhwxEAZPutE3yTwAgoXH9KM_JhISngkF6xu3a9J43UE2F8hJTpW-haVtnxVVngMc0tzGwXxWmGa1hVpxg', 'scope': 'profile openid email', 'id_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28gQ2FycmFzY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNjkyNzIsImV4cCI6MTc0NjI3Mjg3MiwianRpIjoiSUQuN3V4TlN0MjEwMDl3UWlsVHBPR2xhQmhJSkpuSk1TQUpCbjF0RHVFRFRFNCIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjM5NGRhNjJmMWJjNTNjMjQxOTU2YzRjMzk1NWI1ZjgwIiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2OTI3MCwiYXRfaGFzaCI6IllVNjVJTDdjZGxvQl9EZGUtRjVtU2ciLCJlaWQiOiIwMDAwQSJ9.MQQ8Rjfae2FP99-WoPccPPcoZTbJcnT8GhQi9dka9GOrtnHfyWcaNh9vPvynXZD3FqxX9uZS7dNv7sjJ-Jx39MXiQOfyuAeXwA06JP2z5dzJIOkPjLrgZ76BHJt_FWyXNUoTBTaDZmmUbtJb2gvkdwyJvhvwpWZTxua4r9t-lu2JLm6OvrTeVO0-J5t9uDvqSttI8j4i5e691vTdcLTS3WWMATF20BO-_Ji2LgEGczBX7GFBh5i9w7wCsFpNoWN8lCydfEWd0A_YjmHvydRaLeRYb8lxr6SUTWReZ87XW0J8kxx9jevQ9qI8cDQoNMWNpHyzmrk4RQHvdS0H2_nvBg', 'expires_at': 1746272872, 'userinfo': {'sub': '00umxga28fj2SXH2P5d7', 'name': 'Pablo Franco Carrasco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746269272, 'exp': 1746272872, 'jti': 'ID.7uxNSt21009wQilTpOGlaBhIJJnJMSAJBn1tDuEDTE4', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '394da62f1bc53c241956c4c3955b5f80', 'preferred_username': 'pablo.franco.c@estudiantat.upc.edu', 'auth_time': 1746269270, 'at_hash': 'YU65IL7cdloB_Dde-F5mSg', 'eid': '0000A'}}
+[2025-05-03 10:47:53,712] [DEBUG] [app] : User parsed token {'sub': '00umxga28fj2SXH2P5d7', 'name': 'Pablo Franco Carrasco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746269272, 'exp': 1746272872, 'jti': 'ID.7uxNSt21009wQilTpOGlaBhIJJnJMSAJBn1tDuEDTE4', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '394da62f1bc53c241956c4c3955b5f80', 'preferred_username': 'pablo.franco.c@estudiantat.upc.edu', 'auth_time': 1746269270, 'at_hash': 'YU65IL7cdloB_Dde-F5mSg', 'eid': '0000A'}
+[2025-05-03 10:47:53,713] [INFO] [app] : Sessio info usuari: Pablo Franco Carrasco, email: pablo.franco.c@estudiantat.upc.edu, eid: 0000A
+[2025-05-03 10:47:53,761] [DEBUG] [app] : User trobat in db: pablo.franco.c@estudiantat.upc.edu
+[2025-05-03 10:47:53,762] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:47:53] "[32mGET /auth/callback?code=vkjVpysMfm2MH-OFoyyhaztXezYvNtOKXTOC3zh9YXU&state=aGrZybD0BC1JIRCHyEaLZMMafJmiPb HTTP/1.1[0m" 302 -
+[2025-05-03 10:47:53,768] [INFO] [app] : Usuari autenticat {'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco Carrasco'}
+[2025-05-03 10:47:53,768] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:47:53] "GET / HTTP/1.1" 200 -
+[2025-05-03 10:47:56,231] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.ZG9zGROsEigBmZW9CwL7-kdaNKbSTCGq84HbU_9r1HQ', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746269272, 'exp': 1746272872, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['profile', 'openid', 'email'], 'auth_time': 1746269270, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 10:47:56,233] [INFO] [app] : User a modifcar: <User pablo.franco.c@estudiantat.upc.edu>
+[2025-05-03 10:47:56,238] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:47:56] "GET /profile HTTP/1.1" 200 -
+[2025-05-03 10:48:02,659] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.ZG9zGROsEigBmZW9CwL7-kdaNKbSTCGq84HbU_9r1HQ', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746269272, 'exp': 1746272872, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['profile', 'openid', 'email'], 'auth_time': 1746269270, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 10:48:02,659] [INFO] [app] : upduser user:{'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco Carrasco'}
+[2025-05-03 10:48:02,659] [INFO] [app] : NEW full_name: Pablo Franco
+[2025-05-03 10:48:02,659] [INFO] [app] : email: pablo.franco.c@estudiantat.upc.edu
+[2025-05-03 10:48:02,662] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 10:48:03,666] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /api/v1/users/pablo.franco.c@estudiantat.upc.edu HTTP/1.1" 200 None
+[2025-05-03 10:48:03,667] [DEBUG] [app] : Id de l'usuari: 00umxga28fj2SXH2P5d7
+[2025-05-03 10:48:03,667] [DEBUG] [app] : Update profile okta: {'profile': {'firstName': 'Pablo', 'lastName': 'Franco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'login': 'pablo.franco.c@estudiantat.upc.edu', 'displayName': 'Pablo Franco', 'employeeNumber': '0000A'}}
+[2025-05-03 10:48:03,667] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 10:48:04,747] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /api/v1/users/00umxga28fj2SXH2P5d7 HTTP/1.1" 200 None
+[2025-05-03 10:48:04,747] [INFO] [app] : Perfil d'Okta actualitzat correctament: {'firstName': 'Pablo', 'lastName': 'Franco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'login': 'pablo.franco.c@estudiantat.upc.edu', 'displayName': 'Pablo Franco', 'employeeNumber': '0000A'}
+[2025-05-03 10:48:04,752] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:48:04] "[32mPOST /update_profile HTTP/1.1[0m" 302 -
+[2025-05-03 10:48:04,758] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.ZG9zGROsEigBmZW9CwL7-kdaNKbSTCGq84HbU_9r1HQ', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746269272, 'exp': 1746272872, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['profile', 'openid', 'email'], 'auth_time': 1746269270, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 10:48:04,760] [INFO] [app] : User a modifcar: <User pablo.franco.c@estudiantat.upc.edu>
+[2025-05-03 10:48:04,760] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:48:04] "GET /profile HTTP/1.1" 200 -
+[2025-05-03 10:48:08,916] [INFO] [app] : Usuari autenticat {'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco'}
+[2025-05-03 10:48:08,916] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:48:08] "GET / HTTP/1.1" 200 -
+[2025-05-03 10:48:20,451] [DEBUG] [app] : Token de la sessio: eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28gQ2FycmFzY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNjkyNzIsImV4cCI6MTc0NjI3Mjg3MiwianRpIjoiSUQuN3V4TlN0MjEwMDl3UWlsVHBPR2xhQmhJSkpuSk1TQUpCbjF0RHVFRFRFNCIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjM5NGRhNjJmMWJjNTNjMjQxOTU2YzRjMzk1NWI1ZjgwIiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2OTI3MCwiYXRfaGFzaCI6IllVNjVJTDdjZGxvQl9EZGUtRjVtU2ciLCJlaWQiOiIwMDAwQSJ9.MQQ8Rjfae2FP99-WoPccPPcoZTbJcnT8GhQi9dka9GOrtnHfyWcaNh9vPvynXZD3FqxX9uZS7dNv7sjJ-Jx39MXiQOfyuAeXwA06JP2z5dzJIOkPjLrgZ76BHJt_FWyXNUoTBTaDZmmUbtJb2gvkdwyJvhvwpWZTxua4r9t-lu2JLm6OvrTeVO0-J5t9uDvqSttI8j4i5e691vTdcLTS3WWMATF20BO-_Ji2LgEGczBX7GFBh5i9w7wCsFpNoWN8lCydfEWd0A_YjmHvydRaLeRYb8lxr6SUTWReZ87XW0J8kxx9jevQ9qI8cDQoNMWNpHyzmrk4RQHvdS0H2_nvBg
+[2025-05-03 10:48:20,451] [DEBUG] [app] : Logout url: https://dev-67811299.okta.com/oauth2/default/v1/logout?post_logout_redirect_uri=https://192.168.1.10:5000/&id_token_hint=eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28gQ2FycmFzY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNjkyNzIsImV4cCI6MTc0NjI3Mjg3MiwianRpIjoiSUQuN3V4TlN0MjEwMDl3UWlsVHBPR2xhQmhJSkpuSk1TQUpCbjF0RHVFRFRFNCIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjM5NGRhNjJmMWJjNTNjMjQxOTU2YzRjMzk1NWI1ZjgwIiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2OTI3MCwiYXRfaGFzaCI6IllVNjVJTDdjZGxvQl9EZGUtRjVtU2ciLCJlaWQiOiIwMDAwQSJ9.MQQ8Rjfae2FP99-WoPccPPcoZTbJcnT8GhQi9dka9GOrtnHfyWcaNh9vPvynXZD3FqxX9uZS7dNv7sjJ-Jx39MXiQOfyuAeXwA06JP2z5dzJIOkPjLrgZ76BHJt_FWyXNUoTBTaDZmmUbtJb2gvkdwyJvhvwpWZTxua4r9t-lu2JLm6OvrTeVO0-J5t9uDvqSttI8j4i5e691vTdcLTS3WWMATF20BO-_Ji2LgEGczBX7GFBh5i9w7wCsFpNoWN8lCydfEWd0A_YjmHvydRaLeRYb8lxr6SUTWReZ87XW0J8kxx9jevQ9qI8cDQoNMWNpHyzmrk4RQHvdS0H2_nvBg
+[2025-05-03 10:48:20,452] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:48:20] "[32mGET /logout HTTP/1.1[0m" 302 -
+[2025-05-03 10:48:21,096] [INFO] [app] : Usuari no autenticat.
+[2025-05-03 10:48:21,097] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 10:48:21] "GET / HTTP/1.1" 200 -
