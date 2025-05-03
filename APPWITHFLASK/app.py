@@ -286,7 +286,7 @@ def auth():
 
 # /getAToken redirect after login ENTRA ID
 @app.route("/getAToken")
-def auth_microsoft():
+def auth_entraid():
     token = entraid_oauth.authorize_access_token()
     nonce = session.pop("nonce", None)  
     if not nonce:
