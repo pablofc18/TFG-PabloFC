@@ -119,5 +119,4 @@ if __name__ == '__main__':
     GRAPH_URL = os.getenv("GRAPH_URL")
 
     transformOktaToEntraIdData = TransformOktaToEntraIdData(ENTRAID_DOMAIN, AES_KEY, GRAPH_URL)
-
     transformOktaToEntraIdData.run("users.json.enc", "users.entraid.json.enc", "groups.json.enc", "groups.entraid.json.enc")
