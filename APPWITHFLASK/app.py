@@ -307,9 +307,6 @@ def auth_entraid():
     })
     existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
     if not existing_user:
-        db.session.add(User(**session["user_entraid"]))
-        db.session.commit()
-
         app.logger.debug(f"User {user_info["name"]} no guardat en db")
         new_user = User(
             #email=user_info["email"],
