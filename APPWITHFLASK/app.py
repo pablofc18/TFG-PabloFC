@@ -316,7 +316,7 @@ def auth_entraid():
             email=session["user_entraid"]["email"],
             full_name=user_info["name"],
             #eid=user_info["eid"]
-            eid="TEST"
+            eid="TEST2"
         )
         db.session.add(new_user)
         db.session.commit()
