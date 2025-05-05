@@ -304,13 +304,12 @@ def auth_entraid():
             "eid":   user_info.get("eid")
     }
     
-    app.logger.info(f"Sessio info usuari: {session["user_entraid"]["name"]}, email: {session["user_entraid"]["email"]}") # TODO eid: {user_info["eid"]}
+    app.logger.info(f"Sessio info usuari: {session["user_entraid"]["name"]}, email: {session["user_entraid"]["email"]}, eid: {session["user_entraid"]["eid"]}") 
     
     existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
     if not existing_user:
         app.logger.debug(f"User {user_info["name"]} no guardat en db")
         new_user = User(
-            #email=user_info["email"],
             email= session["user_entraid"]["email"],
             full_name = user_info["name"],
             eid = user_info["eid"]
