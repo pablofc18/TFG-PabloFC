@@ -306,7 +306,7 @@ def auth_entraid():
            # "eid":   eid_claim
     }
     
-    app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}") # TODO eid: {user_info["eid"]}
+    app.logger.info(f"Sessio info usuari: {session["user_entraid"]["name"]}, email: {session["user_entraid"]["email"]}") # TODO eid: {user_info["eid"]}
     
     existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
     if not existing_user:
