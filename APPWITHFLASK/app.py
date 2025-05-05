@@ -46,7 +46,7 @@ class User(db.Model):
     __tablename__ = "users"
     email = db.Column(db.String(100), primary_key=True, nullable=False)
     full_name = db.Column(db.String(100), nullable=False)
-    eid = db.Column(db.String(5), nullable=False, unique=True)
+    eid = db.Column(db.String(5), nullable=False)
 
 
 # conf okta
