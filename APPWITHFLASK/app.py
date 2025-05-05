@@ -457,8 +457,7 @@ def logout():
             logout_url += f"&id_token_hint={id_token}"
     
     else: # okta
-        #logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
-        logout_url = f"{OKTA_DOMAIN}/v1/logout"
+        logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
         if id_token:
             logout_url += f"&id_token_hint={id_token}"
 
