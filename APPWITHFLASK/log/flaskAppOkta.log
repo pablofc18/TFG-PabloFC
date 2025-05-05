@@ -4219,3 +4219,262 @@ KeyError: 'eid'
 [2025-05-03 11:02:10,845] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:02:10] "[32mGET /logout HTTP/1.1[0m" 302 -
 [2025-05-03 11:02:11,441] [INFO] [app] : Usuari no autenticat.
 [2025-05-03 11:02:11,441] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:02:11] "GET / HTTP/1.1" 200 -
+[2025-05-03 11:05:37,849] [INFO] [app] : Usuari no autenticat.
+[2025-05-03 11:05:37,850] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:37] "GET / HTTP/1.1" 200 -
+[2025-05-03 11:05:39,329] [DEBUG] [app] : Asignem nonce a la sessio actual: 9c652277adca7c0e1982db58437102e9
+[2025-05-03 11:05:39,330] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/auth/callback
+[2025-05-03 11:05:39,330] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:39] "[32mGET /login HTTP/1.1[0m" 302 -
+[2025-05-03 11:05:40,574] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 11:05:41,758] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /oauth2/default/v1/token HTTP/1.1" 200 None
+[2025-05-03 11:05:41,761] [DEBUG] [app] : Token obtingut: {'token_type': 'Bearer', 'expires_in': 3600, 'access_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnhHTDJwOGp0YmlJS2JSYzJrTFB0ZXg0NDdwWTdFMmxucFpBY0NRQmNuWWMiLCJpc3MiOiJodHRwczovL2Rldi02NzgxMTI5OS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3NDYyNzAzNDEsImV4cCI6MTc0NjI3Mzk0MSwiY2lkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJ1aWQiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsInNjcCI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNzQ2MjY2MjAyLCJzdWIiOiJwYWJsby5mcmFuY28uY0Blc3R1ZGlhbnRhdC51cGMuZWR1IiwiZWlkIjoiMDAwMEEifQ.d6I-9IlU9cQRsbWCr6uGgd82CwjNobS54NIkFRvAZ-tjjBj298LOWoruewC66hAHMcoaXb2-VeYer1e8kvLiI07wy7KHOLQouEIVMlGoW__l8q4aKY9vEkT3PwNt7jTu3YC-32XDrxZS_VTcNQqDH9x-WRFhnUWqIRpTdNnlf59r6GIxvbeiNzvkpgIYYNdgyu4uwpapHf_ist6o4sV-8vUtNPKPKN3c46-FNOwZ3iQbZccfFO30q0FWjpNZ8xFdfrPNifgVS3nxis874UcPK33NV4v9ClLi9m4AdO6Ufk9v_v6q6Q2my9ywNpL4wjn0b03yfYmynaTrqMl2NmzD3g', 'scope': 'openid profile email', 'id_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNzAzNDEsImV4cCI6MTc0NjI3Mzk0MSwianRpIjoiSUQuMTJqaGJ4ZGFoX3dhMGM0QTU1MEo2ZVJ0c0s3MjVaU3lTNlZ3QmlYWGE2SSIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjljNjUyMjc3YWRjYTdjMGUxOTgyZGI1ODQzNzEwMmU5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2NjIwMiwiYXRfaGFzaCI6Ikk4SWZGTGh0QVh4OXZqaGUwS3RHRkEiLCJlaWQiOiIwMDAwQSJ9.bM4q5B3u2tqw89BHj1VSv_NCU5exAumMuBmluU9UL6YaE9tZc0tpQudlOyFLrnq5fdujU6zHoMagQlHqt4iViqjepjA3pRvXbTp4pbKfd-2hFostUc_i_HEkCNVwo1AfmwgAJBcbdMH6e3JYHsymewrAxBMECHH25AEzaeHAAc3xhU4dImsPKqH_ToYIVVtULOcJcJOvkLdyWJ1S0WUKL3S9CpwCQiNvrnHihGssMRS8B-6_Cb8i4Bw0absSeNhiIB7gDwsfuAJxGApGVMvNgMzucZb7aXthw5wtZnjx-omrL6p7kbQt-1qbov1CXPuKfd88RTE16UyjoZFO3sEVTw', 'expires_at': 1746273941, 'userinfo': {'sub': '00umxga28fj2SXH2P5d7', 'name': 'Pablo Franco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746270341, 'exp': 1746273941, 'jti': 'ID.12jhbxdah_wa0c4A550J6eRtsK725ZSyS6VwBiXXa6I', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '9c652277adca7c0e1982db58437102e9', 'preferred_username': 'pablo.franco.c@estudiantat.upc.edu', 'auth_time': 1746266202, 'at_hash': 'I8IfFLhtAXx9vjhe0KtGFA', 'eid': '0000A'}}
+[2025-05-03 11:05:41,761] [DEBUG] [app] : User parsed token {'sub': '00umxga28fj2SXH2P5d7', 'name': 'Pablo Franco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746270341, 'exp': 1746273941, 'jti': 'ID.12jhbxdah_wa0c4A550J6eRtsK725ZSyS6VwBiXXa6I', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '9c652277adca7c0e1982db58437102e9', 'preferred_username': 'pablo.franco.c@estudiantat.upc.edu', 'auth_time': 1746266202, 'at_hash': 'I8IfFLhtAXx9vjhe0KtGFA', 'eid': '0000A'}
+[2025-05-03 11:05:41,762] [INFO] [app] : Sessio info usuari: Pablo Franco, email: pablo.franco.c@estudiantat.upc.edu, eid: 0000A
+[2025-05-03 11:05:41,763] [DEBUG] [app] : User trobat in db: pablo.franco.c@estudiantat.upc.edu
+[2025-05-03 11:05:41,764] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:41] "[32mGET /auth/callback?code=hhAuXCGtMMjTBRoL5G11kMTMAphiDBleU2fiog9cX_I&state=h5IQ7OwwC0NMISp52SptgjYzhunK4v HTTP/1.1[0m" 302 -
+[2025-05-03 11:05:41,770] [INFO] [app] : Usuari autenticat {'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco'}
+[2025-05-03 11:05:41,770] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:41] "GET / HTTP/1.1" 200 -
+[2025-05-03 11:05:42,996] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.xGL2p8jtbiIKbRc2kLPtex447pY7E2lnpZAcCQBcnYc', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746270341, 'exp': 1746273941, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['openid', 'profile', 'email'], 'auth_time': 1746266202, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 11:05:42,997] [INFO] [app] : User a modifcar: <User pablo.franco.c@estudiantat.upc.edu>
+[2025-05-03 11:05:42,998] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:42] "GET /profile HTTP/1.1" 200 -
+[2025-05-03 11:05:49,257] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.xGL2p8jtbiIKbRc2kLPtex447pY7E2lnpZAcCQBcnYc', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746270341, 'exp': 1746273941, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['openid', 'profile', 'email'], 'auth_time': 1746266202, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 11:05:49,258] [INFO] [app] : upduser user:{'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco'}
+[2025-05-03 11:05:49,258] [INFO] [app] : NEW full_name: Pablo Franco Carrasco
+[2025-05-03 11:05:49,258] [INFO] [app] : email: pablo.franco.c@estudiantat.upc.edu
+[2025-05-03 11:05:49,260] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 11:05:50,244] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /api/v1/users/pablo.franco.c@estudiantat.upc.edu HTTP/1.1" 200 None
+[2025-05-03 11:05:50,244] [DEBUG] [app] : Id de l'usuari: 00umxga28fj2SXH2P5d7
+[2025-05-03 11:05:50,244] [DEBUG] [app] : Update profile okta: {'profile': {'firstName': 'Pablo', 'lastName': 'Franco Carrasco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'login': 'pablo.franco.c@estudiantat.upc.edu', 'displayName': 'Pablo Franco Carrasco', 'employeeNumber': '0000A'}}
+[2025-05-03 11:05:50,245] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 11:05:51,207] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /api/v1/users/00umxga28fj2SXH2P5d7 HTTP/1.1" 200 None
+[2025-05-03 11:05:51,207] [INFO] [app] : Perfil d'Okta actualitzat correctament: {'firstName': 'Pablo', 'lastName': 'Franco Carrasco', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'login': 'pablo.franco.c@estudiantat.upc.edu', 'displayName': 'Pablo Franco Carrasco', 'employeeNumber': '0000A'}
+[2025-05-03 11:05:51,210] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:51] "[32mPOST /update_profile HTTP/1.1[0m" 302 -
+[2025-05-03 11:05:51,219] [DEBUG] [app] : decoded jwt: {'ver': 1, 'jti': 'AT.xGL2p8jtbiIKbRc2kLPtex447pY7E2lnpZAcCQBcnYc', 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': 'api://default', 'iat': 1746270341, 'exp': 1746273941, 'cid': '0oamy75qf3BRY7URR5d7', 'uid': '00umxga28fj2SXH2P5d7', 'scp': ['openid', 'profile', 'email'], 'auth_time': 1746266202, 'sub': 'pablo.franco.c@estudiantat.upc.edu', 'eid': '0000A'}
+[2025-05-03 11:05:51,220] [INFO] [app] : User a modifcar: <User pablo.franco.c@estudiantat.upc.edu>
+[2025-05-03 11:05:51,221] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:51] "GET /profile HTTP/1.1" 200 -
+[2025-05-03 11:05:52,905] [INFO] [app] : Usuari autenticat {'eid': '0000A', 'email': 'pablo.franco.c@estudiantat.upc.edu', 'name': 'Pablo Franco Carrasco'}
+[2025-05-03 11:05:52,905] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:52] "GET / HTTP/1.1" 200 -
+[2025-05-03 11:05:54,779] [DEBUG] [app] : Token de la sessio: eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNzAzNDEsImV4cCI6MTc0NjI3Mzk0MSwianRpIjoiSUQuMTJqaGJ4ZGFoX3dhMGM0QTU1MEo2ZVJ0c0s3MjVaU3lTNlZ3QmlYWGE2SSIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjljNjUyMjc3YWRjYTdjMGUxOTgyZGI1ODQzNzEwMmU5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2NjIwMiwiYXRfaGFzaCI6Ikk4SWZGTGh0QVh4OXZqaGUwS3RHRkEiLCJlaWQiOiIwMDAwQSJ9.bM4q5B3u2tqw89BHj1VSv_NCU5exAumMuBmluU9UL6YaE9tZc0tpQudlOyFLrnq5fdujU6zHoMagQlHqt4iViqjepjA3pRvXbTp4pbKfd-2hFostUc_i_HEkCNVwo1AfmwgAJBcbdMH6e3JYHsymewrAxBMECHH25AEzaeHAAc3xhU4dImsPKqH_ToYIVVtULOcJcJOvkLdyWJ1S0WUKL3S9CpwCQiNvrnHihGssMRS8B-6_Cb8i4Bw0absSeNhiIB7gDwsfuAJxGApGVMvNgMzucZb7aXthw5wtZnjx-omrL6p7kbQt-1qbov1CXPuKfd88RTE16UyjoZFO3sEVTw
+[2025-05-03 11:05:54,779] [DEBUG] [app] : Logout url: https://dev-67811299.okta.com/oauth2/default/v1/logout?post_logout_redirect_uri=https://192.168.1.10:5000/&id_token_hint=eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteGdhMjhmajJTWEgyUDVkNyIsIm5hbWUiOiJQYWJsbyBGcmFuY28iLCJlbWFpbCI6InBhYmxvLmZyYW5jby5jQGVzdHVkaWFudGF0LnVwYy5lZHUiLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyNzAzNDEsImV4cCI6MTc0NjI3Mzk0MSwianRpIjoiSUQuMTJqaGJ4ZGFoX3dhMGM0QTU1MEo2ZVJ0c0s3MjVaU3lTNlZ3QmlYWGE2SSIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6IjljNjUyMjc3YWRjYTdjMGUxOTgyZGI1ODQzNzEwMmU5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicGFibG8uZnJhbmNvLmNAZXN0dWRpYW50YXQudXBjLmVkdSIsImF1dGhfdGltZSI6MTc0NjI2NjIwMiwiYXRfaGFzaCI6Ikk4SWZGTGh0QVh4OXZqaGUwS3RHRkEiLCJlaWQiOiIwMDAwQSJ9.bM4q5B3u2tqw89BHj1VSv_NCU5exAumMuBmluU9UL6YaE9tZc0tpQudlOyFLrnq5fdujU6zHoMagQlHqt4iViqjepjA3pRvXbTp4pbKfd-2hFostUc_i_HEkCNVwo1AfmwgAJBcbdMH6e3JYHsymewrAxBMECHH25AEzaeHAAc3xhU4dImsPKqH_ToYIVVtULOcJcJOvkLdyWJ1S0WUKL3S9CpwCQiNvrnHihGssMRS8B-6_Cb8i4Bw0absSeNhiIB7gDwsfuAJxGApGVMvNgMzucZb7aXthw5wtZnjx-omrL6p7kbQt-1qbov1CXPuKfd88RTE16UyjoZFO3sEVTw
+[2025-05-03 11:05:54,780] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:54] "[32mGET /logout HTTP/1.1[0m" 302 -
+[2025-05-03 11:05:55,561] [INFO] [app] : Usuari no autenticat.
+[2025-05-03 11:05:55,561] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:05:55] "GET / HTTP/1.1" 200 -
+[2025-05-03 17:28:41,564] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 17:28:41,565] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:11:23,022] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 18:11:23,023] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:11:43,500] [ERROR] [app] : Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/app.py", line 206, in home
+    if session["provider"] == "okta":
+       ~~~~~~~^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/sessions.py", line 86, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'provider'
+[2025-05-03 18:11:43,505] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:11:43] "[35m[1mGET / HTTP/1.1[0m" 500 -
+[2025-05-03 18:11:43,550] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:11:43] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+[2025-05-03 18:25:21,412] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 18:25:21,412] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:25:36,083] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:25:36,087] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:25:36] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:26:10,158] [DEBUG] [app] : Asignem nonce a la sessio actual: 0d327ce7c191e15c41d03be54e046520
+[2025-05-03 18:26:10,158] [ERROR] [app] : Exception on /login_entraid [GET]
+Traceback (most recent call last):
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/app.py", line 244, in login_entraid
+    redirect_uri = url_for("auth_entraid", _external=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/helpers.py", line 232, in url_for
+    return current_app.url_for(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/werkzeug/routing/map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'auth_entraid'. Did you mean 'login_entraid' instead?
+[2025-05-03 18:26:10,161] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:26:10] "[35m[1mGET /login_entraid HTTP/1.1[0m" 500 -
+[2025-05-03 18:27:45,457] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 18:27:45,457] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:28:00,625] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:28:00,629] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:28:00] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:28:03,448] [DEBUG] [app] : Asignem nonce a la sessio actual: cf9b0351ddc49e18194758afca729924
+[2025-05-03 18:28:03,448] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/getAToken
+[2025-05-03 18:28:03,449] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:28:03,838] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/v2.0/.well-known/openid-configuration HTTP/1.1" 200 1753
+[2025-05-03 18:28:03,842] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:28:03] "[32mGET /login_entraid HTTP/1.1[0m" 302 -
+[2025-05-03 18:28:46,999] [ERROR] [app] : Exception on /getAToken [GET]
+Traceback (most recent call last):
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/app.py", line 290, in auth_entraid
+    token = entraid_oauth.authorize_access_token()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/authlib/integrations/flask_client/apps.py", line 91, in authorize_access_token
+    raise OAuthError(error=error, description=description)
+authlib.integrations.base_client.errors.OAuthError: access_denied: 
+[2025-05-03 18:28:47,002] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:28:47] "[35m[1mGET /getAToken?error=access_denied&error_subcode=cancel&state=6sCMzaT4f5j00M0w0wzG5LZ815CN03 HTTP/1.1[0m" 500 -
+[2025-05-03 18:29:32,045] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:29:32,046] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:29:32] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:29:33,244] [DEBUG] [app] : Asignem nonce a la sessio actual: 05038cdc61b84011912f32cb1386714e
+[2025-05-03 18:29:33,245] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/getAToken
+[2025-05-03 18:29:33,246] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:29:33] "[32mGET /login_entraid HTTP/1.1[0m" 302 -
+[2025-05-03 18:30:06,136] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:30:06,719] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 200 3979
+[2025-05-03 18:30:06,723] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:30:07,220] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/discovery/v2.0/keys HTTP/1.1" 200 9720
+[2025-05-03 18:30:07,285] [ERROR] [app] : Exception on /getAToken [GET]
+Traceback (most recent call last):
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pablofc18/myApp/APPWITHFLASK/app.py", line 310, in auth_entraid
+    db.session.add(User(**session["user_entraid"]))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 4, in __init__
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 571, in _initialize_instance
+    with util.safe_reraise():
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/sqlalchemy/orm/state.py", line 569, in _initialize_instance
+    manager.original_init(*mixed[1:], **kwargs)
+  File "/home/pablofc18/myApp/APPWITHFLASK/myenv/lib/python3.12/site-packages/sqlalchemy/orm/decl_base.py", line 2175, in _declarative_constructor
+    raise TypeError(
+TypeError: 'name' is an invalid keyword argument for User
+[2025-05-03 18:30:07,290] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:30:07] "[35m[1mGET /getAToken?code=1.AU4A-kgeHusoDE2jeAfwnL1x43Vws1FakuxBv2ZxK_OrLCsWAQBOAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P-G3rNW1oF5FbsY_QPE-KZammPUqUVTw_rRaRwqqx4Z3XSKdUqc_7_Wznfn7dcNqfe3x45xY2MFOqjTF2YbK2M1MbHl65Z_gToqH-5ysErNrhqZKINZ47SlKUGfwLY2zcQPftqfATIK3m18eopOtXhrM7S8H_Otu5jxLMqbXwWHOW9DOQmEonR2pEGzlbU_WhexpVs1Dw4dyOSZg8h4ex8IMURCqhiLvvctAlvGaWAJGpopb7Rbgd2Aor_1-IE4C1eab5KYTyGGmbC2h1MI7GBjPiFSMXPxVCTAQtx0A0mt-kchQyXE5myZuWqQJk-PBKrhy4e-epkaATpmWqDLkx2Tx0rNWCp3Ry_oZ27gM5xbxsf-1NqOxKJVq-u-iJlOoHfaTwmQXeM5Yi08Cq5aw6ecNimwSmlDIoc9VyDUqB0kJLuGbyay_G7W5_J0keBB9RmGzJs7O87l67xZ9BJuxqd40WeuBhB-k4RnYroeFHRGSnIqqxqqvNVhJUgw9GhUnTt0-DtYScJPAJvOnOlE5_XhOaRbm2Xa5WYXbtVORRQcNuC3Q3yvV_i6YeKkVa0_Eo5T9v2EvBYFrCwZY0eOJeFzhH2UPGZwaHGj35_d16D7V319Fn22i-fpGpfAze7_zDOhLS2_EE182rudUs2JMlRAemy2enCKa5lggy-fsktaWg3WxZjdSVn05G8LO1mJ2EG7wEX0j247dRZ7ZP1hu3PA75OEC7wmAJiNSU7pCu_VfLqgvNjblsfopQRobwyrhU4bxLc6Qzs7N67DDDSuS8inxTYrKwaPUS2Zi1kLjb5zNngxGtJDa9HFK4_Br_4SllcYAZeXq7K4SoYgFE3rFiDCJuctioFQkRzG8i_9ePfp71xv3GBY&state=rw3l3GRYVAyLiuvcbMS1vwKYyK7rsU&session_state=004cc859-5e58-8f66-0374-160582103d8c HTTP/1.1[0m" 500 -
+[2025-05-03 18:32:07,971] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 18:32:07,971] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:32:23,974] [INFO] [app] : Usuari autenticat {'email': 'pablofranco@TFGPABLO.onmicrosoft.com', 'name': 'Pablo Franco'}
+[2025-05-03 18:32:23,978] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:32:23] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:32:31,907] [DEBUG] [app] : Token de la sessio: None
+[2025-05-03 18:32:31,907] [DEBUG] [app] : Logout url: https://dev-67811299.okta.com/oauth2/default/v1/logout?post_logout_redirect_uri=https://192.168.1.10:5000/
+[2025-05-03 18:32:31,908] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:32:31] "[32mGET /logout HTTP/1.1[0m" 302 -
+[2025-05-03 18:32:47,189] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:32:47,190] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:32:47] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:32:49,448] [DEBUG] [app] : Asignem nonce a la sessio actual: 07ebc1ffaf02df34fd987c19c025ee4b
+[2025-05-03 18:32:49,449] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/getAToken
+[2025-05-03 18:32:49,450] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:32:49,687] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/v2.0/.well-known/openid-configuration HTTP/1.1" 200 1753
+[2025-05-03 18:32:49,692] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:32:49] "[32mGET /login_entraid HTTP/1.1[0m" 302 -
+[2025-05-03 18:33:01,574] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:33:01,922] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 200 3671
+[2025-05-03 18:33:01,926] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:33:02,163] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/discovery/v2.0/keys HTTP/1.1" 200 9720
+[2025-05-03 18:33:02,181] [DEBUG] [app] : User user1 user1 no guardat en db
+[2025-05-03 18:33:02,186] [DEBUG] [app] : User user1 user1 guardat en db
+[2025-05-03 18:33:02,187] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:33:02] "[32mGET /getAToken?code=1.AU4A-kgeHusoDE2jeAfwnL1x43Vws1FakuxBv2ZxK_OrLCsWAQBOAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P95lmxkVJZ5oaSxCuIYT26TPSXoU-1POqXl9JkmQSJQSVVmZenr7KlvSF8CM4CGEjLYuiUg0o228-0zA2eFLzAc33opbKys28V0RDZ7Fhv74hvv-Y93jKEsA6c12PeH7vTAA71KdHiMV-_ZEaLK9bccPO3J7VRZuS9XuwUnXFYRrUWUr7kL3WL3Ib6MAjwYxKUTzQjMD9wiCQrlS_8ccbcUur6bkesCi3vfnwAHpOH9xbEaE8qub5dQOIcEnK75Oxl4Xu5yRltvKC3Pk67MRSk4Vct1O6YbMvO97VkJ189Ku5Y6dyHloTpcjSEVoJyspfM1oCaPUZkd_6zYecxhHEtye1Vq4X6_xEhB239Kt5zRSDyxErAwJDZghc8B7jggoZbfDW-M568Xh09jKhdFeF__b60QPRc72lvtdtuQYXF5IwdR3vmophbfV1N4y1jf3xqN379Zwco0bVSOvR0KPeCcupp9PMGuUy8sXcElZ1L9Psclq0orIJNnsM-sNBdR6Gy30Tzpe2kAvndsqg3g86pFTWnkcznW0UXBF7AP-j5ivqRk21zW-vsdelBI_U7O0bZT3Cra9VOvME3cqYN8OXvGYsoNOWMtM5awux7tdzlqJBU-JKd5j-GKJae7lvIQfJGtBq-EPIaky3yISO0sPjA9caIhBAkS-4AVzoRJosBRCgpH-1GkmmpA5AZoRIQ1Le79stCZXkOQU8HzBtSx6lEGjBbbrvJngk0cm5ISj5ji9dI3zKOIWuuElD3u5O7qTMYv8wFG_xom-yFY49s2jGz5DPLT74A6cLqGWjxQ-7-v_73eTBEOnkEkdaGm_0A39IMO9g&state=KS2VuvbQhcGyCoa5jgtDQnDmC4ibQ6&session_state=004cc859-5fe6-6e71-58ee-3326ada869e0 HTTP/1.1[0m" 302 -
+[2025-05-03 18:33:02,193] [INFO] [app] : Usuari autenticat {'email': 'user1user1@TFGPABLO.onmicrosoft.com', 'name': 'user1 user1'}
+[2025-05-03 18:33:02,194] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:33:02] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:33:50,906] [DEBUG] [app] : Token de la sessio: None
+[2025-05-03 18:33:50,907] [DEBUG] [app] : Logout url: https://dev-67811299.okta.com/oauth2/default/v1/logout?post_logout_redirect_uri=https://192.168.1.10:5000/
+[2025-05-03 18:33:50,907] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:33:50] "[32mGET /logout HTTP/1.1[0m" 302 -
+[2025-05-03 18:34:02,230] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:34:02,232] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:34:02] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:34:06,102] [DEBUG] [app] : Asignem nonce a la sessio actual: 99d3c1c59c8b4e8470352ccbb9104172
+[2025-05-03 18:34:06,102] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/auth/callback
+[2025-05-03 18:34:06,103] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 18:34:06,978] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/.well-known/openid-configuration HTTP/1.1" 200 None
+[2025-05-03 18:34:06,980] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:34:06] "[32mGET /login HTTP/1.1[0m" 302 -
+[2025-05-03 18:34:37,473] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 18:34:38,557] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "POST /oauth2/default/v1/token HTTP/1.1" 200 None
+[2025-05-03 18:34:38,561] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-03 18:34:39,530] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/v1/keys HTTP/1.1" 200 None
+[2025-05-03 18:34:39,535] [DEBUG] [app] : Token obtingut: {'token_type': 'Bearer', 'expires_in': 3600, 'access_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULm9JUnhCeldFYkQzZ21BMTVyR2dlc0hXeUtQbEU2NTV4Rl92Zk9Kd1Q5dTAiLCJpc3MiOiJodHRwczovL2Rldi02NzgxMTI5OS5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3NDYyOTcyNzgsImV4cCI6MTc0NjMwMDg3OCwiY2lkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJ1aWQiOiIwMHVteTN3ZTczOW5QSXI4MzVkNyIsInNjcCI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNzQ2Mjk3Mjc2LCJzdWIiOiJ1c2VyMUB0ZXN0LmNvbSIsImVpZCI6IjAwMDFZIn0.dVdhFIcZbN85awruEEO5N0l5hLxni1NTLnpyD1hR5judP_xvbXQ7zGUx6rNWyd1aFAMovzX3TO74fsjPlD3yY4e-9BW4iebGoOy3Fi1u7nHGRMQ4Sa3yCZoVS0jHu6PxIRDeevLxFqntly7xp0lfQ0VtR4PMfwsD5rvnoahkr8ZGg9F8nGSVeRf6JUlotiFH_LvXhb0NLMiiqvkyuUgPZI8Ky5mLIuzJPLfDJhOK8ppB3XAGUjDa3LY9WLDLm_FMaU3kBqv9BYFWChwvG7XeLtPqMV6Ce_XGp0JGQN8VeSFkFE_2gaTextIThfYIlHlw3kqA71DggUbOaP161tR5ZA', 'scope': 'openid email profile', 'id_token': 'eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteTN3ZTczOW5QSXI4MzVkNyIsIm5hbWUiOiJ1c2VyMSB1c2VyMSIsImVtYWlsIjoidXNlcjFAdGVzdC5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyOTcyNzgsImV4cCI6MTc0NjMwMDg3OCwianRpIjoiSUQuZlRTZ0txZGQxV2FwUUVSMGNnZUk2UnJjRGx0d09SSjVxWHlwVUNFN2ozdyIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6Ijk5ZDNjMWM1OWM4YjRlODQ3MDM1MmNjYmI5MTA0MTcyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20iLCJhdXRoX3RpbWUiOjE3NDYyOTcyNzYsImF0X2hhc2giOiJrelVtOFVTcHRhM0kzZ0JTNXNUUkpBIiwiZWlkIjoiMDAwMVkifQ.Bypy_5qyJeEzCMAsxxGauJZXDwQHE0urIzKKBN5pIVUDIF3tRYD2Ds5_G4f6Si0Ufbh-gTKQ8MmGIM1HJ8vo9oHSy_YiM5WKLob6oPoIQVS9Dt5LCX_IxtE5CQLOzA4PPd0npMTN9FcHNj7F-ZIfa3UiCMKJ7yea6CNXjgGZbLfkEeZ2nbkE9rm0v57Y7ztI4umhUDm6ytA-jBthSpRCjrAjHTAV4KhyqgMx-PDSooKNcianiP4XXCi99KN5zTEZrDveK8tRUJe8MiPrQ8Fiq4d3nU_iUNs6vQGQNiou6n-K3crfC4Hoi6cbDH9gC1mtGqikUuPV6Gfztncc0rQo0g', 'expires_at': 1746300878, 'userinfo': {'sub': '00umy3we739nPIr835d7', 'name': 'user1 user1', 'email': 'user1@test.com', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746297278, 'exp': 1746300878, 'jti': 'ID.fTSgKqdd1WapQER0cgeI6RrcDltwORJ5qXypUCE7j3w', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '99d3c1c59c8b4e8470352ccbb9104172', 'preferred_username': 'user1@test.com', 'auth_time': 1746297276, 'at_hash': 'kzUm8USpta3I3gBS5sTRJA', 'eid': '0001Y'}}
+[2025-05-03 18:34:39,535] [DEBUG] [app] : User parsed token {'sub': '00umy3we739nPIr835d7', 'name': 'user1 user1', 'email': 'user1@test.com', 'ver': 1, 'iss': 'https://dev-67811299.okta.com/oauth2/default', 'aud': '0oamy75qf3BRY7URR5d7', 'iat': 1746297278, 'exp': 1746300878, 'jti': 'ID.fTSgKqdd1WapQER0cgeI6RrcDltwORJ5qXypUCE7j3w', 'amr': ['mfa', 'otp', 'pwd'], 'idp': '00omxga232TrvfZ3I5d7', 'nonce': '99d3c1c59c8b4e8470352ccbb9104172', 'preferred_username': 'user1@test.com', 'auth_time': 1746297276, 'at_hash': 'kzUm8USpta3I3gBS5sTRJA', 'eid': '0001Y'}
+[2025-05-03 18:34:39,536] [INFO] [app] : Sessio info usuari: user1 user1, email: user1@test.com, eid: 0001Y
+[2025-05-03 18:34:39,539] [DEBUG] [app] : User trobat in db: user1@test.com
+[2025-05-03 18:34:39,540] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:34:39] "[32mGET /auth/callback?code=RQkwtV4VcWege6RiDc6aom2xptJbIzn_L2nGgVhlZmU&state=1fTQJr0IPBKWNGWp7Oa2uW86lFLX9U HTTP/1.1[0m" 302 -
+[2025-05-03 18:34:39,547] [INFO] [app] : Usuari autenticat {'eid': '0001Y', 'email': 'user1@test.com', 'name': 'user1 user1'}
+[2025-05-03 18:34:39,547] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:34:39] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:35:17,525] [DEBUG] [app] : Token de la sessio: eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteTN3ZTczOW5QSXI4MzVkNyIsIm5hbWUiOiJ1c2VyMSB1c2VyMSIsImVtYWlsIjoidXNlcjFAdGVzdC5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyOTcyNzgsImV4cCI6MTc0NjMwMDg3OCwianRpIjoiSUQuZlRTZ0txZGQxV2FwUUVSMGNnZUk2UnJjRGx0d09SSjVxWHlwVUNFN2ozdyIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6Ijk5ZDNjMWM1OWM4YjRlODQ3MDM1MmNjYmI5MTA0MTcyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20iLCJhdXRoX3RpbWUiOjE3NDYyOTcyNzYsImF0X2hhc2giOiJrelVtOFVTcHRhM0kzZ0JTNXNUUkpBIiwiZWlkIjoiMDAwMVkifQ.Bypy_5qyJeEzCMAsxxGauJZXDwQHE0urIzKKBN5pIVUDIF3tRYD2Ds5_G4f6Si0Ufbh-gTKQ8MmGIM1HJ8vo9oHSy_YiM5WKLob6oPoIQVS9Dt5LCX_IxtE5CQLOzA4PPd0npMTN9FcHNj7F-ZIfa3UiCMKJ7yea6CNXjgGZbLfkEeZ2nbkE9rm0v57Y7ztI4umhUDm6ytA-jBthSpRCjrAjHTAV4KhyqgMx-PDSooKNcianiP4XXCi99KN5zTEZrDveK8tRUJe8MiPrQ8Fiq4d3nU_iUNs6vQGQNiou6n-K3crfC4Hoi6cbDH9gC1mtGqikUuPV6Gfztncc0rQo0g
+[2025-05-03 18:35:17,525] [DEBUG] [app] : Logout url: https://dev-67811299.okta.com/oauth2/default/v1/logout?post_logout_redirect_uri=https://192.168.1.10:5000/&id_token_hint=eyJraWQiOiJrSHhLVklZNXphdEhmeWE2M3V2TEhISHZzdTZaY2dtSHB1VHRINS1kUzc0IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIwMHVteTN3ZTczOW5QSXI4MzVkNyIsIm5hbWUiOiJ1c2VyMSB1c2VyMSIsImVtYWlsIjoidXNlcjFAdGVzdC5jb20iLCJ2ZXIiOjEsImlzcyI6Imh0dHBzOi8vZGV2LTY3ODExMjk5Lm9rdGEuY29tL29hdXRoMi9kZWZhdWx0IiwiYXVkIjoiMG9hbXk3NXFmM0JSWTdVUlI1ZDciLCJpYXQiOjE3NDYyOTcyNzgsImV4cCI6MTc0NjMwMDg3OCwianRpIjoiSUQuZlRTZ0txZGQxV2FwUUVSMGNnZUk2UnJjRGx0d09SSjVxWHlwVUNFN2ozdyIsImFtciI6WyJtZmEiLCJvdHAiLCJwd2QiXSwiaWRwIjoiMDBvbXhnYTIzMlRydmZaM0k1ZDciLCJub25jZSI6Ijk5ZDNjMWM1OWM4YjRlODQ3MDM1MmNjYmI5MTA0MTcyIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjFAdGVzdC5jb20iLCJhdXRoX3RpbWUiOjE3NDYyOTcyNzYsImF0X2hhc2giOiJrelVtOFVTcHRhM0kzZ0JTNXNUUkpBIiwiZWlkIjoiMDAwMVkifQ.Bypy_5qyJeEzCMAsxxGauJZXDwQHE0urIzKKBN5pIVUDIF3tRYD2Ds5_G4f6Si0Ufbh-gTKQ8MmGIM1HJ8vo9oHSy_YiM5WKLob6oPoIQVS9Dt5LCX_IxtE5CQLOzA4PPd0npMTN9FcHNj7F-ZIfa3UiCMKJ7yea6CNXjgGZbLfkEeZ2nbkE9rm0v57Y7ztI4umhUDm6ytA-jBthSpRCjrAjHTAV4KhyqgMx-PDSooKNcianiP4XXCi99KN5zTEZrDveK8tRUJe8MiPrQ8Fiq4d3nU_iUNs6vQGQNiou6n-K3crfC4Hoi6cbDH9gC1mtGqikUuPV6Gfztncc0rQo0g
+[2025-05-03 18:35:17,526] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:35:17] "[32mGET /logout HTTP/1.1[0m" 302 -
+[2025-05-03 18:35:18,293] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:35:18,294] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:35:18] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:37:13,302] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-03 18:37:13,302] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-03 18:37:22,248] [INFO] [app] : Usuari no autenticat
+[2025-05-03 18:37:22,253] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:37:22] "GET / HTTP/1.1" 200 -
+[2025-05-03 18:37:24,248] [DEBUG] [app] : Asignem nonce a la sessio actual: 07742afa39c8cdac29fdfac2bd7ec34e
+[2025-05-03 18:37:24,248] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/getAToken
+[2025-05-03 18:37:24,249] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:37:24,520] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/v2.0/.well-known/openid-configuration HTTP/1.1" 200 1753
+[2025-05-03 18:37:24,522] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:37:24] "[32mGET /login_entraid HTTP/1.1[0m" 302 -
+[2025-05-03 18:37:33,067] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:37:33,369] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 200 3672
+[2025-05-03 18:37:33,373] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-03 18:37:33,633] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "GET /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/discovery/v2.0/keys HTTP/1.1" 200 9720
+[2025-05-03 18:37:33,636] [DEBUG] [app] : Token obtingut: {'token_type': 'Bearer', 'scope': 'email openid profile User.Read User.ReadWrite User.ReadWrite.All', 'expires_in': 3730, 'ext_expires_in': 3730, 'access_token': 'eyJ0eXAiOiJKV1QiLCJub25jZSI6ImRQNE9sQUgxSjN3eUJ6V2szdUNoRURPVHZnSU9odU1EODV0N1doejNqTm8iLCJhbGciOiJSUzI1NiIsIng1dCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSIsImtpZCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8xZTFlNDhmYS0yOGViLTRkMGMtYTM3OC0wN2YwOWNiZDcxZTMvIiwiaWF0IjoxNzQ2Mjk3MTUzLCJuYmYiOjE3NDYyOTcxNTMsImV4cCI6MTc0NjMwMTE4NCwiYWNjdCI6MCwiYWNyIjoiMSIsImFpbyI6IkFYUUFpLzhaQUFBQVRvZkxydGdMbmFmUU1JaklXSlNOYnA3cHJXd1NHS0JvbDh4ZmRUQ2xwOE5XaHA3OUVmS1VjNUtFQk5OS0gxV3B1ZytVcXVnUFBQVzVyekM1b200alhDWjdUYjNETDl6djc1dVpJc3Nlem9wQjRNZjR3UlVhTzkvbjVCTFVmMG1DU1pFVUJoMklHZVNUdzJDN3R6cFF1QT09IiwiYW1yIjpbInB3ZCJdLCJhcHBfZGlzcGxheW5hbWUiOiJteUFwcEZsYXNrIiwiYXBwaWQiOiI1MWIzNzA3NS05MjVhLTQxZWMtYmY2Ni03MTJiZjNhYjJjMmIiLCJhcHBpZGFjciI6IjEiLCJpZHR5cCI6InVzZXIiLCJpcGFkZHIiOiI4My40My43MS41MyIsIm5hbWUiOiJ1c2VyMSB1c2VyMSIsIm9pZCI6IjJjNWRjNjNkLTUyOGUtNDYzMS1iMmMwLTA2ZTE3NTBhY2M1NiIsInBsYXRmIjoiMyIsInB1aWQiOiIxMDAzMjAwNDk1NDgxOEYwIiwicmgiOiIxLkFVNEEta2dlSHVzb0RFMmplQWZ3bkwxeDR3TUFBQUFBQUFBQXdBQUFBQUFBQUFBV0FhdE9BQS4iLCJzY3AiOiJlbWFpbCBvcGVuaWQgcHJvZmlsZSBVc2VyLlJlYWQgVXNlci5SZWFkV3JpdGUgVXNlci5SZWFkV3JpdGUuQWxsIiwic2lkIjoiMDA0Y2M4NTktMjgxMS04NDRjLWNjMzAtNGI5NDViMmVjZWMyIiwic3ViIjoibkJYWkNMdWFiVjlsR18xa0RfTkduT2FEOERIVW4yWHVXYlZYZEc0Q05sSSIsInRlbmFudF9yZWdpb25fc2NvcGUiOiJFVSIsInRpZCI6IjFlMWU0OGZhLTI4ZWItNGQwYy1hMzc4LTA3ZjA5Y2JkNzFlMyIsInVuaXF1ZV9uYW1lIjoidXNlcjF1c2VyMUBURkdQQUJMTy5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJ1c2VyMXVzZXIxQFRGR1BBQkxPLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6InN1VnlJSjZ1TzBTcVdEV2ZHTzEyQUEiLCJ2ZXIiOiIxLjAiLCJ3aWRzIjpbImI3OWZiZjRkLTNlZjktNDY4OS04MTQzLTc2YjE5NGU4NTUwOSJdLCJ4bXNfZnRkIjoidFZMaEx0RmlBR1pCaF9aTVhlOVJ5bTVjVnpVQkNTRVlxZHd3TXN4VUs4TUJabkpoYm1ObFl5MWtjMjF6IiwieG1zX2lkcmVsIjoiMTIgMSIsInhtc19zdCI6eyJzdWIiOiJjNVk5aS0xSUNmWHZTY3JKMk5oMGhzOEpzeDM1M1p1djBqQ3BMSVhwbXBZIn0sInhtc190Y2R0IjoxNzQ0Mjc5Mzk0LCJ4bXNfdGRiciI6IkVVIn0.Hd8j33ESdVpU4shehr_EwDm1EiFc-7Bt6uBaQWgmJRpm5JhFhs25dgKB8DlJTblmSBq0QguKY85ILhrnO-Suh0BPIm5myWPebbB1obLKHHoWiTN67VF_0TpbgXu_0ku5s4wRkurO-4ZR2lZPgCPCMQZtpdR-nGS07J04lSY_zR02kUtNKarO9q-jtaGQLhzQ3X9UKXNnPJE7O9fohaAzgoF1UqhPwIZqFVjoQ6HBj-ZmLNjeuVPLggSS7uxK9fTgK7-9O1s1J3TtSMeJcheTOOYhtcdVE1nEXKkfGQ6chiX__WOs5Wx-3WGXZp_ECgIch46v-HUDIxRMuRkQE2zKXw', 'id_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IkNOdjBPSTNSd3FsSEZFVm5hb01Bc2hDSDJYRSJ9.eyJhdWQiOiI1MWIzNzA3NS05MjVhLTQxZWMtYmY2Ni03MTJiZjNhYjJjMmIiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMWUxZTQ4ZmEtMjhlYi00ZDBjLWEzNzgtMDdmMDljYmQ3MWUzL3YyLjAiLCJpYXQiOjE3NDYyOTcxNTMsIm5iZiI6MTc0NjI5NzE1MywiZXhwIjoxNzQ2MzAxMDUzLCJuYW1lIjoidXNlcjEgdXNlcjEiLCJub25jZSI6IjA3NzQyYWZhMzljOGNkYWMyOWZkZmFjMmJkN2VjMzRlIiwib2lkIjoiMmM1ZGM2M2QtNTI4ZS00NjMxLWIyYzAtMDZlMTc1MGFjYzU2IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjF1c2VyMUBURkdQQUJMTy5vbm1pY3Jvc29mdC5jb20iLCJyaCI6IjEuQVU0QS1rZ2VIdXNvREUyamVBZnduTDF4NDNWd3MxRmFrdXhCdjJaeEtfT3JMQ3NXQWF0T0FBLiIsInNpZCI6IjAwNGNjODU5LTI4MTEtODQ0Yy1jYzMwLTRiOTQ1YjJlY2VjMiIsInN1YiI6ImM1WTlpLTFJQ2ZYdlNjckoyTmgwaHM4SnN4MzUzWnV2MGpDcExJWHBtcFkiLCJ0aWQiOiIxZTFlNDhmYS0yOGViLTRkMGMtYTM3OC0wN2YwOWNiZDcxZTMiLCJ1dGkiOiJzdVZ5SUo2dU8wU3FXRFdmR08xMkFBIiwidmVyIjoiMi4wIn0.IwTfnpAwxJX8B0sOXTARwTry1WLxzm4Tksm7NHBqGQLT-ADkOmzzVxF9Ah02X4VCh2zR6BC3hJGrzKiA0IBJyy62G9MEwmpUyAlrAeeGtuCAyfmH1PlLgjTqfcTlTXHgf1VXEpaXCtleMhuVf7AGweRHoq_W0Dj3nHdPruuoD-ko25JCsgozcHY4U6Fno4I3K6j0N2sftgWyH191hA35n9EAc599irURN6KmbCyEv9Xlrfa3BYMaQxnwJMvnoNBFR78I8GkKYN0poruRnHhxdR_S-n7LndVu6heGfnk_LX0fdfeNQ9qGQUAP_1rnYVGxcNRY6kCuc4vmQMHgqcU4-g', 'expires_at': 1746301183, 'userinfo': {'aud': '51b37075-925a-41ec-bf66-712bf3ab2c2b', 'iss': 'https://login.microsoftonline.com/1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/v2.0', 'iat': 1746297153, 'nbf': 1746297153, 'exp': 1746301053, 'name': 'user1 user1', 'nonce': '07742afa39c8cdac29fdfac2bd7ec34e', 'oid': '2c5dc63d-528e-4631-b2c0-06e1750acc56', 'preferred_username': 'user1user1@TFGPABLO.onmicrosoft.com', 'rh': '1.AU4A-kgeHusoDE2jeAfwnL1x43Vws1FakuxBv2ZxK_OrLCsWAatOAA.', 'sid': '004cc859-2811-844c-cc30-4b945b2ecec2', 'sub': 'c5Y9i-1ICfXvScrJ2Nh0hs8Jsx353Zuv0jCpLIXpmpY', 'tid': '1e1e48fa-28eb-4d0c-a378-07f09cbd71e3', 'uti': 'suVyIJ6uO0SqWDWfGO12AA', 'ver': '2.0'}}
+[2025-05-03 18:37:33,637] [DEBUG] [app] : User parsed token {'aud': '51b37075-925a-41ec-bf66-712bf3ab2c2b', 'iss': 'https://login.microsoftonline.com/1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/v2.0', 'iat': 1746297153, 'nbf': 1746297153, 'exp': 1746301053, 'name': 'user1 user1', 'nonce': '07742afa39c8cdac29fdfac2bd7ec34e', 'oid': '2c5dc63d-528e-4631-b2c0-06e1750acc56', 'preferred_username': 'user1user1@TFGPABLO.onmicrosoft.com', 'rh': '1.AU4A-kgeHusoDE2jeAfwnL1x43Vws1FakuxBv2ZxK_OrLCsWAatOAA.', 'sid': '004cc859-2811-844c-cc30-4b945b2ecec2', 'sub': 'c5Y9i-1ICfXvScrJ2Nh0hs8Jsx353Zuv0jCpLIXpmpY', 'tid': '1e1e48fa-28eb-4d0c-a378-07f09cbd71e3', 'uti': 'suVyIJ6uO0SqWDWfGO12AA', 'ver': '2.0'}
+[2025-05-03 18:37:33,650] [DEBUG] [app] : User trobat in db: user1user1@TFGPABLO.onmicrosoft.com
+[2025-05-03 18:37:33,651] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:37:33] "[32mGET /getAToken?code=1.AU4A-kgeHusoDE2jeAfwnL1x43Vws1FakuxBv2ZxK_OrLCsWAQBOAA.AgABBAIAAABVrSpeuWamRam2jAF1XRQEAwDs_wUA9P-U1AcF1mdduZ249xITLe8_x1mU5un472WBjoDgTUDO0d5Vaf1po8qX5T3-Pdt6hc34ERVrTLDiBZBgEs_7eG8bGZE_MdcXYwrcb0-GgwI_b6mWauIw9Orzp6q-L-HbtKmh-rvCqUDJTFEgLok6d2MN6XXvt1fx9tq9eVlezfbOC9vpNtVPWPWYEeLzpqWF8D5NOqxZ-y_1bbKLFbsGji0a1E77W16z3d9icjhdsuCrXKkhmUffPLDJgVcMx2Q30lgamBF523xsk68JnuSs_ulbRHLBxi_avza93Fm0SdCzgjd40iHZK0ARtHiBzUNgCq00lKeZF5kQEI7KSUXoMUHblvi05ngXLEFJAtzZDGVO-kWfZ1RW_fJ3HF-Yb7DC7PvaHHraAL3_rfXyqRSIwdt_gg5UY1MEhe0pvXVx6iX0M_mvvin9WQZnxiaJ-oKYjNenPjlYEf7d3v_SICzlse86b0ZLkhI5xED3W8ZABciurpNt3AaL5aH_7VlUqQt2TsSSkAOUduwQIRTJeakSpqPuC8FiVrvb34shiqCMixRHKhb54PNOyqiwLSU-lJRfAUqHRKeVZBiEHBzQP1InUV6a4EwXJ8BjfBlvoXm-zrMVLnkaWbnVThLqLRiLPAt34BgQQHf1Pc25q4LvfOZg86e5OiyEIoWbGVasNSVtQfTuznnK7dq1eyfEYAX3AnLRl9OGdTopLvJZFv1cUMDkk0z2U61jdJGTR84uZ3AXlONghl1Zc9lg-CCJ6QS7rEmz2VBWYOseMlmpq9b6loZOWvKSMuF4lBK53zg7PEpMdGrqAEzmTv_Vcawhm4TUsacByg&state=oQ3PLBQHWTLxqZ0AWvL4ej9xMhlwWt&session_state=004cc859-2811-844c-cc30-4b945b2ecec2 HTTP/1.1[0m" 302 -
+[2025-05-03 18:37:33,657] [INFO] [app] : Usuari autenticat {'email': 'user1user1@TFGPABLO.onmicrosoft.com', 'name': 'user1 user1'}
+[2025-05-03 18:37:33,657] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 18:37:33] "GET / HTTP/1.1" 200 -
+[2025-05-05 14:52:01,887] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-05 14:52:01,888] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
