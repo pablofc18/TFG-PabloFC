@@ -295,15 +295,13 @@ def auth_entraid():
         return "Error: Nonce perdut o no valid", 400
     user_info = entraid_oauth.parse_id_token(token, nonce)
     app.logger.debug(f"User parsed token {user_info}")
-    #TODO EID
-    #eid_claim = user_info.get("employeeNumber") or user_info.get("extension_EmployeeNumber") or ""
     session["provider"] = "entra_id"
     session["entraid_id_token"] = token.get("id_token"),
     session["entraid_access_token"] = token.get("access_token"),
     session["user_entraid"] = {
             "name": user_info["name"],
             "email": user_info.get("email") or user_info.get("preferred_username"), # idontthink email in idtoken
-           # "eid":   eid_claim
+            "eid":   user_info.get("eid")
     }
     
     app.logger.info(f"Sessio info usuari: {session["user_entraid"]["name"]}, email: {session["user_entraid"]["email"]}") # TODO eid: {user_info["eid"]}
@@ -313,10 +311,9 @@ def auth_entraid():
         app.logger.debug(f"User {user_info["name"]} no guardat en db")
         new_user = User(
             #email=user_info["email"],
-            email=session["user_entraid"]["email"],
-            full_name=user_info["name"],
-            #eid=user_info["eid"]
-            eid="TEST2"
+            email= session["user_entraid"]["email"],
+            full_name = user_info["name"],
+            eid = user_info["eid"]
         )
         db.session.add(new_user)
         db.session.commit()
