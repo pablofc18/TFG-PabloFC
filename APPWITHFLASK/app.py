@@ -297,16 +297,17 @@ def auth_entraid():
     app.logger.debug(f"User parsed token {user_info}")
     #TODO EID
     #eid_claim = user_info.get("employeeNumber") or user_info.get("extension_EmployeeNumber") or ""
-    session.update({
-        "provider": "entra_id",
-        "entraid_id_token": token.get("id_token"),
-        "entraid_access_token": token.get("access_token"),
-        "user_entraid": {
+    session["provider"] = "entra_id"
+    session["entraid_id_token"] = token.get("id_token"),
+    session["entraid_access_token"] = token.get("access_token"),
+    session["user_entraid"] = {
             "name": user_info["name"],
-            "email": user_info.get("email") or user_info.get("preferred_username"),
+            "email": user_info.get("email") or user_info.get("preferred_username"), # idontthink email in idtoken
            # "eid":   eid_claim
-        }
-    })
+    }
+    
+    app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}") # TODO eid: {user_info["eid"]}
+    
     existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
     if not existing_user:
         app.logger.debug(f"User {user_info["name"]} no guardat en db")
@@ -440,25 +441,31 @@ def change_password():
 # /logout endpoint
 @app.route("/logout")
 def logout():
-    # cogemos id_token de la sesion
-    id_token = session.pop("id_token", None)
+    # get prov
+    provider = session.get("provider")
+
+    if provider == "entra_id":
+        id_token = session.pop("entraid_id_token", None)
+    else: # okta
+        id_token = session.pop("id_token", None)
+
     app.logger.debug(f"Token de la sessio: {id_token}")
 
-    # despues de logout vamos a / (home())
-    logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
-    if id_token:
-        logout_url += f"&id_token_hint={id_token}"
+    if provider == "entra_id":
+        logout_url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
+        if id_token:
+            logout_url += f"&id_token_hint={id_token}"
+    
+    else: # okta
+        #logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
+        logout_url = f"{OKTA_DOMAIN}/v1/logout"
+        if id_token:
+            logout_url += f"&id_token_hint={id_token}"
 
-    # clear la sesion
     session.clear()
 
-    app.logger.debug(f"Logout url: {logout_url}")
+    app.logger.debug(f"Logout url de {provider}: {logout_url}")
     return redirect(logout_url)
-
-# enpoint si pagina no encontrada mostrar msj
-@app.errorhandler(404)
-def page_not_found(error):
-    return "Pagina no trobada. ERROR 404 :(", 404
 
 
 ###
