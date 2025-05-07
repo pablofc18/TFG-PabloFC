@@ -28,15 +28,17 @@ class LoadEntraIdData:
         raw_entraid_groups_no_members = self.decryptor.decrypt_file(groups_enc_path)
         # afegir una transformacio mes per afegir usuaris als grups
         groups_json = self.transformData.add_members_to_entraid_groups(raw_entraid_groups_no_members, groups_okta_enc_path, users_okta_enc_path, users_entra_enc_path)          
-        batch_response = self.entraid_utils.create_groups_batch(groups_json)
-        if results_path:
-            with open(results_path, "w", encoding="utf-8") as f:
-                json.dump(batch_response, f, ensure_ascii=False, indent=2)
-        return batch_response
+        with open('ge.json', 'w', encoding='utf-8') as f:
+            json.dump(groups_json, f, ensure_ascii=False, indent=2)
+        #batch_response = self.entraid_utils.create_groups_batch(groups_json)
+        #if results_path:
+        #    with open(results_path, "w", encoding="utf-8") as f:
+        #        json.dump(batch_response, f, ensure_ascii=False, indent=2)
+        #return batch_response
 
     # Run all, decrypt entra id json enc files and create users/groups
     def run(self, users_in_enc: str, users_out_batch: str, groups_in_enc: str, groups_out_batch: str, groups_okta_enc_path: str, users_okta_enc_path: str):
-        batch_resp_u = self.create_users(users_in_enc, users_out_batch)
+        #batch_resp_u = self.create_users(users_in_enc, users_out_batch)
         batch_resp_g = self.create_groups(groups_in_enc, groups_out_batch, groups_okta_enc_path, users_okta_enc_path, users_in_enc)
         print(f"Carrega de data exitosa. Resposta json en {users_out_batch} i {groups_out_batch}")
         
