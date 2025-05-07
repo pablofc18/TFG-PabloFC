@@ -40,6 +40,19 @@ class LoadEntraIdData:
         batch_resp_g = self.create_groups(groups_in_enc, groups_out_batch, groups_okta_enc_path, users_okta_enc_path, users_in_enc)
         print(f"Carrega de data exitosa. Resposta json en {users_out_batch} i {groups_out_batch}")
         
+    def write_json(self, users_json_okta: str, groups_json_okta: str, users_json_entraid: str, groups_json_entraid: str):
+        raw_uo = self.decryptor.decrypt_file(users_json_okta)
+        raw_ue = self.decryptor.decrypt_file(users_json_entraid)
+        raw_go = self.decryptor.decrypt_file(groups_json_okta)
+        raw_ge = self.decryptor.decrypt_file(groups_json_entraid)
+        with open('uo.json', 'w', encoding='utf-8') as f:
+            json.dump(raw_uo, f, ensure_ascii=False, indent=2)
+        with open('ue.json', 'w', encoding='utf-8') as f:
+            json.dump(raw_ue, f, ensure_ascii=False, indent=2)
+        with open('go.json', 'w', encoding='utf-8') as f:
+            json.dump(raw_go, f, ensure_ascii=False, indent=2)
+        with open('ge.json', 'w', encoding='utf-8') as f:
+            json.dump(raw_ge, f, ensure_ascii=False, indent=2)
 
 if __name__ == '__main__':
     load_dotenv("../env_vars.env")
@@ -47,4 +60,5 @@ if __name__ == '__main__':
     ENTRAID_DOMAIN = os.getenv("ENTRAID_DOMAIN")
     GRAPH_URL = os.getenv("GRAPH_URL")
     loadData = LoadEntraIdData(AES_KEY, ENTRAID_DOMAIN, GRAPH_URL)
-    loadData.run("users.entraid.json.enc", "BATCH_RESP_U.json", "groups.entraid.json.enc", "BATCH_RESP_G.json", "groups.json.enc", "users.json.enc")
+    #loadData.run("users.entraid.json.enc", "BATCH_RESP_U.json", "groups.entraid.json.enc", "BATCH_RESP_G.json", "groups.json.enc", "users.json.enc")
+    loadData.write_json("users.json.enc", "groups.json.enc", "users.entraid.json.enc", "groups.entraid.json.enc")
