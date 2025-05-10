@@ -26,7 +26,29 @@ def get_graph_token():
         raise RuntimeError(f"Access token no obtingut: {response.text}")
     return token
 
-print(get_graph_token())
+
+#print(get_graph_token())
+OKTA_ORG_URL = os.getenv("OKTA_ORG_URL")
+OKTA_DOMAIN = f"{OKTA_ORG_URL}/oauth2/default"
+CLIENT_ID = os.getenv("OKTA_CLIENT_ID")
+CLIENT_SECRET = os.getenv("OKTA_CLIENT_SECRET")
+API_TOKEN = os.getenv("OKTA_API_TOKEN")
+headers = {
+    "Authorization": f"SSWS {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+# find user by eid
+def find_okta_user_by_eid(eid):
+    url = f"{OKTA_ORG_URL}/api/v1/users"
+    parameters = {
+        "filter": f'profile.employeeNumber eq "{eid}"' 
+    }
+    response = requests.get(url, headers=headers, params=parameters)
+    response.raise_for_status()
+    id_user = response.json()["id"]
+    return id_user if id_user else None
+
+print(find_okta_user_by_eid("0000A"))
 """
 okta_domain = os.getenv("OKTA_ORG_URL")
 api_token = os.getenv("OKTA_API_TOKEN")
