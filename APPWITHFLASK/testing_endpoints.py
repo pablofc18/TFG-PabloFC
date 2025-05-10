@@ -45,7 +45,7 @@ def find_okta_user_by_eid(eid):
     }
     response = requests.get(url, headers=headers, params=parameters)
     response.raise_for_status()
-    id_user = response.json()["id"]
+    id_user = response.json()[0]["id"]
     return id_user if id_user else None
 
 print(find_okta_user_by_eid("0000A"))
