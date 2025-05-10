@@ -5033,3 +5033,30 @@ DETAIL:  Key (eid)=(TEST ) already exists.
 [2025-05-05 16:07:43,167] [INFO] [werkzeug] : 192.168.1.37 - - [05/May/2025 16:07:43] "GET /?sid=004d1679-b721-fa45-dec1-8a274643fc9a HTTP/1.1" 200 -
 [2025-05-05 16:07:49,200] [INFO] [app] : Usuari no autenticat
 [2025-05-05 16:07:49,200] [INFO] [werkzeug] : 192.168.1.37 - - [05/May/2025 16:07:49] "GET / HTTP/1.1" 200 -
+[2025-05-07 09:52:50,429] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-07 09:52:50,432] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-09 15:22:54,663] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-09 15:22:54,664] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-10 09:34:57,467] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-10 09:34:57,467] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-10 09:37:31,178] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:37:31,666] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
+[2025-05-10 09:37:32,286] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:37:32,626] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
+[2025-05-10 09:37:33,276] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:37:33,705] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
+[2025-05-10 09:37:34,275] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:37:34,665] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
+[2025-05-10 09:37:35,281] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:37:35,746] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
+[2025-05-10 09:38:59,967] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): login.microsoftonline.com:443
+[2025-05-10 09:39:00,347] [DEBUG] [urllib3.connectionpool] : https://login.microsoftonline.com:443 "POST /1e1e48fa-28eb-4d0c-a378-07f09cbd71e3/oauth2/v2.0/token HTTP/1.1" 400 494
