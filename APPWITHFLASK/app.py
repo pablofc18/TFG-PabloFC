@@ -208,7 +208,7 @@ def get_graph_token():
         "client_secret": ENTRAID_CLIENT_SECRET,
         "scope": f"{GRAPH_URL}/.default"
     }
-    response = requests.post(url, json=payload)
+    response = requests.post(url, data=payload)
     response.raise_for_status()
     token = response.json().get("access_token")
     if not token:
