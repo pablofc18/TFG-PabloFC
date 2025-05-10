@@ -115,7 +115,6 @@ def require_valid_token(f):
             access_token = session.get("access_token")
         elif session["provider"] == "entra_id":
             access_token = session.get("entraid_access_token")
-        app.logger.debug(f"!!!!!!!!!!!!!!-> {access_token}")
         if not access_token:
             flash("Acces denegat: token no present.", "danger")
             app.logger.error("Acces denegat token no present")
@@ -403,7 +402,7 @@ def auth_entraid():
     app.logger.debug(f"User parsed token {user_info}")
     session["provider"] = "entra_id"
     session["entraid_id_token"] = token.get("id_token"),
-    session["entraid_access_token"] = token.get("access_token"),
+    session["entraid_access_token"] = token.get("access_token")
     session["entraid_user"] = {
             "name": user_info["name"],
             "email": user_info["preferred_username"], 
