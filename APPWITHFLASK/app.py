@@ -472,6 +472,8 @@ def update_profile():
     try:
         # actualitzar usuari a Entra id
         userPrincipalName = find_entraid_user_by_eid(user["eid"])
+        if not userPrincipalName:
+            flash("No s'ha pogut trobar l'usuari a EntraID", "danger")
         if update_entraid_user_profile(userPrincipalName, full_name):
             for u in curr_users:
                 u.full_name = full_name
@@ -485,7 +487,6 @@ def update_profile():
             flash("Perfil actualitzat correctament a EntraID", "success")
         else:
             flash("Error en actualitzar el perfil a EntraID", "danger")
-        flash("No s'ha pogut trobar l'usuari a EntraID", "danger")
     except Exception as e:
         db.session.rollback()
         app.logger.error(f"Error en actualitzar el perfil a EntraID: {str(e)}")
