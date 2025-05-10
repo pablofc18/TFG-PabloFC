@@ -297,7 +297,7 @@ def find_entraid_user_by_eid(eid):
     }
     response = requests.get(url, headers=headers_entraid, params=parameters)
     response.raise_for_status()
-    id_user = response.json()["value"]["id"]
+    id_user = response.json()["value"][0]["id"]
     app.logger.debug(f"Id de l'usuari: {id_user}")
     return id_user if id_user else None
     
