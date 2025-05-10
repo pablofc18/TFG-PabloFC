@@ -119,6 +119,7 @@ def require_valid_token(f):
             flash("Acces denegat: token no present.", "danger")
             app.logger.error("Acces denegat token no present")
             return redirect("/logout")
+        app.logger.debug(f"!!!!!!!!!!!!!!-> {access_token}")
         try:
             # decode token sin verificar firma para extraer los claims
             decoded = jwt_decode_no_verification(access_token)
