@@ -77,6 +77,7 @@ ENTRAID_CLIENT_ID     = os.getenv("ENTRAID_CLIENT_ID")
 ENTRAID_CLIENT_SECRET = os.getenv("ENTRAID_CLIENT_SECRET")
 ENTRAID_AUTHORITY     = f"{os.getenv("LOGIN_MICROSOFT_URL")}/{ENTRAID_TENANT_ID}"
 ENTRAID_OPENID_CONFIG = f"{ENTRAID_AUTHORITY}/v2.0/.well-known/openid-configuration"
+GRAPH_URL             = os.getenv("GRAPH_URL")
 
 # conf oauth Entra id
 entraid_oauth = oauth.register(
@@ -197,6 +198,60 @@ def change_okta_user_password(user_id, curr_psswd, new_psswd):
         app.logger.error(f"Error actualitzant contrasenya a Okta: {response.text}")
         return False
 
+### ENTRA ID api calls
+# get token to use graph api
+def get_graph_token():
+    url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/token"
+    payload = {
+        "grant_type": "client_credentials",
+        "client_id": ENTRAID_CLIENT_ID,
+        "client_secret": ENTRAID_CLIENT_SECRET,
+        "scope": f"{GRAPH_URL}/.default"
+    }
+    response = requests.post(url, json=payload)
+    response.raise_for_status()
+    token = response.json().get("access_token")
+    if not token:
+        raise RuntimeError(f"Access token no obtingut: {response.text}")
+    return token
+
+headers_entraid = {
+    "Authorization": f"Bearer {get_graph_token()}",
+    "Content-Type": "application/json"
+}
+
+# update user in Entra ID
+def update_entraid_user_profile(userPrincipalName, displayName):
+    data = {
+        "displayName": displayName
+    }
+    app.logger.debug(f"Update Entra ID user: {userPrincipalName}, {displayName}")
+    response = requests.patch(f"{GRAPH_URL}/v1.0/users/{userPrincipalName}", headers=headers_entraid, json=data)
+    if response.status_code in (200, 204): # then its ok
+        app.logger.info(f"Perfil Entra ID actualitzar correctament: {data}")
+        return True
+    else:
+        app.logger.error(f"Error actualitzant perfil a Entra ID: {response.text}")
+        return False
+
+# change password in Entra id
+def change_entraid_user_password(userPrincipalName, curr_psswd, new_psswd):
+    # NO son segurs mai mostrar pwd en text pla 
+    app.logger.debug(f"entraid pwd:{curr_psswd}")
+    app.logger.debug(f"entraid newpwd:{new_psswd}")
+    data = {
+        "currentPassword": curr_psswd,
+        "newPassword": new_psswd
+    }
+    url = f"{GRAPH_URL}/v1.0/users/{userPrincipalName}/changePassword"
+    response = requests.post(url, headers=headers_entraid, json=data)
+    if response.status_code in (200, 204): # then its ok
+        app.logger.info(f"Contrasenya actualitzada a Entra ID")
+        return True
+    else:
+        app.logger.error(f"Error actualitzant contrasenya a Entra ID: {response.text}")
+        return False
+
 ### 
 ### ENDPOINTS
 ###
@@ -213,7 +268,7 @@ def home():
             app.logger.info("Usuari no autenticat.")
             return render_template("home.html", user=user)
     elif provider == "entra_id":
-        user = session.get("user_entraid")
+        user = session.get("entraid_user")
         if user:
             app.logger.info(f"Usuari autenticat {user}")
             return render_template("home.html", user=user)
@@ -285,7 +340,7 @@ def auth():
     return redirect("/")
 
 # /getAToken redirect after login ENTRA ID
-@app.route("/getAToken")
+@app.route("/auth/entraid/callback")
 def auth_entraid():
     token = entraid_oauth.authorize_access_token()
     app.logger.debug(f"Token obtingut: {token}")
@@ -298,19 +353,19 @@ def auth_entraid():
     session["provider"] = "entra_id"
     session["entraid_id_token"] = token.get("id_token"),
     session["entraid_access_token"] = token.get("access_token"),
-    session["user_entraid"] = {
+    session["entraid_user"] = {
             "name": user_info["name"],
-            "email": user_info.get("email") or user_info.get("preferred_username"), # idontthink email in idtoken
-            "eid":   user_info.get("eid")
+            "email": user_info["preferred_username"], 
+            "eid":   user_info["eid"]
     }
     
-    app.logger.info(f"Sessio info usuari: {session["user_entraid"]["name"]}, email: {session["user_entraid"]["email"]}, eid: {session["user_entraid"]["eid"]}") 
+    app.logger.info(f"Sessio info usuari: {session["entraid_user"]["name"]}, email: {session["entraid_user"]["email"]}, eid: {session["entraid_user"]["eid"]}") 
     
-    existing_user = User.query.filter_by(email=session["user_entraid"]["email"]).first()
+    existing_user = User.query.filter_by(email=session["entraid_user"]["email"]).first()
     if not existing_user:
         app.logger.debug(f"User {user_info["name"]} no guardat en db")
         new_user = User(
-            email= session["user_entraid"]["email"],
+            email= session["entraid_user"]["email"], 
             full_name = user_info["name"],
             eid = user_info["eid"]
         )
@@ -451,7 +506,6 @@ def logout():
         logout_url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
         if id_token:
             logout_url += f"&id_token_hint={id_token}"
-    
     else: # okta
         logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
         if id_token:
