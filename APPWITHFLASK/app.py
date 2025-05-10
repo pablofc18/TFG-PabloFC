@@ -494,7 +494,10 @@ def update_profile():
 
     try:
         # actualitzar usuari a Okta
-        okta_user_id = get_okta_user_id(user["email"])
+        if session["provider"] == "okta":
+            okta_user_id = get_okta_user_id(user["email"])
+        elif session["provider"] == "entra_id":
+            okta_user_id = find_okta_user_by_eid(user["eid"])
         if okta_user_id:
             profile_data = {
                 "firstName": full_name.split()[0],
@@ -508,7 +511,6 @@ def update_profile():
                 # si actualitzacio a Okta exit, actualitzar la BD (tant user d'okta com d'entraid)
                 for u in curr_users:
                     u.full_name = full_name
-                db.session.commit()
                 db.session.commit()
                 
                 # actualitzar la sessio (no cal no s'usa si prov == entra_id)
