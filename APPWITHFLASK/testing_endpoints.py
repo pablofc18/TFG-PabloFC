@@ -41,7 +41,7 @@ headers = {
 def find_okta_user_by_eid(eid):
     url = f"{OKTA_ORG_URL}/api/v1/users"
     parameters = {
-        "filter": f'profile.employeeNumber eq "{eid}"' 
+        "search": f'profile.employeeNumber eq "{eid}"' 
     }
     response = requests.get(url, headers=headers, params=parameters)
     response.raise_for_status()
