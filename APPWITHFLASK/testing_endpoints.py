@@ -3,7 +3,30 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv("env_vars.env")
-# Configuració: defineix el teu domini d'Okta i el teu API token
+# conf entra id
+ENTRAID_TENANT_ID     = os.getenv("ENTRAID_TENANT_ID")
+ENTRAID_CLIENT_ID     = os.getenv("ENTRAID_CLIENT_ID")
+ENTRAID_CLIENT_SECRET = os.getenv("ENTRAID_CLIENT_SECRET")
+ENTRAID_AUTHORITY     = f"{os.getenv("LOGIN_MICROSOFT_URL")}/{ENTRAID_TENANT_ID}"
+ENTRAID_OPENID_CONFIG = f"{ENTRAID_AUTHORITY}/v2.0/.well-known/openid-configuration"
+GRAPH_URL             = os.getenv("GRAPH_URL")
+def get_graph_token():
+    url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/token"
+    payload = {
+        "grant_type": "client_credentials",
+        "client_id": ENTRAID_CLIENT_ID,
+        "client_secret": ENTRAID_CLIENT_SECRET,
+        "scope": f"{GRAPH_URL}/.default"
+    }
+    response = requests.post(url, json=payload)
+    response.raise_for_status()
+    token = response.json().get("access_token")
+    if not token:
+        raise RuntimeError(f"Access token no obtingut: {response.text}")
+    return token
+
+print(get_graph_token())
+"""
 okta_domain = os.getenv("OKTA_ORG_URL")
 api_token = os.getenv("OKTA_API_TOKEN")
 headers = {
@@ -45,3 +68,4 @@ if resp.status_code == 200:
     
 else:
     print("error")
+"""

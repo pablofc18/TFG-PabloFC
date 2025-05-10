@@ -212,18 +212,18 @@ def get_graph_token():
     response.raise_for_status()
     token = response.json().get("access_token")
     if not token:
+        app.logger.error(f"Access token no obtingut: {response.text}")
         raise RuntimeError(f"Access token no obtingut: {response.text}")
     return token
-
-headers_entraid = {
-    "Authorization": f"Bearer {get_graph_token()}",
-    "Content-Type": "application/json"
-}
 
 # update user in Entra ID
 def update_entraid_user_profile(userPrincipalName, displayName):
     data = {
         "displayName": displayName
+    }
+    headers_entraid = {
+        "Authorization": f"Bearer {get_graph_token()}",
+        "Content-Type": "application/json"
     }
     app.logger.debug(f"Update Entra ID user: {userPrincipalName}, {displayName}")
     response = requests.patch(f"{GRAPH_URL}/v1.0/users/{userPrincipalName}", headers=headers_entraid, json=data)
@@ -242,6 +242,10 @@ def change_entraid_user_password(userPrincipalName, curr_psswd, new_psswd):
     data = {
         "currentPassword": curr_psswd,
         "newPassword": new_psswd
+    }
+    headers_entraid = {
+        "Authorization": f"Bearer {get_graph_token()}",
+        "Content-Type": "application/json"
     }
     url = f"{GRAPH_URL}/v1.0/users/{userPrincipalName}/changePassword"
     response = requests.post(url, headers=headers_entraid, json=data)
