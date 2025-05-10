@@ -343,7 +343,7 @@ def auth():
 
     return redirect("/")
 
-# /getAToken redirect after login ENTRA ID
+# /auth/entraid/callback redirect after login ENTRA ID
 @app.route("/auth/entraid/callback")
 def auth_entraid():
     token = entraid_oauth.authorize_access_token()
