@@ -2,7 +2,7 @@ import requests
 import os 
 from dotenv import load_dotenv
 
-load_dotenv("env_vars.env")
+load_dotenv("../env_vars.env")
 # conf entra id
 ENTRAID_TENANT_ID     = os.getenv("ENTRAID_TENANT_ID")
 ENTRAID_CLIENT_ID     = os.getenv("ENTRAID_CLIENT_ID")
