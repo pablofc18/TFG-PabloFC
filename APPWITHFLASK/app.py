@@ -557,15 +557,26 @@ def change_password():
         flash("Les contrasenyes no coincideixen!", "danger")
         return redirect("/passowrd")
 
-    okta_user_id = get_okta_user_id(user["email"])
+    if session["provider"] == "okta":
+        okta_user_id = get_okta_user_id(user["email"])
+    elif session["provider"] == "entra_id":
+        okta_user_id = find_okta_user_by_eid(user["eid"])
     if not okta_user_id:
         flash("No s'ha pogut trobar el id de l'usuari a Okta", "danger")
         return redirect("/password")
     
     if change_okta_user_password(okta_user_id, curr_psswd, new_psswd):
-        flash("Contrasenya actualitzada correctament", "success")
+        flash("Contrasenya actualitzada correctament a Okta", "success")
     else:
-        flash("Error a l'actualitzar contrasenya! Proba una mes segura!", "danger")
+        flash("Error a l'actualitzar contrasenya a Okta! Proba una mes segura!", "danger")
+
+    userPrincipalName = find_entraid_user_by_eid(user["eid"])
+    if not userPrincipalName:
+        flash("No s'ha pogut trobar l'usuari a EntraID", "danger")
+    if change_entraid_user_password(userPrincipalName, curr_psswd, new_psswd):
+        flash("Contrasenya actualitzada correctament a Entra ID", "success")
+    else:
+        flash("Error a l'actualitzar contrasenya a EntraID!", "danger")
     
     # tornem al profile view
     return redirect("/profile")
