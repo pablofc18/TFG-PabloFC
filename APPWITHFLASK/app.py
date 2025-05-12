@@ -540,7 +540,10 @@ def password():
 @app.route("/change_password", methods=["POST"])
 @require_valid_token
 def change_password():
-    user = session.get("user")
+    if session["provider"] == "okta":
+        user = session.get("user")
+    elif session["provider"] == "entra_id":
+        user = session.get("entraid_user")
     app.logger.info(f"chpwd user:{user}")
     if not user:
         return redirect("/login")
