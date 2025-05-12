@@ -1,0 +1,112 @@
+[
+  {
+    "accountEnabled": true,
+    "displayName": "Pablo Franco Carrasco",
+    "mailNickname": "PabloFrancoCarrasco",
+    "userPrincipalName": "PabloFrancoCarrasco@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0000A",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user3 user3",
+    "mailNickname": "user3user3",
+    "userPrincipalName": "user3user3@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0003Y",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user1 user1",
+    "mailNickname": "user1user1",
+    "userPrincipalName": "user1user1@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0001Y",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user2 user2",
+    "mailNickname": "user2user2",
+    "userPrincipalName": "user2user2@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0002Y",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user6 user6",
+    "mailNickname": "user6user6",
+    "userPrincipalName": "user6user6@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0006X",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user9 user9",
+    "mailNickname": "user9user9",
+    "userPrincipalName": "user9user9@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0009X",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user4 user4",
+    "mailNickname": "user4user4",
+    "userPrincipalName": "user4user4@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0004Y",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user5 user5",
+    "mailNickname": "user5user5",
+    "userPrincipalName": "user5user5@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0005Y",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user7 user7",
+    "mailNickname": "user7user7",
+    "userPrincipalName": "user7user7@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0007X",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  },
+  {
+    "accountEnabled": true,
+    "displayName": "user8 user8",
+    "mailNickname": "user8user8",
+    "userPrincipalName": "user8user8@TFGPABLO.onmicrosoft.com",
+    "employeeId": "0008X",
+    "passwordProfile": {
+      "forceChangePasswordNextSignIn": true,
+      "password": "Prueba123!"
+    }
+  }
+]
