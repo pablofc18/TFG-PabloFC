@@ -276,8 +276,7 @@ def change_entraid_user_password(userPrincipalName, curr_psswd, new_psswd):
         "Authorization": f"Bearer {get_graph_token()}",
         "Content-Type": "application/json"
     }
-    #url = f"{GRAPH_URL}/v1.0/users/{userPrincipalName}/changePassword"
-    url = f"{GRAPH_URL}/v1.0/me/changePassword"
+    url = f"{GRAPH_URL}/v1.0/users/{userPrincipalName}/changePassword"
     response = requests.post(url, headers=headers_entraid, json=data)
     if response.status_code in (200, 204): # then its ok
         app.logger.info(f"Contrasenya actualitzada a Entra ID")
