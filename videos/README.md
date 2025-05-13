@@ -27,6 +27,6 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ## `jenkins-loginOkta.mp4`
 
 - **Explicació:**  
-  En aquest vídeo es mostra el login amb Okta des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
+  En aquest vídeo es mostra el login amb Okta amb l'usuari **pablo.franco.c@estudiantat.upc.edu** (que si té accés) des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
 
 > Cal destacar que el codi de MFA que s'escriu tant en aquest vídeo com els anteriors s'obté de l'aplicació mòvil **Okta Verify**.
