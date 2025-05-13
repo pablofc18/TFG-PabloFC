@@ -22,7 +22,8 @@ En la branca `master` trobaràs:
 
 Conté la versió de l’aplicació Flask **integrada amb Okta** com a sistema d’autenticació.
 
-- **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) i la resta d'arxius necessaris.
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l. .
 
 ---
 
