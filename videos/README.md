@@ -12,6 +12,8 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 - **Comentaris sobre la captura:**  
   En la captura es pot observar els logs tant de l'app de Flask com de les connexions amb Okta. On es pot veure la informació de l'usuari abans i després de fer el canvi de nom (s'elimina l'últim cognom).
 
+> Cal destacar que el codi de MFA que s'escriu en aquest vídeo s'obté de l'aplicació mòvil **Okta Verify**.
+
 ---
 
 ## `flask-jenkins-user9-OKTA_chpwd.mp4`
@@ -22,6 +24,8 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 - **Comentaris sobre la captura:**  
   En la captura es pot observar els logs tant de l'app de Flask com de les connexions amb Okta. On es pot veure la contrasenya antiga i la nova (en un entorn real no s'hauria de mostrar).
 
+> Cal destacar que el codi de MFA que s'escriu tant en aquest vídeo com l'anterior s'obté de l'aplicació mòvil **Okta Verify**.
+
 ---
 
 ## `jenkins-loginOkta.mp4`
@@ -30,3 +34,10 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
   En aquest vídeo es mostra el login amb Okta amb l'usuari **pablo.franco.c@estudiantat.upc.edu** (que si té accés) des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
 
 > Cal destacar que el codi de MFA que s'escriu tant en aquest vídeo com els anteriors s'obté de l'aplicació mòvil **Okta Verify**.
+
+---
+
+## `connectors-EntraID-u-g.mp4`
+
+- **Explicació:**  
+  En aquest vídeo es mostra
