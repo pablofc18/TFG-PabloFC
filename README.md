@@ -10,6 +10,8 @@ En la branca `master` trobaràs:
 
 - **`connectors/`**  
   Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
+  - **`connectors/response_files`**   
+    Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte BATCH_* que es pot veure).
 - **`videos/`**  
   Carpeta amb vídeos demostratius.  
   - Cada vídeo està documentat amb un petit README.
