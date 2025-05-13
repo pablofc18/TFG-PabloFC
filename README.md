@@ -9,8 +9,7 @@ Aquest repositori conté el codi de la app Flask en les diferents fases de la mi
 En la branca `master` trobaràs:
 
 - **`connectors/`**  
-  Carpeta amb scripts i mòduls de connexió als diferents serveis d’autenticació.  
-  - Clica sobre cada fitxer per veure’n el codi i la documentació integrada.  
+  Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
 - **`videos/`**  
   Carpeta amb vídeos demostratius.  
   - Cada vídeo està documentat amb un petit README.
@@ -23,28 +22,16 @@ En la branca `master` trobaràs:
 
 Conté la versió de l’aplicació Flask **integrada amb Okta** com a sistema d’autenticació.
 
-- **`APPWITHFLASK/`** – Codi de l'aplicació web Flask integrat amb Okta.
-
-> Per veure aquest codi, canvia de branca amb:
-> ```bash
-> git switch okta
-> ```
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) i la resta d'arxius necessaris.
 
 ---
 
 ## Branca `dual_run`
 
-Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta simultàniament:
+Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta simultàniament: **Okta** i **Microsoft Entra ID**.
 
-1. **Okta**  
-2. **Microsoft Entra ID**
 
-- **`APPWITHFLASK/`** – Codi de l'aplicació web Flask integrat amb Okta i Entra ID.
-
-> Canvia a aquesta branca amb:
-> ```bash
-> git switch dual_run
-> ```
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi de l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/dual_run/APPWITHFLASK/app.py) integrat amb Okta i Entra ID.
 
 ---
 
@@ -52,11 +39,6 @@ Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta sim
 
 Conté la versió finalitzada la migració de l’aplicació **integrada amb Microsoft Entra ID**.
 
-- **`app/`** – Codi de l'aplicació Flask integrat amb Microsoft Entra ID.
-
-> Per accedir-hi:
-> ```bash
-> git switch entraid
-> ```
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi de l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/entraid/APPWITHFLASK/app.py) integrat amb Microsoft Entra ID.
 
 ---
