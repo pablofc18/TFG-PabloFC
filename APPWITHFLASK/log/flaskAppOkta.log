@@ -4219,3 +4219,15 @@ KeyError: 'eid'
 [2025-05-03 11:02:10,845] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:02:10] "[32mGET /logout HTTP/1.1[0m" 302 -
 [2025-05-03 11:02:11,441] [INFO] [app] : Usuari no autenticat.
 [2025-05-03 11:02:11,441] [INFO] [werkzeug] : 192.168.1.35 - - [03/May/2025 11:02:11] "GET / HTTP/1.1" 200 -
+[2025-05-13 16:30:14,006] [INFO] [werkzeug] : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on https://127.0.0.1:5000
+ * Running on https://192.168.1.10:5000
+[2025-05-13 16:30:14,007] [INFO] [werkzeug] : [33mPress CTRL+C to quit[0m
+[2025-05-13 16:30:21,197] [INFO] [app] : Usuari no autenticat.
+[2025-05-13 16:30:21,201] [INFO] [werkzeug] : 192.168.1.38 - - [13/May/2025 16:30:21] "GET / HTTP/1.1" 200 -
+[2025-05-13 16:30:22,672] [DEBUG] [app] : Asignem nonce a la sessio actual: 2b7ab6af64b1623a31439f723cf04113
+[2025-05-13 16:30:22,673] [INFO] [app] : Redireccionem a uri: https://192.168.1.10:5000/auth/callback
+[2025-05-13 16:30:22,674] [DEBUG] [urllib3.connectionpool] : Starting new HTTPS connection (1): dev-67811299.okta.com:443
+[2025-05-13 16:30:23,477] [DEBUG] [urllib3.connectionpool] : https://dev-67811299.okta.com:443 "GET /oauth2/default/.well-known/openid-configuration HTTP/1.1" 200 None
+[2025-05-13 16:30:23,479] [INFO] [werkzeug] : 192.168.1.38 - - [13/May/2025 16:30:23] "[32mGET /login HTTP/1.1[0m" 302 -
