@@ -31,8 +31,8 @@ Conté la versió de l’aplicació Flask **integrada amb Okta** com a sistema d
 
 Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta simultàniament: **Okta** i **Microsoft Entra ID**.
 
-
-- **`APPWITHFLASK/`** – Carpeta on es troba el codi de l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/dual_run/APPWITHFLASK/app.py) integrat amb Okta i Entra ID.
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l. .
 
 ---
 
@@ -40,6 +40,7 @@ Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta sim
 
 Conté la versió finalitzada la migració de l’aplicació **integrada amb Microsoft Entra ID**.
 
-- **`APPWITHFLASK/`** – Carpeta on es troba el codi de l'aplicació web Flask [app.py](https://github.com/pablofc18/myApp/blob/entraid/APPWITHFLASK/app.py) integrat amb Microsoft Entra ID.
+- **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l. .
 
 ---
