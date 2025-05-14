@@ -7,7 +7,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ## `flask-jenkins-PFC-OKTA_chname.mp4`
 
 - **Explicació:**  
-  En aquest vídeo es mostra el funcionament del SSO (Single Sign-On), s'inicia sessió amb Okta amb l'usuari **pablo.franco.c@estudiantat.upc.edu** en l'app de Flask i es modifica el nom del perfil, que s'actualitza tant a Okta com a la base de dades (captura associada). I després, s'inicia sessió a Jenkins comprovant que no cal introduir credencials gràcies al SSO. Per últim, es tanca sessió.
+  En aquest vídeo es mostra el funcionament del SSO (Single Sign-On), s'inicia sessió amb Okta amb l'usuari **Pablo Franco Carrasco** en l'app de Flask i es modifica el nom del perfil, que s'actualitza tant a Okta com a la base de dades (captura associada). I després, s'inicia sessió a Jenkins comprovant que no cal introduir credencials gràcies al SSO. Per últim, es tanca sessió.
 - **Fitxer de captura associat:** [`chname-PFC-OKTA.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/chname-PFC-OKTA.jpg)
 - **Comentaris sobre la captura:**  
   En la captura es pot observar els logs tant de l'app de Flask com de les connexions amb Okta. On es pot veure la informació de l'usuari abans i després de fer el canvi de nom (s'elimina l'últim cognom).
@@ -31,7 +31,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ## `jenkins-loginOkta.mp4`
 
 - **Explicació:**  
-  En aquest vídeo es mostra el login amb Okta amb l'usuari **pablo.franco.c@estudiantat.upc.edu** (que si té accés) des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
+  En aquest vídeo es mostra el login amb Okta amb l'usuari **Pablo Franco Carrasco** (que si té accés) des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
 
 > Cal destacar que el codi de MFA que s'escriu tant en aquest vídeo com els anteriors s'obté de l'aplicació mòvil **Okta Verify**.
 
@@ -40,4 +40,14 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ## `connectors-EntraID-u-g.mp4`
 
 - **Explicació:**  
-  En aquest vídeo es mostra
+  En aquest vídeo es mostra el funcionament dels connectors pas a pas.
+  1. Primer s'observa com al portal de Microsoft Entra ID no hi ha usuaris ni grups creats.
+  2. Després, s'executa la comanda `source ../APPWITHFLASK/myenv/bin/activate` que activa l'entorn virtual de Python, on s'han instal·lat les llibreries necessàries per l'app de Flask i els connectors.
+  3. Seguidament, s'executen els 3 diferents scripts `extract_data.py`, `transform_data.py` i `load_data.py` que generen els diferents arxius encriptats:
+    - *users.json.enc* | *groups.json.enc* 
+      > Extrets del **extract_data** script, contenen la info d'Okta.
+    - *users.entraid.json.enc* | *groups.entraid.json.enc*
+      > Extrets del **transform_data** script, contenen la info un cop adaptada al format d'Entra ID.
+    - Els següents fitxers no estan encriptats: *BATCH_RESP_U.json* i *BATCH_RESP_G.json*
+      > Extrats del **load_data** script, contenen la informació retornada d'Entra ID després de la creació d'usuaris i grups.
+  4. Per últim, es mostra al portal d'Entra ID els usuaris que s'han creat i els grups juntament amb els membres de cada grup.
