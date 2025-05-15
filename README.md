@@ -11,7 +11,7 @@ En la branca `master` trobaràs:
 - **`connectors/`**  
   Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
   - **`connectors/response_files/`**   
-    Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte BATCH_* que es pot veure).
+    Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte els dos BATCH_* que no estan xifrats).
 - **`videos/`**  
   Carpeta amb vídeos demostratius.  
   - Cada vídeo està documentat amb un petit README.
@@ -24,9 +24,9 @@ En la branca `master` trobaràs:
 Conté la versió de l’aplicació Flask **integrada amb Okta** com a sistema d’autenticació.
 
 - **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
-- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, click [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
 
-> Clicka [aquí](https://github.com/pablofc18/myApp/tree/okta) per anar a la branca.
+> Click [aquí](https://github.com/pablofc18/myApp/tree/okta) per anar a la branca.
 ---
 
 ## Branca `dual_run`
@@ -34,9 +34,9 @@ Conté la versió de l’aplicació Flask **integrada amb Okta** com a sistema d
 Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta simultàniament: **Okta** i **Microsoft Entra ID**.
 
 - **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
-- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, click [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
 
-> Clicka [aquí](https://github.com/pablofc18/myApp/tree/dual_run) per anar a la branca.
+> Click [aquí](https://github.com/pablofc18/myApp/tree/dual_run) per anar a la branca.
 ---
 
 ## Branca `entraid`
@@ -44,7 +44,7 @@ Aquesta branca implementa la **fase de dual-run**, on l’aplicació suporta sim
 Conté la versió finalitzada la migració de l’aplicació **integrada amb Microsoft Entra ID**.
 
 - **`APPWITHFLASK/`** – Carpeta on es troba el codi l'aplicació web Flask i la resta d'arxius necessaris.
-- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, clicka [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
+- **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, click [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
 
-> Clicka [aquí](https://github.com/pablofc18/myApp/tree/entraid) per anar a la branca.
+> Click [aquí](https://github.com/pablofc18/myApp/tree/entraid) per anar a la branca.
 ---
