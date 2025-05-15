@@ -17,7 +17,6 @@ En la branca `master` trobaràs:
   - Cada vídeo està documentat amb un petit README.
 
 > Aquesta branca serveix de punt de partida i conté només els connectors i els vídeos.
-
 ---
 
 ## Branca `okta`
