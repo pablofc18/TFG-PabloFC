@@ -21,7 +21,7 @@ logging.basicConfig(
     level=logging.DEBUG,            
     format="[%(asctime)s] [%(levelname)s] [%(name)s] : %(message)s",
     handlers=[
-        logging.FileHandler("log/flaskAppOkta.log"),
+        logging.FileHandler("log/flaskApp.log"),
         logging.StreamHandler() # tambe mostrara log en terminal
     ]
 )
