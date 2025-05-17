@@ -502,10 +502,7 @@ def update_profile():
             profile_data = {
                 "firstName": full_name.split()[0],
                 "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
-                "email": user["email"],
-                "login": user["email"],
                 "displayName": full_name,
-                "employeeNumber": user["eid"]
             }
             if update_okta_user_profile(okta_user_id, profile_data):
                 # si actualitzacio a Okta exit, actualitzar la BD (tant user d'okta com d'entraid)
