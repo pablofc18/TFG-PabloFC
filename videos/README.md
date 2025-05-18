@@ -6,7 +6,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ## Integrat amb `Okta`
 
-### `flask-jenkins-PFC-OKTA_chname.mp4`
+### [`flask-jenkins-PFC-OKTA_chname.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/flask-jenkins-PFC-OKTA_chname.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament del SSO (Single Sign-On), s'inicia sessió amb Okta amb l'usuari **Pablo Franco Carrasco** en l'app de Flask i es modifica el nom del perfil, que s'actualitza tant a Okta com a la base de dades (captura associada). I després, s'inicia sessió a Jenkins comprovant que no cal introduir credencials gràcies al SSO. Per últim, es tanca sessió.
@@ -18,7 +18,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ---
 
-### `flask-jenkins-user9-OKTA_chpwd.mp4`
+### [`flask-jenkins-user9-OKTA_chpwd.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/flask-jenkins-user9-OKTA_chpwd.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament del SSO (Single Sign-On) també, s'inicia sessió amb Okta amb l'usuari **user9 user9** en l'app de Flask i es modifica la contrasenya, que s'actualitza a Okta. I després, s'inicia sessió a Jenkins comprovant que l'usuari no té l'aplicació asignada, el seu grup no pot accedir al servei de Jenkins. Per últim, es tanca sessió.
@@ -30,7 +30,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ---
 
-### `jenkins-loginOkta.mp4`
+### [`jenkins-loginOkta.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/jenkins-loginOkta.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el login amb Okta amb l'usuari **Pablo Franco Carrasco** (que si té accés) des del servei de Jenkins, ja que en els anteriors dos vídeos no es pot observar com et redirecciona a Okta.
@@ -39,7 +39,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ---
 
-### `connectors-EntraID-u-g.mp4`
+### [`connectors-EntraID-u-g.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/connectors-EntraID-u-g.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament dels connectors pas a pas.
@@ -59,7 +59,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ## Integrat amb `Okta i EntraID` (**dual-run**)
 
-### `dualrun-changeName.mp4`
+### [`dualrun-changeName.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/dualrun-changeName.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament de l'aplicació Flask integrada amb Okta i Entra ID al mateix temps. Primer s'inicia sessió amb l'usuari **user9 user9** amb Microsoft Entra ID (fent ús del MFA), es canvia el nom de l'usuari i es tanca sessió. Després, s'inicia un altre cop sessió però amb Okta (també fent ús de MFA), on es pot veure el nou nom de l'usuari, i per últim es torna a canviar el nom al que tenia abans i es tanca sessió. 
@@ -73,6 +73,6 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 ---
 
-
-
 ## Integrat amb `Microsoft Entra ID`
+
+### `x.mp4`
