@@ -49,27 +49,8 @@ class User(db.Model):
     eid = db.Column(db.String(5), nullable=False)
 
 
-# conf okta
-OKTA_ORG_URL = os.getenv("OKTA_ORG_URL")
-OKTA_DOMAIN = f"{OKTA_ORG_URL}/oauth2/default"
-CLIENT_ID = os.getenv("OKTA_CLIENT_ID")
-CLIENT_SECRET = os.getenv("OKTA_CLIENT_SECRET")
-API_TOKEN = os.getenv("OKTA_API_TOKEN")
-
 app.config["SESSION_COOKIE_NAME"] = "login-session"
 app.config["SESSION_PERMANENT"] = False # user session terminara si es tanca navegador 
-
-# conf oauth Okta
-oauth = OAuth(app)
-okta_oauth = oauth.register(
-    name="okta",
-    client_id=CLIENT_ID,
-    client_secret=CLIENT_SECRET,
-    server_metadata_url=f"{OKTA_DOMAIN}/.well-known/openid-configuration",
-    client_kwargs={
-        "scope": "openid profile email",
-    }
-)
 
 # conf entra id
 ENTRAID_TENANT_ID     = os.getenv("ENTRAID_TENANT_ID")
@@ -80,6 +61,7 @@ ENTRAID_OPENID_CONFIG = f"{ENTRAID_AUTHORITY}/v2.0/.well-known/openid-configurat
 GRAPH_URL             = os.getenv("GRAPH_URL")
 
 # conf oauth Entra id
+oauth = OAuth(app)
 entraid_oauth = oauth.register(
     name="microsoft",
     client_id=ENTRAID_CLIENT_ID,
@@ -111,10 +93,7 @@ def jwt_decode_no_verification(token):
 def require_valid_token(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session["provider"] == "okta":
-            access_token = session.get("access_token")
-        elif session["provider"] == "entra_id":
-            access_token = session.get("entraid_access_token")
+        access_token = session.get("entraid_access_token")
         if not access_token:
             flash("Acces denegat: token no present.", "danger")
             app.logger.error("Acces denegat token no present")
@@ -127,20 +106,11 @@ def require_valid_token(f):
             flash("Acces denegat: token invalid.", "danger")
             return redirect("/logout")        
         
-        # verificar dades critiques okta
-        if session["provider"] == "okta":
-            app.logger.debug(f"decoded OKTA jwt: {decoded}")
-            user_session = session.get("user", {})
-            token_email = decoded.get("sub")
-            token_eid = decoded.get("eid")
-            token_issuer = decoded.get("iss")
-        # verificar dades critiques entraid
-        elif session["provider"] == "entra_id":
-            app.logger.debug(f"decoded ENTRA ID jwt: {decoded}")
-            user_session = session.get("entraid_user", {})
-            token_email = decoded.get("preferred_username")
-            token_eid = decoded.get("eid")
-            token_issuer = decoded.get("iss")
+        app.logger.debug(f"decoded ENTRA ID jwt: {decoded}")
+        user_session = session.get("entraid_user", {})
+        token_email = decoded.get("preferred_username")
+        token_eid = decoded.get("eid")
+        token_issuer = decoded.get("iss")
 
         # verificar pattern eid (employeeNumber)
         pattern = r'^\d{4}[A-Z]$'
@@ -149,16 +119,10 @@ def require_valid_token(f):
             flash("Employee Number incorrecte!", "danger")
             return redirect("/logout")
 
-        if session["provider"] == "okta":
-            if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != OKTA_DOMAIN:
-                app.logger.error(f"Dades d'usuari inconsistents!!!")
-                flash("Dades d'usuari OKTA inconsistents, si us plau inicia sesio de nou.", "danger")
-                return redirect("/logout")        
-        elif session["provider"] == "entra_id":
-            if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != f"{ENTRAID_AUTHORITY}/v2.0":
-                app.logger.error(f"Dades d'usuari inconsistents!!!")
-                flash("Dades d'usuari ENTRAID inconsistents, si us plau inicia sesio de nou.", "danger")
-                return redirect("/logout")        
+        if token_email != user_session["email"] or token_eid != user_session["eid"] or token_issuer != f"{ENTRAID_AUTHORITY}/v2.0":
+            app.logger.error(f"Dades d'usuari inconsistents!!!")
+            flash("Dades d'usuari ENTRAID inconsistents, si us plau inicia sesio de nou.", "danger")
+            return redirect("/logout")        
 
         return f(*args, **kwargs)
     return decorated_function
@@ -166,68 +130,7 @@ def require_valid_token(f):
 ###
 ### Api calls methods
 ###
-# auth http headers for okta api 
-headers = {
-    "Authorization": f"SSWS {API_TOKEN}",
-    "Content-Type": "application/json"
-}
 
-# find id with email
-def get_okta_user_id(email):
-    response = requests.get(f"{OKTA_ORG_URL}/api/v1/users/{email}", headers=headers)
-    if response.status_code == 200:
-        id_user = response.json()["id"]
-        app.logger.debug(f"Id de l'usuari: {id_user}")
-        return id_user
-    else:
-        app.logger.error(f"Error obtenint usuari d'Okta: {response.text}")
-        return None
-
-# modif profile in Okta
-def update_okta_user_profile(user_id, profile_data):
-    data = {
-        "profile": profile_data
-    }
-    app.logger.debug(f"Update profile okta: {data}")
-    response = requests.post(f"{OKTA_ORG_URL}/api/v1/users/{user_id}", headers=headers, json=data)
-    if response.status_code == 200:
-        app.logger.info(f"Perfil d'Okta actualitzat correctament: {profile_data}")
-        return True
-    else:
-        app.logger.error(f"Error actualitzant perfil d'usuari a Okta: {response.text}")
-        return False
-
-# change password in Okta
-def change_okta_user_password(user_id, curr_psswd, new_psswd):
-    # NO son segurs mai mostrar pwd en text pla
-    app.logger.debug(f"pwd:{curr_psswd}")
-    app.logger.debug(f"newpwd:{new_psswd}")
-    data = {
-        "oldPassword": {"value": curr_psswd},
-        "newPassword": {"value": new_psswd}
-    }
-    url = f"{OKTA_ORG_URL}/api/v1/users/{user_id}/credentials/change_password"
-    response = requests.post(url, headers=headers, json=data)
-    if response.status_code == 200:
-        app.logger.info("Contrasenya actualitzada a Okta")
-        return True
-    else:
-        app.logger.error(f"Error actualitzant contrasenya a Okta: {response.text}")
-        return False
-
-# find user by eid
-def find_okta_user_by_eid(eid):
-    url = f"{OKTA_ORG_URL}/api/v1/users"
-    parameters = {
-        "search": f'profile.employeeNumber eq "{eid}"' 
-    }
-    response = requests.get(url, headers=headers, params=parameters)
-    response.raise_for_status()
-    id_user = response.json()[0]["id"]
-    app.logger.debug(f"Id de l'usuari: {id_user}")
-    return id_user if id_user else None
-
-### ENTRA ID api calls
 # get token to use graph api
 def get_graph_token():
     url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/token"
@@ -308,37 +211,13 @@ def find_entraid_user_by_eid(eid):
 # / endpoint
 @app.route("/")
 def home():
-    provider = session.get("provider")
-    if provider == "okta":
-        user = session.get("user")
-        if user:
-            app.logger.info(f"Usuari autenticat {user}")
-            return render_template("home.html", user=user)
-        else:
-            app.logger.info("Usuari no autenticat.")
-            return render_template("home.html", user=user)
-    elif provider == "entra_id":
-        user = session.get("entraid_user")
-        if user:
-            app.logger.info(f"Usuari autenticat {user}")
-            return render_template("home.html", user=user)
-        else:
-            app.logger.info("Usuari no autenticat.")
-            return render_template("home.html", user=user)
+    user = session.get("entraid_user")
+    if user:
+        app.logger.info(f"Usuari autenticat {user}")
+        return render_template("home.html", user=user)
     else:
-        app.logger.info("Usuari no autenticat")
-        return render_template("home.html", user=None)
-
-
-# /login endpoint for Okta
-@app.route("/login")
-def login():
-    redirect_uri = url_for("auth", _external=True)
-    nonce = os.urandom(16).hex()
-    app.logger.debug(f"Asignem nonce a la sessio actual: {nonce}")
-    session["nonce"] = nonce
-    app.logger.info(f"Redireccionem a uri: {redirect_uri}")
-    return okta_oauth.authorize_redirect(redirect_uri, nonce=nonce)
+        app.logger.info("Usuari no autenticat.")
+        return render_template("home.html", user=user)
 
 # /login endpoint for Okta
 @app.route("/login_entraid")
@@ -349,45 +228,6 @@ def login_entraid():
     redirect_uri = url_for("auth_entraid", _external=True)
     app.logger.info(f"Redireccionem a uri: {redirect_uri}")
     return entraid_oauth.authorize_redirect(redirect_uri, nonce=nonce)
-
-# /auth/callback redirect after login OKTA
-@app.route("/auth/callback")
-def auth():
-    # 73-83 TODO: check
-    token = okta_oauth.authorize_access_token()
-    app.logger.debug(f"Token obtingut: {token}")
-    nonce = session.pop("nonce", None)  
-    if not nonce:
-        app.logger.error("Nonce no trobat en la sessio!")
-        return "Error: Nonce perdut o no valid", 400
-    user_info = okta_oauth.parse_id_token(token, nonce)
-    app.logger.debug(f"User parsed token {user_info}")
-    session["provider"] = "okta"
-    session["id_token"] = token.get("id_token")
-    session["access_token"] = token.get("access_token")
-    session["user"] = {
-        "name": user_info["name"],
-        "email": user_info["email"],
-        "eid": user_info["eid"]
-    }
-    app.logger.info(f"Sessio info usuari: {user_info["name"]}, email: {user_info["email"]}, eid: {user_info["eid"]}")
-
-    # guardar user si no exist en db
-    existing_user = User.query.filter_by(email=user_info["email"]).first()
-    if not existing_user:
-        app.logger.debug(f"User {user_info["name"]} no guardat en db")
-        new_user = User(
-            email=user_info["email"],
-            full_name=user_info["name"],
-            eid=user_info["eid"]
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        app.logger.debug(f"User {user_info["name"]} guardat en db")
-    else:
-        app.logger.debug(f"User trobat in db: {existing_user.email}")
-
-    return redirect("/")
 
 # /auth/entraid/callback redirect after login ENTRA ID
 @app.route("/auth/entraid/callback")
@@ -430,10 +270,7 @@ def auth_entraid():
 @app.route("/profile")
 @require_valid_token
 def profile():
-    if session["provider"] == "okta":
-        user = session.get("user")
-    elif session["provider"] == "entra_id":
-        user = session.get("entraid_user")
+    user = session.get("entraid_user")
     if not user:
         app.logger.warning("Usuari perdut al intentar modificar perfil!")
         return redirect("/login")
@@ -446,10 +283,7 @@ def profile():
 @app.route("/update_profile", methods=["POST"])
 @require_valid_token
 def update_profile():
-    if session["provider"] == "okta":
-        user = session.get("user")
-    elif session["provider"] == "entra_id":
-        user = session.get("entraid_user")
+    user = session.get("entraid_user")
     app.logger.info(f"upduser user:{user}")
     if not user:
         return redirect("/login")
@@ -475,10 +309,10 @@ def update_profile():
         if not userPrincipalName:
             flash("No s'ha pogut trobar l'usuari a EntraID", "danger")
         if update_entraid_user_profile(userPrincipalName, full_name):
-            for u in curr_users:
+            for u in curr_users: # estara l'usuari d'okta en la db encara
                 u.full_name = full_name
             db.session.commit()
-            # actualitzar la sessio (no cal no s'usa si prov == okta)
+            # actualitzar la sessio 
             session["entraid_user"] = {
                 "name": full_name,
                 "email": user["email"],
@@ -491,43 +325,6 @@ def update_profile():
         db.session.rollback()
         app.logger.error(f"Error en actualitzar el perfil a EntraID: {str(e)}")
         flash(f"Error en actualitzar el perfil a EntraID: {str(e)}", "danger")
-
-    try:
-        # actualitzar usuari a Okta
-        if session["provider"] == "okta":
-            okta_user_id = get_okta_user_id(user["email"])
-        elif session["provider"] == "entra_id":
-            okta_user_id = find_okta_user_by_eid(user["eid"])
-        if okta_user_id:
-            profile_data = {
-                "firstName": full_name.split()[0],
-                "lastName": ' '.join(full_name.split()[1:]) if len(full_name.split()) > 1 else "",
-                "email": user["email"],
-                "login": user["email"],
-                "displayName": full_name,
-                "employeeNumber": user["eid"]
-            }
-            if update_okta_user_profile(okta_user_id, profile_data):
-                # si actualitzacio a Okta exit, actualitzar la BD (tant user d'okta com d'entraid)
-                for u in curr_users:
-                    u.full_name = full_name
-                db.session.commit()
-                
-                # actualitzar la sessio (no cal no s'usa si prov == entra_id)
-                session["user"] = {
-                    "name": full_name,
-                    "email": user["email"],
-                    "eid": user["eid"]
-                }
-                flash("Perfil actualitzat correctament a Okta", "success")
-            else:
-                flash("Error en actualitzar el perfil a Okta", "danger")
-        else:
-            flash("No s'ha pogut trobar l'usuari a Okta", "danger")
-    except Exception as e:
-        db.session.rollback()
-        app.logger.error(f"Error en actualitzar el perfil a Okta: {str(e)}")
-        flash(f"Error en actualitzar el perfil a Okta: {str(e)}", "danger")
     
     return redirect("/profile")
 
@@ -557,22 +354,10 @@ def change_password():
         flash("Les contrasenyes no coincideixen!", "danger")
         return redirect("/passowrd")
 
-    if session["provider"] == "okta":
-        okta_user_id = get_okta_user_id(user["email"])
-    elif session["provider"] == "entra_id":
-        okta_user_id = find_okta_user_by_eid(user["eid"])
-    if not okta_user_id:
-        flash("No s'ha pogut trobar el id de l'usuari a Okta", "danger")
-        return redirect("/password")
-    
-    if change_okta_user_password(okta_user_id, curr_psswd, new_psswd):
-        flash("Contrasenya actualitzada correctament a Okta", "success")
-    else:
-        flash("Error a l'actualitzar contrasenya a Okta! Proba una mes segura!", "danger")
-
     userPrincipalName = find_entraid_user_by_eid(user["eid"])
     if not userPrincipalName:
         flash("No s'ha pogut trobar l'usuari a EntraID", "danger")
+
     if change_entraid_user_password(userPrincipalName, curr_psswd, new_psswd):
         flash("Contrasenya actualitzada correctament a Entra ID", "success")
     else:
@@ -585,28 +370,17 @@ def change_password():
 # /logout endpoint
 @app.route("/logout")
 def logout():
-    # get prov
-    provider = session.get("provider")
-
-    if provider == "entra_id":
-        id_token = session.pop("entraid_id_token", None)
-    else: # okta
-        id_token = session.pop("id_token", None)
+    id_token = session.pop("entraid_id_token", None)
 
     app.logger.debug(f"Token de la sessio: {id_token}")
 
-    if provider == "entra_id":
-        logout_url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
-        if id_token:
-            logout_url += f"&id_token_hint={id_token}"
-    else: # okta
-        logout_url = f"{OKTA_DOMAIN}/v1/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
-        if id_token:
-            logout_url += f"&id_token_hint={id_token}"
+    logout_url = f"{ENTRAID_AUTHORITY}/oauth2/v2.0/logout?post_logout_redirect_uri={url_for("home", _external=True)}"
+    if id_token:
+        logout_url += f"&id_token_hint={id_token}"
 
     session.clear()
 
-    app.logger.debug(f"Logout url de {provider}: {logout_url}")
+    app.logger.debug(f"Logout url d'Entra ID: {logout_url}")
     return redirect(logout_url)
 
 
