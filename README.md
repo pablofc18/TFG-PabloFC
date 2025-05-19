@@ -9,13 +9,13 @@ Aquest repositori conté el codi de la app Flask en les diferents fases de la mi
 En la branca `master` trobaràs:
 
 - **`connectors/`**  
-  Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
+  - Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
   - **`connectors/response_files/`**   
-    Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte els dos BATCH_* que no estan xifrats).
+    - Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte els dos BATCH_* que no estan xifrats).
 - **`jenkins_pipelines/`**  
-  Carpeta on es troben els dos pipelines de Jenkins per desplegar i aturar l'aplicació de Flask de la VM1.
+  - Carpeta on es troben els dos pipelines de Jenkins per desplegar i aturar l'aplicació de Flask de la VM1.
 - **`videos/`**  
-  Carpeta amb vídeos demostratius.  
+  - Carpeta amb vídeos demostratius.  
   - Cada vídeo està documentat amb un petit README.
 
 > Aquesta branca serveix de punt de partida i conté només els connectors i els vídeos.
