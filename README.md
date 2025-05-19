@@ -12,7 +12,7 @@ En la branca `master` trobaràs:
   Carpeta amb scripts i classes auxiliars per dur a terme la migració de dades.  
   - **`connectors/response_files/`**   
     Carpeta on es troben els diferents fitxers xifrats extrets dels scripts dels connectors. (Excepte els dos BATCH_* que no estan xifrats).
-- **`jenkins_pipelines/`**
+- **`jenkins_pipelines/`**  
   Carpeta on es troben els dos pipelines de Jenkins per desplegar i aturar l'aplicació de Flask de la VM1.
 - **`videos/`**  
   Carpeta amb vídeos demostratius.  
