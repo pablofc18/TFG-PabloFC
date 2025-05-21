@@ -371,11 +371,6 @@ def logout():
     app.logger.debug(f"Logout url: {logout_url}")
     return redirect(logout_url)
 
-# enpoint si pagina no encontrada mostrar msj
-@app.errorhandler(404)
-def page_not_found(error):
-    return "Pagina no trobada. ERROR 404 :(", 404
-
 
 ###
 ### MAIN
