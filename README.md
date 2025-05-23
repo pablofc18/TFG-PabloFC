@@ -1,6 +1,6 @@
 # Repositori TFG PabloFC 
 
-Aquest repositori conté el codi de la app Flask en les diferents fases de la migració i el material suplementari (videos, connectors)
+Aquest repositori conté el codi de la app Flask en les diferents fases de la migració i el material suplementari.
 
 ---
 
