@@ -33,7 +33,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
     - *users.entraid.json.enc* | *groups.entraid.json.enc*
       > Extrets del **transform_data** script, contenen la info un cop adaptada al format d'Entra ID.
     - Els següents fitxers no estan encriptats: *BATCH_RESP_U.json* i *BATCH_RESP_G.json*
-      > Extrats del **load_data** script, contenen la informació retornada d'Entra ID després de la creació d'usuaris i grups.
+      > Extrets del **load_data** script, contenen la informació retornada d'Entra ID després de la creació d'usuaris i grups.
   4. Per últim, es mostra al portal d'Entra ID els usuaris que s'han creat i els grups juntament amb els membres de cada grup.
   > Es pot observar a les imatges [`usersjson-example.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/usersjson-example.jpg) i [`groupsjson-example.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/groupsjson-example.jpg) el contingut a l'esquerra dels arxius *.json.enc (extrets de **extract_data.py**) i a la dreta un cop transformats *.entraid.json.enc (extrets de **transform_data.py**)
 
