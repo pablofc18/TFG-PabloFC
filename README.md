@@ -49,4 +49,3 @@ Conté la versió finalitzada la migració de l’aplicació **integrada amb Mic
 - **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, click [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
 
 > Click [aquí](https://github.com/pablofc18/myApp/tree/entraid) per anar a la branca.
----
