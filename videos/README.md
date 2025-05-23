@@ -30,6 +30,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
   3. Seguidament, s'executen els 3 diferents scripts `extract_data.py`, `transform_data.py` i `load_data.py` que generen els diferents arxius encriptats:
     - *users.json.enc* | *groups.json.enc* 
       > Extrets del **extract_data** script, contenen la info d'Okta.
+      > A les imatges [`info-usersOkta.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/info-usersOkta.jpg) i [`info-groupsOkta.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/info-groupsOkta.jpg) pots observar els usuaris i grups a Okta.
     - *users.entraid.json.enc* | *groups.entraid.json.enc*
       > Extrets del **transform_data** script, contenen la info un cop adaptada al format d'Entra ID.
     - Els següents fitxers no estan encriptats: *BATCH_RESP_U.json* i *BATCH_RESP_G.json*
