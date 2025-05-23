@@ -19,12 +19,12 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ---
 ---
 
-- El següent video no correspon a cap integració com a tal,   
+- El següent video no correspon a cap integració com a tal.   
 
 ### [`connectors-EntraID-u-g.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/connectors-EntraID-u-g.mp4)
 
 - **Explicació:**  
-  En aquest vídeo es mostra el funcionament dels connectors pas a pas.
+  En aquest vídeo es mostra el funcionament dels connectors pas a pas per extreure la info d'Okta i carregar-la a Entra ID.
   1. Primer s'observa com al portal de Microsoft Entra ID no hi ha usuaris ni grups creats.
   2. Després, s'executa la comanda `source ../APPWITHFLASK/myenv/bin/activate` que activa l'entorn virtual de Python, on s'han instal·lat les llibreries necessàries per l'app de Flask i els connectors.
   3. Seguidament, s'executen els 3 diferents scripts `extract_data.py`, `transform_data.py` i `load_data.py` que generen els diferents arxius encriptats:
