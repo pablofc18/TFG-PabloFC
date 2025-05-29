@@ -337,7 +337,7 @@ def password():
 @app.route("/change_password", methods=["POST"])
 @require_valid_token
 def change_password():
-    user = session.get("user")
+    user = session.get("entraid_user")
     app.logger.info(f"chpwd user:{user}")
     if not user:
         return redirect("/login")
