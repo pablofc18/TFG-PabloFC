@@ -273,7 +273,7 @@ def profile():
     user = session.get("entraid_user")
     if not user:
         app.logger.warning("Usuari perdut al intentar modificar perfil!")
-        return redirect("/login")
+        return redirect("/login_entraid")
     
     db_user = User.query.filter_by(email=user["email"]).first()
     app.logger.info(f"User a modifcar: {db_user}")
@@ -340,7 +340,7 @@ def change_password():
     user = session.get("entraid_user")
     app.logger.info(f"chpwd user:{user}")
     if not user:
-        return redirect("/login")
+        return redirect("/login_entraid")
     
     curr_psswd = request.form.get("curr_psswd")
     new_psswd = request.form.get("new_psswd")
