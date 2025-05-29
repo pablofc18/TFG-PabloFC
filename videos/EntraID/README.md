@@ -16,7 +16,7 @@
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament del SSO (Single Sign-On) també, s'inicia sessió amb EntraID amb l'usuari **user9 user9** en l'app de Flask i es modifica la contrasenya, que s'actualitza a EntraID. I després, s'inicia sessió a Jenkins comprovant que l'usuari no té l'aplicació asignada, el seu grup no pot accedir al servei de Jenkins. Per últim, es tanca sessió.
-- **Fitxers de captures associades:** [`chpwd-user9-ENTRAID.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chpwd-user9-ENTRAID-WebLog.jpg) [`chpwd-user9-ENTRAID.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chpwd-user9-ENTRAID-WebLog.jpg)
+- **Fitxers de captures associades:** [`chpwd-user9-ENTRAID.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chpwd-user9-ENTRAID.jpg) [`chpwd-user9-ENTRAID-WebLog.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chpwd-user9-ENTRAID-WebLog.jpg)
 - **Comentaris sobre la captura:**  
   En les captures es pot observar els logs tant de l'app de Flask com de la web d'EntraID. On es pot veure la contrasenya antiga i la nova (en un entorn real no s'hauria de mostrar) i el ChangePassword al log de la web d'Entra ID.
 
