@@ -7,6 +7,7 @@
 - **Fitxer de captura associat:** [`chname-PFC-OKTA.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/Okta/chname-PFC-OKTA.jpg)
 - **Comentaris sobre la captura:**  
   En la captura es pot observar els logs tant de l'app de Flask com de les connexions amb Okta. On es pot veure la informació de l'usuari abans i després de fer el canvi de nom (s'elimina l'últim cognom).
+  > Es destaca que els logs de l'app de Flask tenen 2 hores endarrerides de diferencia!
 
 > Cal destacar que el codi de MFA que s'escriu en aquest vídeo s'obté de l'aplicació mòvil **Okta Verify**.
 
@@ -19,6 +20,7 @@
 - **Fitxer de captura associat:** [`chpwd-user9-OKTA.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/Okta/chpwd-user9-OKTA.jpg)
 - **Comentaris sobre la captura:**  
   En la captura es pot observar els logs tant de l'app de Flask com de les connexions amb Okta. On es pot veure la contrasenya antiga i la nova (en un entorn real no s'hauria de mostrar).
+  > Es destaca que els logs de l'app de Flask tenen 2 hores endarrerides de diferencia!
 
 > Cal destacar que el codi de MFA que s'escriu tant en aquest vídeo com l'anterior s'obté de l'aplicació mòvil **Okta Verify**.
 
