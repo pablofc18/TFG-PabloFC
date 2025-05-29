@@ -86,7 +86,7 @@ entraid_oauth = oauth.register(
     client_secret=ENTRAID_CLIENT_SECRET,
     server_metadata_url=ENTRAID_OPENID_CONFIG,
     client_kwargs={
-        "scope": "openid profile email api://myAppFlask/myApp-scope" # TODO CHECK SCOPES!!!
+        "scope": "openid profile email api://myAppFlask/myApp-scope"
     },
 )
 
