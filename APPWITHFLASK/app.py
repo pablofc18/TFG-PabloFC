@@ -286,7 +286,7 @@ def update_profile():
     user = session.get("entraid_user")
     app.logger.info(f"upduser user:{user}")
     if not user:
-        return redirect("/login")
+        return redirect("/login_entraid")
     
     # dades del formulari (full_name)
     full_name = request.form.get("full_name")
