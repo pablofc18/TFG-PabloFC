@@ -4,7 +4,7 @@
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament del SSO (Single Sign-On), s'inicia sessió amb EntraID amb l'usuari **user1 user1** en l'app de Flask i es modifica el nom del perfil, que s'actualitza tant a Entra ID com a la base de dades. I després, s'inicia sessió a Jenkins comprovant que no cal introduir credencials gràcies al SSO. Per últim, es tanca sessió.
-- **Fitxers de captures associades:** [`chname-user1-ENTRAID.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chname-PFC-ENTRAID.jpg) [`chname-user1-ENTRAID-WebLog.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chname-PFC-ENTRAID-WebLog.jpg) 
+- **Fitxers de captures associades:** [`chname-user1-ENTRAID.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chname-user1-ENTRAID.jpg) [`chname-user1-ENTRAID-WebLog.jpg`](https://github.com/pablofc18/myApp/blob/master/videos/EntraID/chname-user1-ENTRAID-WebLog.jpg) 
 - **Comentaris sobre la captura:**  
   En les captures es pot observar els logs tant de l'app de Flask com de la web d'Entra ID. On es pot veure la informació de l'usuari abans i després de fer el canvi de nom.
 
