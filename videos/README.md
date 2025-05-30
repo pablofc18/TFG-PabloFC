@@ -21,7 +21,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 
 - El següent video no correspon a cap integració com a tal.   
 
-### [`connectors-EntraID-u-g.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/connectors-EntraID-u-g.mp4)
+### [`connectors-users-groups.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/connectors-users-groups.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament dels connectors pas a pas per extreure la info d'Okta i carregar-la a Entra ID.
