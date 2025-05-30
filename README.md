@@ -18,7 +18,7 @@ En la branca `master` trobaràs:
   - Carpeta amb vídeos demostratius.  
   - Cada vídeo està documentat amb un petit README.
 
-> Aquesta branca serveix de punt de partida i conté només els connectors i els vídeos.
+> Aquesta branca serveix de punt de partida i conté els connectors, els pipelines de Jenkins i els vídeos demostratius.
 ---
 
 ## Branca `okta`
