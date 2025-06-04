@@ -1,6 +1,6 @@
 # Videos Microsoft Entra ID 
 
-### [`1.0.EntraID-flask-jenkins-user1-chname.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/3.EntraID/flask-jenkins-user1-ENTRAID_chname.mp4)
+### [`1.0.EntraID-flask-jenkins-user1-chname.mp4`](https://github.com/pablofc18/myApp/blob/master/videos/3.EntraID/1.0.EntraID-flask-jenkins-user1-chname.mp4)
 
 - **Explicació:**  
   En aquest vídeo es mostra el funcionament del SSO (Single Sign-On), s'inicia sessió amb EntraID amb l'usuari **user1 user1** en l'app de Flask i es modifica el nom del perfil, que s'actualitza tant a Entra ID com a la base de dades. I després, s'inicia sessió a Jenkins comprovant que no cal introduir credencials gràcies al SSO. Per últim, es tanca sessió.
