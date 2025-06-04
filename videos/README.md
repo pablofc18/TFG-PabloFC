@@ -1,6 +1,6 @@
 # Carpeta `videos`
 
-Aquest directori conté diversos vídeos demostratius i les seves captures associades. Els videos i captures es separen en 3 diferents fases, amb la integració d'Okta, amb la integració d'ambdós (fase dual-run) i amb la integració de Microsoft Entra ID. Més informació de cadascun es pot trobar dins de la seva respectiva carpeta.
+Aquest directori conté diversos vídeos demostratius i les seves captures associades. Els videos i captures es separen en 3 diferents fases, amb la integració d'Okta, amb la integració d'ambdós (fase dual-run) i amb la integració de Microsoft Entra ID. I la carpeta de Connectors, que no té relació amb cap integració com a tal. Més informació de cadascun es pot trobar dins de la seva respectiva carpeta.
 
 ---
 
