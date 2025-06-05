@@ -1,4 +1,4 @@
-# Repositori TFG PabloFC 
+# Repositori de material suplementari. Treball de Fi de Grau PabloFC 
 
 Aquest repositori conté el codi de la app Flask en les diferents fases de la migració i el material suplementari.
 
