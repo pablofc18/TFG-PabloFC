@@ -21,3 +21,7 @@ Aquest directori conté diversos vídeos demostratius i les seves captures assoc
 ## Connectors
 
 - Es troben a la carpeta [**4.Connectors**](https://github.com/pablofc18/myApp/blob/master/videos/4.Connectors)
+
+## Jenkins pipelines
+
+- Es troben a la carpeta [**5.Jenkins_pipelines**](https://github.com/pablofc18/myApp/blob/master/videos/5.Jenkins_pipelines)
