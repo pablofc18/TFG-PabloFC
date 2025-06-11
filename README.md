@@ -49,3 +49,7 @@ Conté la versió finalitzada la migració de l’aplicació **integrada amb Mic
 - **`APPWITHFLASK/app.py`** – Fitxer amb el codi l'aplicació web Flask, click [aquí](https://github.com/pablofc18/myApp/blob/okta/APPWITHFLASK/app.py) per veure'l.
 
 > Click [aquí](https://github.com/pablofc18/myApp/tree/entraid) per anar a la branca.
+
+---
+
+> Es destaca que apareixen secrets al fitxers de logs i arxius que NO haurien d'estar en un projecte estàndard, en aquest cas tot el que es pot observar es mostra de manera intencionada a efectes demostratius i no té cap afectació al projecte. 
