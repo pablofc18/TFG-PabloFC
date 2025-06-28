@@ -2,6 +2,8 @@
 
 Aquest repositori conté el codi de la app Flask en les diferents fases de la migració i el material suplementari.
 
+- Para leer explicación en español click aquí: [ESP](https://github.com/pablofc18/myApp/blob/master/README.es.md)
+
 ---
 
 ## Estructura de la branca `master`
@@ -52,4 +54,7 @@ Conté la versió finalitzada la migració de l’aplicació **integrada amb Mic
 
 ---
 
-> Es destaca que apareixen secrets al fitxers de logs i arxius que NO haurien d'estar en un projecte estàndard, en aquest cas tot el que es pot observar es mostra de manera intencionada a efectes demostratius i no té cap afectació al projecte. 
+> Es destaca que apareixen secrets al fitxers de logs i arxius que NO haurien d'estar en un projecte estàndard, en aquest cas tot el que es pot observar es mostra de manera intencionada a efectes demostratius i no té cap afectació al projecte.
+
+
+
