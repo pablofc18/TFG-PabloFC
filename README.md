@@ -54,6 +54,7 @@ Conté la versió finalitzada la migració de l’aplicació **integrada amb Mic
 
 ---
 
+> [!IMPORTANT]
 > Es destaca que apareixen secrets al fitxers de logs i arxius que NO haurien d'estar en un projecte estàndard, en aquest cas tot el que es pot observar es mostra de manera intencionada a efectes demostratius i no té cap afectació al projecte.
 
 
