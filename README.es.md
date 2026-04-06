@@ -42,4 +42,5 @@ Contiene la versión finalizada de la migración de la aplicación **integrada c
 
 ---
 
+> [!IMPORTANT]
 > Se destaca que aparecen secretos en los archivos de logs y archivos que NO deberían estar en un proyecto estándar, en este caso todo lo que se puede observar se muestra de manera intencionada a efectos demostrativos y no tiene ninguna afectación al proyecto.
